@@ -68,10 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $classtime = $error_html['errClass'];
     }
 
-    // if (empty($errNomComplet) && empty($errCin) && empty($errTele) && empty($errAge) && empty($errdata) && empty($errtime)) {
-    //     // Form is valid
-    //     echo "Form is valid. Values: $NomComplet, $Cin, $Tele, $Age, $date, $time";
-    // }
+
 }
 
 ?>
@@ -98,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Libraries Stylesheet -->
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
@@ -118,7 +115,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css">
-    <link rel="shortcut icon" href="./img/logoCAbi.ico" type="image/x-icon">
+    <!-- <link rel="shortcut icon" href="./img/logoCAbi.ico" type="image/x-icon"> -->
+     <link rel="shortcut icon" href="./assets/img/icon/logoCAbi.ico" type="image/x-icon">
 
     <style>
         .my-calendar {
@@ -209,8 +207,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <a href="index.php" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
             <!-- <h1 class="m-0 text-primary"><i class="far fa-hospital me-3"></i>Cabinet Chaibi</h1> -->
             <h1 class="m-0 text-primary">
-                <img src="./img/LogoCAbi.ico" alt="logo cabinet" style="width: 15%;">
-            Cabinet Chaibi
+                <img src="./assets/img/widget/logo.png"  style="width: 80px;">
+                    Cabinet Chaibi
             </h1>
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -554,7 +552,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                 <p class="d-inline-block border rounded-pill py-1 px-4">Rendez-vous</p>
                 <h1 class="mb-4">Prenez Rendez-vous Pour Consulter Notre Médecin</h1>
-                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                <!-- <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                -->
                 <div class="bg-light rounded d-flex align-items-center p-5 mb-4">
                     <div class="d-flex flex-shrink-0 align-items-center justify-content-center rounded-circle bg-white" style="width: 55px; height: 55px;">
                         <i class="fa fa-phone-alt text-primary"></i>
@@ -711,7 +710,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     &copy; <a class="border-bottom" href="#">Nom de Votre Site</a>, Tous droits réservés.
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    Conçu par <a class="border-bottom" href="">Ritechco</a>
+                    Conçu par <a class="border-bottom" href="https://ritechco.ma/">Ritechco</a>
                 </div>
             </div>
         </div>
@@ -723,6 +722,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <a href="https://web.whatsapp.com/send/?phone=212666741666" class="btn  rounded-circle " id="btnwpts" ><i class="fa-brands fa-whatsapp"></i></a>
 
 
     <!-- JavaScript Libraries -->

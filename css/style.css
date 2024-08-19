@@ -5,6 +5,25 @@
     --dark: #1B2C51;
  
 }
+#btnwpts{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:#25d366 ;
+    position: fixed;
+     left: 3%;
+     bottom:5%;
+     color: #FFFFFF;
+     font-size: 30px;
+     transition: all .5s ease;
+}
+#btnwpts:hover{
+
+    background-color:#075e54 ;
+
+}
 
 .fw-medium {
     font-weight: 500 !important;
@@ -270,6 +289,7 @@
 
 .service-item:hover .btn {
     width: 140px;
+    /* background-color: ; */
 }
 
 

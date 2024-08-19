@@ -97,8 +97,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.php" class="nav-item nav-link active">Accueil</a>
-                <a href="about.php" class="nav-item nav-link">À propos</a>
+                <a href="index.php" class="nav-item nav-link ">Accueil</a>
+                <a href="about.php" class="nav-item nav-link active">À propos</a>
                 <a href="service.php" class="nav-item nav-link">Service</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Plus</a>
@@ -151,13 +151,17 @@
             </div>
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                 <p class="d-inline-block border rounded-pill py-1 px-4">À Propos de Nous</p>
-                <h1 class="mb-4">Pourquoi Vous Devriez Nous Faire Confiance ? Apprenez à Nous Connaître !</h1>
-                <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                <p class="mb-4">Stet no et lorem dolor et diam, amet duo ut dolore vero eos. No stet est diam rebum amet diam ipsum. Clita clita labore, dolor duo nonumy clita sit at, sed sit sanctus dolor eos.</p>
-                <p><i class="far fa-check-circle text-primary me-3"></i>Soins de santé de qualité</p>
-                <p><i class="far fa-check-circle text-primary me-3"></i>Seulement des Médecins Qualifiés</p>
-                <p><i class="far fa-check-circle text-primary me-3"></i>Professionnels de la Recherche Médicale</p>
-                <a class="btn btn-primary rounded-pill py-3 px-5 mt-3" href="">En Savoir Plus</a>
+                <h1 class="mb-4">Créer par Mr. Soufiyan Chaibi, expert kine-Physiothérapeute.</h1>
+                <p class="">Nos services s'adressent à toute personne cherchant à soulager ses douleurs.
+                     Depuis l'établissement du centre, il est devenu un lieu où le bien-être et
+                      la santé sont prioritaires. Nous offrons des traitements de kinésithérapie 
+                      et de physiothérapie. Chaque individu est unique à nos yeux et notre objectif
+                       est de trouver la prise en charge la plus adaptée afin de vous débarrasser de vos douleurs.</p>
+                <p><i class="far fa-check-circle text-primary me-3"></i>Kinésithérapie</p>
+                <p><i class="far fa-check-circle text-primary me-3"></i>Tecarthérapie</p>
+                <p><i class="far fa-check-circle text-primary me-3"></i>Physiothérapie</p>
+                <p><i class="far fa-check-circle text-primary me-3"></i>Cryothérapie</p>
+                <a class="btn btn-primary rounded-pill py-3 px-5 mt-3" href="https://web.whatsapp.com/send/?phone=212666741666">CONTACTEZ-NOUS +</a>
             </div>
         </div>
     </div>
@@ -167,7 +171,7 @@
 
 
     <!-- Feature Start -->
-    <div class="container-fluid bg-primary overflow-hidden my-5 px-lg-0">
+    <!-- <div class="container-fluid bg-primary overflow-hidden my-5 px-lg-0">
         <div class="container feature px-lg-0">
             <div class="row g-0 mx-lg-0">
                 <div class="col-lg-6 feature-text py-5 wow fadeIn" data-wow-delay="0.1s">
@@ -230,12 +234,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Feature End -->
 
 
     <!-- Team Start -->
-    <div class="container-xxl py-5">
+    <!-- <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                 <p class="d-inline-block border rounded-pill py-1 px-4">Doctors</p>
@@ -308,12 +312,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Team End -->
         
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-light footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container-fluid bg-dark text-light footer  pt-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
