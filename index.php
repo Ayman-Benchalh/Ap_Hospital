@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -118,6 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css">
+    <link rel="shortcut icon" href="./img/logoCAbi.ico" type="image/x-icon">
 
     <style>
         .my-calendar {
@@ -750,7 +751,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
      
   
     const printdata = (data)=>{
-        const timevalid=['09:00 AM','10:00 AM','11:00 AM','12:00 AM','13:00 PM','15:00 PM','16:00 PM','17:00 PM','18:00 PM'];
+        const timevalid=['09:00 AM','10:00 AM','11:00 AM','12:00 AM','1:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM'];
         const select =document.getElementById('time2');
 
 
