@@ -516,6 +516,6 @@
 }
 
 .footer .copyright a:hover {
-    color: var(--primary);
+    color: var(--primary) ;
   
 }

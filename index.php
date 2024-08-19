@@ -207,7 +207,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 wow fadeIn" data-wow-delay="0.1s">
         <a href="index.php" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-            <h1 class="m-0 text-primary"><i class="far fa-hospital me-3"></i>Cabinet Chaibi</h1>
+            <!-- <h1 class="m-0 text-primary"><i class="far fa-hospital me-3"></i>Cabinet Chaibi</h1> -->
+            <h1 class="m-0 text-primary">
+                <img src="./img/LogoCAbi.ico" alt="logo cabinet" style="width: 15%;">
+            Cabinet Chaibi
+            </h1>
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -223,9 +227,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <a href="feature.php" class="dropdown-item">Fonctionnalité</a>
                         <a href="team.php" class="dropdown-item">Nos Docteurs</a>
                         <a href="appointment.php" class="dropdown-item">Rendez-vous</a>
-                        <a href="./admin/login.php" class="dropdown-item">Espace Admin</a>
+                        <!-- <a href="./admin/login.php" class="dropdown-item">Espace Admin</a>
                         <a href="./clinic/login.php" class="dropdown-item">Espace Clinique</a>
-                        <a href="./doctor/login.php" class="dropdown-item">Espace Docteur</a>
+                        <a href="./doctor/login.php" class="dropdown-item">Espace Docteur</a> -->
                         <!-- <a href="testimonial.php" class="dropdown-item">Témoignages</a>
                         <a href="404.php" class="dropdown-item">Page 404</a> -->
                     </div>
