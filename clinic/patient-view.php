@@ -17,7 +17,7 @@ $age = (date("md", date("U", mktime(0, 0, 0, $dobDate[0], $dobDate[1], $dobDate[
 $medresult = $conn->query(
     "SELECT * FROM medical_record M 
     INNER JOIN patients P ON M.patient_id = P.patient_id
-    WHERE M.patient_id = $patient_id AND M.clinic_id = '".$clinic_row["clinic_id"]."' ORDER BY M.med_id DESC "
+    WHERE M.patient_id = '".$patient_id."' AND M.clinic_id = '".$clinic_row["clinic_id"]."' ORDER BY M.med_id DESC "
 );
 $barrow = $medresult->fetch_assoc();
 ?>
@@ -99,7 +99,7 @@ tbody tr td:first-child {
                         $medresult2 = $conn->query(
                             "SELECT * FROM medical_record M 
                             INNER JOIN patients P ON M.patient_id = P.patient_id
-                            WHERE M.patient_id = $patient_id AND M.clinic_id = '".$clinic_row["clinic_id"]."' ORDER BY M.med_id DESC "
+                            WHERE M.patient_id = '".$patient_id."' AND M.clinic_id = '".$clinic_row["clinic_id"]."' ORDER BY M.med_id DESC "
                         );
                         if ($medresult2->num_rows == 0) {
                             echo '<td colspan="4">No Record Found</td>';
@@ -133,7 +133,7 @@ tbody tr td:first-child {
                             </thead>
                             <tbody>
                                 <?php
-                                $tresult = $conn->query("SELECT * FROM appointment WHERE patient_id = $patient_id");
+                                $tresult = $conn->query("SELECT * FROM appointment WHERE patient_id = '".$patient_id."'");
                                 if ($tresult->num_rows == 0) {
                                     echo '<td colspan="2">No Record Found</td>';
                                 } else {

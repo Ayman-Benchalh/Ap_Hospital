@@ -67,6 +67,24 @@ function encrypt($text, $token) {
 
 	return openssl_encrypt($text, $ciphering, $encryption_key, $options, $encryption_iv);
 }
+// $ciphering = "AES-256-CBC";
+// $iv_length = openssl_cipher_iv_length($ciphering); 
+// $options = 0;
+
+// function encrypt($text, $token) {
+//     global $ciphering, $options;
+
+//     // Derive the encryption key from the token
+//     $enfirst = substr($token, 0, 3);
+//     $enlast = substr($token, -3);
+//     $encryption_key = $enfirst . $enlast;
+
+//     // Ensure the IV is 16 bytes long by hashing the token
+//     $encryption_iv = substr(hash('sha256', $token), 0, 16);
+
+//     return openssl_encrypt($text, $ciphering, $encryption_key, $options, $encryption_iv);
+// }
+
 // function encrypt($text, $token) {
 //     global $ciphering, $iv_length, $options;
 
@@ -97,3 +115,16 @@ function decrypt($entext, $token) {
 	
 	return openssl_decrypt ($entext, $ciphering, $decryption_key, $options, $decryption_iv);
 }
+// function decrypt($entext, $token) {
+//     global $ciphering, $options;
+
+//     // Derive the decryption key from the token
+//     $enfirst = substr($token, 0, 3);
+//     $enlast = substr($token, -3);
+//     $decryption_key = $enfirst . $enlast;
+
+//     // Ensure the IV is 16 bytes long by hashing the token
+//     $decryption_iv = substr(hash('sha256', $token), 0, 16);
+
+//     return openssl_decrypt($entext, $ciphering, $decryption_key, $options, $decryption_iv);
+// }

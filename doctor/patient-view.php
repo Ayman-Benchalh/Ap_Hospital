@@ -4,7 +4,7 @@ include('./includes/path.inc.php');
 include('./includes/session.inc.php');
 
 $patient_id = decrypt_url($_GET["id"]);
-$result = $conn->query("SELECT * FROM patients WHERE patient_id = $patient_id");
+$result = $conn->query("SELECT * FROM patients WHERE patient_id = '".$patient_id."'");
 $row = $result->fetch_assoc();
 
 $patient_age = date('Y') - date('Y', strtotime($row['patient_dob']));
@@ -13,7 +13,7 @@ $medresult = $conn->query(
 	"SELECT * FROM medical_record M 
 	INNER JOIN clinics C ON M.clinic_id = C.clinic_id
 	INNER JOIN patients P ON M.patient_id = P.patient_id
-	WHERE M.patient_id = $patient_id ORDER BY M.med_id DESC"
+	WHERE M.patient_id = '".$patient_id."' ORDER BY M.med_id DESC"
 );
 $medrow = $medresult->fetch_assoc();
 
@@ -316,7 +316,7 @@ if (isset($_POST['appointmentbtn'])) {
 									</thead>
 									<tbody>
 										<?php
-										$tresult = $conn->query("SELECT * FROM medical_record WHERE patient_id = $patient_id");
+										$tresult = $conn->query("SELECT * FROM medical_record WHERE patient_id = '".$patient_id."'");
 										if ($tresult->num_rows == 0) {
 											echo '<td colspan="4">No Record Found</td>';
 										} else {
@@ -380,11 +380,12 @@ if (isset($_POST['appointmentbtn'])) {
 								<table class="table nowrap">
 									<thead>
 										<th>Date</th>
+										
 										<th>Treatment</th>
 									</thead>
 									<tbody>
 										<?php
-										$tresult = $conn->query("SELECT * FROM appointment WHERE patient_id = $patient_id");
+										$tresult = $conn->query("SELECT * FROM appointment WHERE patient_id = '".$patient_id."'");
 										if ($tresult->num_rows == 0) {
 											echo '<td colspan="2">No Record Found</td>';
 										} else {

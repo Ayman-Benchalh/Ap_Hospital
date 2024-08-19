@@ -1,5 +1,6 @@
 <?php
 include('../config/autoload.php');
+include('../config/database.php');
 include('./includes/path.inc.php');
 include('./includes/session.inc.php');
 ?>
@@ -89,18 +90,25 @@ include('./includes/session.inc.php');
 
 </html>
 <?php
-if (isset($_POST["deletebtn"])) {
 
+if (isset($_POST["deletebtn"])) {
 	$id = $_POST["doctor_id"];
-	if (mysqli_query($conn, "DELETE FROM doctor WHERE doctor_id = $id")) {
+	if (mysqli_query($conn, "DELETE FROM doctors WHERE doctor_id = $id")) {
 		echo '<script>
-		Swal.fire({ title: "Great!", text: "Doctor Delete Successfully!", type: "success" }).then((result) => {
-			if (result.value) { window.location.href = "doctor-list.php"; }
-		})
+		Swal.fire({
+			title: "Great!",
+			text: "Doctor deleted successfully!",
+			icon: "success"
+		}).then((result) => {
+			if (result.isConfirmed) {
+				window.location.href = "doctor-list.php";
+			}
+		});
 		</script>';
 	} else {
 		echo "Error deleting record: " . mysqli_error($conn);
 	}
 	mysqli_close($conn);
 }
+
 ?>

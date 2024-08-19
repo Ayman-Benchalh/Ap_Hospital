@@ -1,5 +1,6 @@
 <?php
 include("../config/autoload.php");
+include("../config/database.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $patient = escape_input($_POST['inputPatient']);

@@ -7,6 +7,14 @@ include('./includes/path.inc.php');
 <html>
 <head>
     <?php include CSS_PATH;?>
+    <style>
+    body{
+        
+  background: #0575e6; 
+  background: -webkit-linear-gradient(to right, #0575e6, #021b79);
+  background: linear-gradient(to right, #0575e6, #021b79);
+    }
+ </style>
 </head>
 <body>
     <div class="container">
@@ -50,17 +58,7 @@ if (isset($_POST['loginbtn']))
 	} else {
         $token = $r["admin_token"];
     }
-    // $inputPassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
-// echo "Password :" ,$inputPassword;
-//     $hashedPasswordFromDb =$inputPassword ; /* fetched from the database */;
 
-// // Verify the password
-// if (password_verify($_POST['password'], $hashedPasswordFromDb)) {
-//     echo "Password is correct" , $inputPassword;
-//     // Password is correct, proceed with login or reset
-// } else {
-//     echo "Password is incorrect" , $inputPassword;
-    // Password is incorrect, handle the error
 
     $inputPassword = $conn->real_escape_string(encrypt(md5($_POST['password']), $token));
 

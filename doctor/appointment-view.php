@@ -15,7 +15,7 @@ $medresult = $conn->query(
 	"SELECT * FROM medical_record M 
 	INNER JOIN clinics C ON M.clinic_id = C.clinic_id
 	INNER JOIN patients P ON M.patient_id = P.patient_id
-	WHERE M.patient_id = $patient_id ORDER BY M.med_id DESC"
+	WHERE M.patient_id = '".$patient_id."' ORDER BY M.med_id DESC"
 );
 $medrow = $medresult->fetch_assoc();
 
@@ -53,7 +53,9 @@ if (isset($_POST['appointmentbtn'])) {
 	$date = escape_input($_POST['inputAppointmentDate']);
 	$time = escape_input($_POST['inputAppointmentTime']);
 	$treatment = $conn->real_escape_string($_POST['inputTreatment']);
-
+	$status=1;
+	$consult_status=0;
+	$arrive_status=0;
 	if (empty($date)) {
 		array_push($apperrors, "Dates is required");
 	}
@@ -67,8 +69,11 @@ if (isset($_POST['appointmentbtn'])) {
 	}
 
 	if (count($apperrors) == 0) {
-		$appstmt = $conn->prepare("INSERT INTO appointment (app_date, app_time, treatment_type, patient_id, clinic_id, doctor_id) VALUE (?,?,?,?,?,?) ");
-		$appstmt->bind_param("ssssss", $date, $time, $treatment, $patient_id, $doctor_row['clinic_id'], $doctor_row['doctor_id']);
+		// $appstmt = $conn->prepare("INSERT INTO appointment (app_date, app_time, treatment_type, patient_id, clinic_id, doctor_id) VALUE (?,?,?,?,?,?) ");
+		// $appstmt->bind_param("ssssss", $date, $time, $treatment, $patient_id, $doctor_row['clinic_id'], $doctor_row['doctor_id']);
+		$appstmt = $conn->prepare("INSERT INTO appointment (app_date, app_time, treatment_type, patient_id, doctor_id, clinic_id, status, consult_status, arrive_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		$appstmt->bind_param("ssssiiiii", $date, $time, $treatment, $patient_id, $doctor_row['doctor_id'], $doctor_row['clinic_id'], $status, $consult_status, $arrive_status);
+			  
 		$appstmt->execute();
 		$appstmt->close();
 		header('Location: '.$_SERVER['REQUEST_URI']);
@@ -335,7 +340,7 @@ if (isset($_POST["completebtn"])) {
 									</thead>
 									<tbody>
 										<?php
-										$tresult = $conn->query("SELECT * FROM medical_record WHERE patient_id = $patient_id");
+										$tresult = $conn->query("SELECT * FROM medical_record WHERE patient_id = '".$patient_id."'");
 										if ($tresult->num_rows == 0) {
 											echo '<td colspan="4">No Record Found</td>';
 										} else {
@@ -403,7 +408,7 @@ if (isset($_POST["completebtn"])) {
 									</thead>
 									<tbody>
 										<?php
-										$tresult = $conn->query("SELECT * FROM appointment WHERE patient_id = $patient_id ORDER BY app_date DESC");
+										$tresult = $conn->query("SELECT * FROM appointment WHERE patient_id ='".$patient_id."'ORDER BY app_date DESC");
 										if ($tresult->num_rows == 0) {
 											echo '<td colspan="2">No Record Found</td>';
 										} else {

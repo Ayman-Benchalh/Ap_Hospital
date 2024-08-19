@@ -1,13 +1,31 @@
 <?php
 include('../config/autoload.php');
+include('../config/database.php');
 include('./includes/path.inc.php');
 include('./includes/session.inc.php');
 
 include(SELECT_HELPER);
 include(EMAIL_HELPER);
+$error_html = [
+    'errClinic' => 'Clinic is required.',
+    'errFName' => 'First Name is required.',
+    'errLName' => 'Last Name is required.',
+    'errSpec' => 'Speciality is required.',
+    'errYears' => 'Years of Experience is required.',
+    'errFee' => 'Consultant Fees is required.',
+    'errSpoke' => 'Languages Spoken is required.',
+    'errGender' => 'Gender is required.',
+    'errEmail' => 'Email Address is required.',
+    'errContact' => 'Contact Number is required.',
+    'errPassword' => 'Password is required.',
+    'passwordInvalid' => 'Password must be between 8 and 20 characters long and include at least one uppercase letter, one lowercase letter, one digit, and one special character.',
+    'errConfPassword' => 'Password confirmation is required.',
+    'passwordsDoNotMatch' => 'Passwords do not match.',
+    'errClass' => 'is-invalid',
+];
 
-$errFName = $errLName = $errSpec = $errYears = $errFee = $errSpoke = $errGender = $errEmail = $errContact = $errImage = "";
-$classFName = $classLName = $classSpec = $classYears = $classFee = $classSpoke = $classGender = $classEmail = $errContact = "";
+$errFName = $errLName = $errSpec = $errYears = $errFee = $errSpoke = $errGender = $errEmail = $errContact = $errImage =$errPassword=$errConfPassword = "";
+$classFName = $classLName = $classSpec = $classYears = $classFee = $classSpoke = $classGender = $classEmail = $errContact =$classPassword=$classConfPassword= "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fname       = escape_input($_POST['inputFirstName']);
@@ -26,9 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['inputGender'])) {
         $gender     = escape_input($_POST['inputGender']);
     }
-    $email      = escape_input($_POST['inputEmailAddress']);
     $contact    = escape_input($_POST['inputContactNumber']);
-
+    $email      = escape_input($_POST['inputEmailAddress']);
+    $password       = escape_input($_POST['inputPassword']);
+    $confpassword       = escape_input($_POST['inputConfPassword']);
+    
     if (empty($fname)) {
         $errFName = $error_html['errFirstName'];
         $classFName = $error_html['errClass'];
@@ -105,6 +125,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($_FILES['inputAvatar']['name'])) {
         $errImage = "Image is required";
         $classImage = "invalid";
+    }
+    $passwordPattern = '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W]).{8,20}$/';
+
+    if (empty($password)) {
+        $errPassword = $error_html['errPassword'];
+        $classPassword = $error_html['errClass'];
+    } elseif (!preg_match($passwordPattern, $password)) {
+        $errPassword = $error_html['passwordInvalid'];
+        $classPassword = $error_html['errClass'];
+    }
+    if (empty($confpassword)) {
+     
+        $errConfPassword = $error_html['errConfPassword'];
+        $classConfPassword = $error_html['errClass'];
+    } elseif ($password !== $confpassword) {
+
+        $errConfPassword = $error_html['passwordsDoNotMatch'];
+        $classConfPassword = $error_html['errClass'];
     }
 }
 ?>
@@ -295,6 +333,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <?= $errEmail ?>
                                 </div>
                             </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputPassword">Password</label>
+                                    <input type="text" name="inputPassword" class="form-control <?= $classPassword ?>" id="inputPassword" placeholder="Enter Password">
+                                    <?= $errPassword ?>
+                                </div>
+                                <div class="form-group col-md-6" >
+                                    <label for="inputConfPassword">Confim Password</label>
+                                    <input type="text" name="inputConfPassword" class="form-control <?= $classConfPassword ?>" id="inputConfPassword" placeholder="Confim Password">
+                                    <?= $errConfPassword ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -336,8 +386,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </html>
 <?php
 if (isset($_POST["savebtn"])) {
-    // ! prefer use empty() for each instead of function multi_empty()  *stackoverflow
-    if (multi_empty($errFName, $errLName, $errSpec, $errYears, $errFee, $errSpoke, $errGender, $errEmail, $errContact, $errImage)) {
+     if (multi_empty($errFName, $errLName, $errSpec, $errYears, $errFee, $errSpoke, $errGender, $errEmail, $errContact, $errImage ,$errPassword , $errConfPassword )) {
 
         if (isset($_FILES["inputAvatar"]["name"])) {
             $allowed =  array('gif', 'png', 'jpg', 'jpeg');
@@ -364,12 +413,61 @@ if (isset($_POST["savebtn"])) {
                 }
             }
         }
-
+//  echo "data docter :".$fname,$lname,$speciality , $years,$contact,$email,$password ,$confpassword;
         $token = generateCode(6);
         $en_token = md5($token);
+        // $token2 = generateCode(22);
+        // $crp_pass = encrypt(md5($password), $token2);
 
-        $stmt = $conn->prepare("INSERT INTO doctors (doctor_avatar, doctor_firstname, doctor_lastname, doctor_speciality, doctor_experience, doctor_desc, doctor_spoke, doctor_gender, doctor_dob, doctor_email, doctor_contact, consult_fee, date_created, clinic_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        $stmt->bind_param("ssssissssssssi", $image, $fname, $lname, $speciality, $years, $desc, $spoke, $gender, $dob, $email, $contact, $fees, $date_created, $clinic_row['clinic_id']);
+        // $stmt = $conn->prepare("INSERT INTO doctors (doctor_avatar, doctor_firstname, doctor_lastname, doctor_speciality, doctor_experience, doctor_desc,doctor_password, doctor_spoke, doctor_gender, doctor_dob, doctor_email, doctor_contact, consult_fee, date_created, clinic_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        // $stmt->bind_param("ssssisssssssssi", $image, $fname, $lname, $speciality, $years, $desc,$crp_pass , $spoke, $gender, $dob, $email, $contact, $fees, $date_created, $clinic_row['clinic_id']);
+        
+        // $token2 = generateCode(22);
+        // $crp_pass = encrypt(md5($password), $token);
+
+        $cryp_Password = password_hash($password, PASSWORD_DEFAULT);
+        // $cryp_Password = "eggdrrr";
+        // echo $cryp_Password;
+
+        // $stmt = $conn->prepare("INSERT INTO doctors (doctor_avatar, doctor_firstname, doctor_lastname, doctor_speciality, doctor_experience, doctor_desc, doctor_password, doctor_spoke, doctor_gender, doctor_dob, doctor_email, doctor_contact, consult_fee, date_created, clinic_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?)");
+
+        // $stmt->bind_param("ssssisisssssdsi", $image, $fname, $lname, $speciality, $years, $desc,  $cryp_Password, $spoke, $gender, $dob, $email, $contact, $fees, $date_created, $clinic_row['clinic_id']);
+        $stmt = $conn->prepare("INSERT INTO 
+        doctors (doctor_avatar, 
+        doctor_firstname,
+         doctor_lastname,
+          doctor_speciality,
+           doctor_experience,
+            doctor_desc,
+             
+              doctor_spoke,
+               doctor_gender, 
+               doctor_dob,
+                doctor_email,
+                 doctor_contact, 
+                 consult_fee,
+                  date_created,
+                  doctor_password,
+                   clinic_id
+                   ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+        $stmt->bind_param("ssssisissssdssi",
+         $image, 
+         $fname, 
+         $lname, 
+         $speciality,
+          $years,
+           $desc,
+            
+             $spoke,
+              $gender,
+              $dob, 
+              $email, 
+              $contact,
+               $fees,
+                $date_created,
+                $cryp_Password,
+                 $clinic_row['clinic_id']);
         if ($stmt->execute()) {
 
             $last_id = $conn->insert_id;

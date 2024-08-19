@@ -1,5 +1,6 @@
 <?php
 include('../config/autoload.php');
+include('../config/database.php');
 include('./includes/path.inc.php');
 include('./includes/session.inc.php');
 include('../helper/select_helper.php');
@@ -9,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $lastname   = $conn->real_escape_string($_POST['inputLastName']);
     $ic         = $conn->real_escape_string($_POST['inputIC']);
     $nationality = $conn->real_escape_string($_POST['inputNationality']);
-    $avatars     = $conn->real_escape_string($_POST['inputAvatar']);
+    $avatars = isset($_POST['inputAvatar']) ? $conn->real_escape_string($_POST['inputAvatar']) : '';
 
     if (!empty($_POST['inputGender'])) {
         $gender = $_POST['inputGender'];
@@ -68,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- Page content -->
         <div class="row">
             <div class="col-12">
-                <form name="regform" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                <form name="regform" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
                     <div class="d-flex">
                         <div class="card col-md-9">
                             <div class="card-body">
@@ -213,6 +214,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <?php foreach ($select_state as $state_value) {
                                                 echo '<option value="' . $state_value . '">' . $state_value . '</option>';
                                             } ?>
+                                            <option value="khemisset">khemisset</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-2">
@@ -262,60 +264,72 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 </html>
 <?php
-if (isset($_POST['savebtn'])) {
 
-    if (empty($fullname) && empty($ic) && empty($nationality)) {
+if (isset($_POST['savebtn'])) {
+// echo $firstname ,$lastname ,$ic,$nationality, $avatars,$gender,$m_status, $dob ,
+//  $age , $email, $contact,$address,$city ,$state  ,$zipcode;
+    if (empty($firstname) ||empty($lastname)|| empty($ic) || empty($nationality)) {
         echo '<script>
-                Swal.fire({ title: "Oops...", text: "Firstname, Lastname, IC, Nationality Field Cannot Be Empty!", type: "error" }).then((result) => {
-                    if (result.value) { window.location.href = "patient-add.php"; }
+                Swal.fire({ title: "Oops...", text: "Firstname, Lastname, IC, Nationality Field Cannot Be Empty!", icon: "error" }).then((result) => {
+                    if (result.isConfirmed) { window.location.href = "patient-add.php"; }
                 })
                 </script>';
     } else {
         // Check Email
-        $result = mysqli_query($conn, "SELECT * FROM patients WHERE patient_email = '.$email.'");
+        // echo "data good";
+        $result = mysqli_query($conn, "SELECT * FROM patients WHERE patient_email = '$email' OR patient_identity = '$ic'");
         if (mysqli_num_rows($result) != 0) {
-            echo "<script>Swal.fire('Oops...', 'Email Already Existed!', 'error');</script>";
+            echo "<script>Swal.fire('Oops...', 'Email and Identity Already Exists!', 'error');</script>";
         } else {
+            //  print_r($result);
             if ($_FILES["inputAvatar"]["name"] != "") {
-                if (isset($_FILES["inputAvatar"]["name"])) {
-                    $allowed =  array('gif', 'png', 'jpg');
-                    $filename = $_FILES['inputAvatar']['name'];
-                    $ext = pathinfo($filename, PATHINFO_EXTENSION);
-                    if (!in_array($ext, $allowed)) {
-                        echo "<script>Swal.fire('Oops...','Only can be image!','error')</script>";
-                        exit();
-                    } else {
-                        if (!empty($_FILES['inputAvatar']['name'])) {
-                            $folderpath = "../uploads/" . $clinic_row['clinic_id'] . "/doctor" . "/";
-                            $path = "../uploads/" . $clinic_row['clinic_id'] . "/doctor" . "/" . $_FILES['inputAvatar']['name'];
-                            $image = $_FILES['inputAvatar']['name'];
-        
-                            if (!file_exists($folderpath)) {
-                                mkdir($folderpath, 0777, true);
-                                move_uploaded_file($_FILES['inputAvatar']['tmp_name'], $path);
-                            } else {
-                                move_uploaded_file($_FILES['inputAvatar']['tmp_name'], $path);
-                            }
-                        } else {
-                            echo "<script>Swal.fire('Oops...','You should select a file to upload!','error')</script>";
-                            exit();
-                        }
+                $allowed = array('gif', 'png', 'jpg');
+                $filename = $_FILES['inputAvatar']['name'];
+                $ext = pathinfo($filename, PATHINFO_EXTENSION);
+            
+                if (!in_array($ext, $allowed)) {
+                    echo "<script>Swal.fire('Oops...','Only image files are allowed!','error')</script>";
+                    exit();
+                } else {
+                    $folderpath = "../uploads/" . $clinic_row['clinic_id'] . "/doctor/";
+                    $path = $folderpath . $filename;
+                    $image = $filename;
+            
+                    if (!file_exists($folderpath)) {
+                        mkdir($folderpath, 0777, true);
                     }
-                }
-                $query = 'INSERT INTO patients 
-                (patient_avatar, patient_name, patient_identity, patient_nationality, patient_gender, patient_maritalstatus, patient_dob, patient_age, patient_email, patient_contact, patient_address, patient_city, patient_state, patient_zipcode, date_created)
-                VALUES ("'.$avatar.'", "'.$fullname.'", "'.$ic.'", "'.$nationality.'", "'.$gender.'", "'.$m_status.'", "'.$dob.'", "'.$age.'", "'.$email.'", "'.$contact.'", "'.$address.'", "'.$city.'", "'.$state.'", "'.$zipcode.'", "'.$date_created.'")';
-            } else {
-                $query = 'INSERT INTO patients 
-                (patient_name, patient_identity, patient_nationality, patient_gender, patient_maritalstatus, patient_dob, patient_age, patient_email, patient_contact, patient_address, patient_city, patient_state, patient_zipcode, date_created)
-                VALUES ("'.$fullname.'", "'.$ic.'", "'.$nationality.'", "'.$gender.'", "'.$m_status.'", "'.$dob.'", "'.$age.'", "'.$email.'", "'.$contact.'", "'.$address.'", "'.$city.'", "'.$state.'", "'.$zipcode.'", "'.$date_created.'")';
+            
+                    move_uploaded_file($_FILES['inputAvatar']['tmp_name'], $path);
+                    $password=password_hash($ic, PASSWORD_DEFAULT);
+                    $query = 'INSERT INTO patients 
+                    (patient_avatar, patient_firstname, patient_lastname, patient_identity, patient_nationality, patient_gender, patient_maritalstatus, patient_dob, patient_age, patient_email,patient_password, patient_contact, patient_address, patient_city, patient_state, patient_zipcode, date_created)
+                    VALUES ("'.$image.'", "'.$firstname.'", "'.$lastname.'", "'.$ic.'", "'.$nationality.'", "'.$gender.'", "'.$m_status.'", "'.$dob.'", "'.$age.'", "'.$email.'","'.$password.'", "'.$contact.'", "'.$address.'", "'.$city.'", "'.$state.'", "'.$zipcode.'", "'.$date_created.'")';
+                
             }
-
+            }
+        //  else {
+        //         // echo "image path 2 ", $filename ;
+        //         $query = 'INSERT INTO patients 
+        //         (patient_firstname, patient_lastname, patient_identity, patient_nationality, patient_gender, patient_maritalstatus, patient_dob, patient_age, patient_email, patient_contact, patient_address, patient_city, patient_state, patient_zipcode, date_created)
+        //         VALUES ("'.$firstname.'", "'.$lastname.'", "'.$ic.'", "'.$nationality.'", "'.$gender.'", "'.$m_status.'", "'.$dob.'", "'.$age.'", "'.$email.'", "'.$contact.'", "'.$address.'", "'.$city.'", "'.$state.'", "'.$zipcode.'", "'.$date_created.'")';
+            
+        // }
+            
+            // Execute the query and handle the result
+            if (mysqli_query($conn, $query)) {
+                echo '<script>
+                        Swal.fire({ title: "Great!", text: "New Record Added!", icon: "success" }).then((result) => {
+                            if (result.isConfirmed) { window.location.href = "patient-add.php"; }
+                        })
+                      </script>';
+            } else {
+                echo "Error: " . $query . "<br>" . mysqli_error($conn);
+            }
             
             if (mysqli_query($conn, $query)) {
                 echo '<script>
-                        Swal.fire({ title: "Great!", text: "New Record Added!", type: "success" }).then((result) => {
-                            if (result.value) { window.location.href = "patient-add.php"; }
+                        Swal.fire({ title: "Great!", text: "New Record Added!", icon: "success" }).then((result) => {
+                            if (result.isConfirmed) { window.location.href = "patient-add.php"; }
                         })
                         </script>';
             } else {
@@ -323,6 +337,7 @@ if (isset($_POST['savebtn'])) {
             }
         }
     }
-    mysqli_close($conn);
+    mysqli_close($conn); 
 }
+
 ?>

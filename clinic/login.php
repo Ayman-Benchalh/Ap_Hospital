@@ -9,14 +9,23 @@ require_once('../config/database.php');
 
 <head>
     <?php include CSS_PATH; ?>
+ <style>
+    body{
+        
+  background: #0575e6; 
+  background: -webkit-linear-gradient(to right, #0575e6, #021b79);
+  background: linear-gradient(to right, #0575e6, #021b79);
+    }
+ </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="login-wrap mx-auto">
-            <div class="login-head">
+        <div class="login-wrap mx-auto ">
+            <div class="login-head "  style="background-color:#0463FA !important;">
                 <h4><?php echo $BRAND_NAME; ?></h4>
                 <p>Hello there, Sign into your Account!</p>
+             
             </div>
             <div class="login-body">
                 <form name="login_form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
@@ -29,9 +38,9 @@ require_once('../config/database.php');
                         <label for="exampleInputPassword1">Password</label>
                         <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                     </div>
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <a href="forgot.php">Forgot Password?</a>
-                    </div>
+                    </div> -->
                     <button type="submit" name="login_btn" class="btn btn-primary btn-block button">Log In</button>
                 </form>
             </div>
@@ -48,6 +57,7 @@ require_once('../config/database.php');
 if (isset($_POST['login_btn']))
 {
     $inputEmail = $conn->real_escape_string($_POST['email']);
+   
 
     $check = $conn->prepare("SELECT * FROM clinic_manager WHERE clinicadmin_email = ? ");
     $check->bind_param("s", $inputEmail);
@@ -59,46 +69,70 @@ if (isset($_POST['login_btn']))
 		exit();
 	} else {
         $token = $r["clinicadmin_token"];
+        $Password = $r["clinicadmin_password"];
     }
-//     // echo   $r["clinicadmin_password"];
-//     $hashedPasswordFromDb = $r["clinicadmin_password"];/* fetched from the database */;
-//     $inputPassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
-// // Verify the password
-// if (password_verify($inputPassword, $hashedPasswordFromDb)) {
-//    echo " Password is correct" ,  $hashedPasswordFromDb , $_POST['password']; // Password is correct, proceed with login or reset
-// } else {
-//     echo " Password is incorrect" ,  $hashedPasswordFromDb , $_POST['password'];  // Password is incorrect, handle the error
-// }
-    $inputPassword = $conn->real_escape_string(encrypt(md5($_POST['password']), $token));
-    $cryp_Password = password_hash($password, PASSWORD_DEFAULT);
-
-    $stmt = $conn->prepare("SELECT * FROM clinic_manager WHERE clinicadmin_email = ? AND clinicadmin_password = ? ");
-    $stmt->bind_param("ss", $inputEmail, $$cryp_Password);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
+    $inputPassword=$_POST['password'];
+ 
+    // $inputPassword = $conn->real_escape_string(encrypt(md5($_POST['password']), $token));
 
     if ($inputEmail == "" && empty($inputEmail)) {
-        echo "<script>Swal.fire({title: 'Error!', text: 'Please Enter a Email', type: 'error'}).then(function() { $('#inputEmail').focus(); });</script>";
-        exit();
-    }
-
+            echo "<script>Swal.fire({title: 'Error!', text: 'Please Enter a Email', type: 'error'}).then(function() { $('#inputEmail').focus(); });</script>";
+            exit();
+        }
+    
     if ($inputPassword == "" && empty($inputPassword)) {
-        echo "<script>Swal.fire({title: 'Error!', text: 'Please Enter a Password', type: 'error'}).then(function() { $('#inputPassword').focus(); });</script>";
-        exit();
-    }
+            echo "<script>Swal.fire({title: 'Error!', text: 'Please Enter a Password', type: 'error'}).then(function() { $('#inputPassword').focus(); });</script>";
+            exit();
+        }
 
-    if ($result->num_rows != 1)
-    {
-        echo "<script>Swal.fire({title: 'Error!', text: 'Email & Password Not Exist', type: 'error', confirmButtonText: 'Try Again'})</script>";
-        exit();
-    }
-    else {
+        
+    if (password_verify($inputPassword, $Password)) {
+        // Password is correct
+        echo "Login successful!";
+        $stmt = $conn->prepare("SELECT * FROM clinic_manager WHERE clinicadmin_email = ? AND clinicadmin_password = ? ");
+        $stmt->bind_param("ss", $inputEmail, $Password);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
         $_SESSION['sess_clinicadminid'] = $row['clinicadmin_id'];
         $_SESSION['sess_clinicadminemail'] = $row['clinicadmin_email'];
         $_SESSION['loggedin'] = 1;
         header("Location: index.php");
-    }
+    } else {
+        // Password is incorrect
+        // echo "Invalid credentials.";
+        echo "<script>Swal.fire({title: 'Error!', text: 'Email & Password Not Exist', type: 'error', confirmButtonText: 'Try Again'})</script>";
+        //     exit();
+    }    
+
+
+    // $stmt = $conn->prepare("SELECT * FROM clinic_manager WHERE clinicadmin_email = ? AND clinicadmin_password = ? ");
+    // $stmt->bind_param("ss", $inputEmail, $inputPassword);
+    // $stmt->execute();
+    // $result = $stmt->get_result();
+    // $row = $result->fetch_assoc();
+
+    // if ($inputEmail == "" && empty($inputEmail)) {
+    //     echo "<script>Swal.fire({title: 'Error!', text: 'Please Enter a Email', type: 'error'}).then(function() { $('#inputEmail').focus(); });</script>";
+    //     exit();
+    // }
+
+    // if ($inputPassword == "" && empty($inputPassword)) {
+    //     echo "<script>Swal.fire({title: 'Error!', text: 'Please Enter a Password', type: 'error'}).then(function() { $('#inputPassword').focus(); });</script>";
+    //     exit();
+    // }
+
+    // if ($result->num_rows != 1)
+    // {
+    //     echo "<script>Swal.fire({title: 'Error!', text: 'Email & Password Not Exist', type: 'error', confirmButtonText: 'Try Again'})</script>";
+    //     exit();
+    // }
+    // else {
+    //     $_SESSION['sess_clinicadminid'] = $row['clinicadmin_id'];
+    //     $_SESSION['sess_clinicadminemail'] = $row['clinicadmin_email'];
+    //     $_SESSION['loggedin'] = 1;
+    //     header("Location: index.php");
+    // }
     $stmt->close();
 }
 ?>

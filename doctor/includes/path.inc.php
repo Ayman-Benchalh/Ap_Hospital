@@ -1,7 +1,7 @@
 <?php
 // Clinic
 $HOME_PAGE = "index.php";
-$BRAND_NAME = "Clinic ME";
+$BRAND_NAME = "Cabinet Chaibi";
 $PATH = "doclab/doctor";
 
 switch ($_SERVER["SCRIPT_NAME"]) {

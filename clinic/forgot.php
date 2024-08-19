@@ -1,5 +1,6 @@
 <?php
 require_once('../config/autoload.php');
+require_once('../config/database.php');
 require_once('./includes/path.inc.php');
 include(EMAIL_HELPER);
 

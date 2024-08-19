@@ -14,29 +14,36 @@ if (isset($_POST['inputemail']) && isset($_POST['inputpass'])) {
     $check->execute();
     $q = $check->get_result();
     $r = $q->fetch_assoc();
+	$Password = $r["patient_password"];
     if (mysqli_num_rows($q) != 1) {
 		echo json_encode(array("0"), JSON_FORCE_OBJECT);
 	} else {
-        $token = $r["patient_token"];
-        $inputPassword = $conn->real_escape_string(md5($_POST['inputpass']));
-		$enpass = encrypt($inputPassword, $token);
 
-		$checkstmt = $conn->prepare("SELECT * FROM patients WHERE patient_email = ? AND patient_password = ?");
-		$checkstmt->bind_param("ss", $email, $enpass);
-		$checkstmt->execute();
-		$checkresult = $checkstmt->get_result();
-			
-		if ($checkresult->num_rows > 0) {
-			$arr = array();
-			while($row = $checkresult->fetch_assoc()) {
-				$arr[] = $row;
-			}
+		if (password_verify($pass , $Password)) {
+						// $token = $r["patient_token"];
+						// $inputPassword = $conn->real_escape_string(md5($_POST['inputpass']));
+						// $enpass = encrypt($inputPassword, $token);
 
-			echo json_encode($arr);
-			mysqli_close($conn);
-		} else {
+						$checkstmt = $conn->prepare("SELECT * FROM patients WHERE patient_email = ? AND patient_password = ?");
+						$checkstmt->bind_param("ss", $email, $Password);
+						$checkstmt->execute();
+						$checkresult = $checkstmt->get_result();
+							
+						if ($checkresult->num_rows > 0) {
+							$arr = array();
+							while($row = $checkresult->fetch_assoc()) {
+								$arr[] = $row;
+							}
+
+							echo json_encode($arr);
+							mysqli_close($conn);
+						} else {
+							echo json_encode(array("0"), JSON_FORCE_OBJECT);
+						}
+		}else{
 			echo json_encode(array("0"), JSON_FORCE_OBJECT);
 		}
+       
 	}
 
 } else {

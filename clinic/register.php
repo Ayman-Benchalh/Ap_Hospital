@@ -47,6 +47,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <?php include CSS_PATH; ?>
     <link rel="stylesheet" href="../assets/css/login.css">
+    <style>
+    body{
+        
+  background: #0575e6; 
+  background: -webkit-linear-gradient(to right, #0575e6, #021b79);
+  background: linear-gradient(to right, #0575e6, #021b79);
+    }
+ </style>
 </head>
 
 <body>
@@ -122,11 +130,13 @@ if (isset($_POST['registerbtn'])) {
         }
         $stmt->close();
 
-        $token = generateCode(22);
-        $en_pass = encrypt(md5($password), $token);
-        //  $cryp_Password = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $conn->prepare("INSERT INTO clinic_manager (clinicadmin_name, clinicadmin_email, clinicadmin_password, clinicadmin_token, clinicadmin_contact, date_created, clinic_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssssss", $manager, $email, $en_pass, $token, $contact, $date_created, $last_id);
+        // $token = generateCode(22);
+        // $en_pass = encrypt(md5($password), $token);
+        $cryp_Password = password_hash($password, PASSWORD_DEFAULT);
+        // echo   $cryp_Password;
+        // RahmaCLinic@2024
+        $stmt = $conn->prepare("INSERT INTO clinic_manager (clinicadmin_name, clinicadmin_email, clinicadmin_password,  clinicadmin_contact, date_created, clinic_id) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $manager, $email, $cryp_Password, $contact, $date_created, $last_id);
 
         $weekstmt = $conn->prepare("INSERT INTO business_hour (clinic_id) VALUES (?)");
         $weekstmt->bind_param("i", $last_id);

@@ -22,11 +22,11 @@ include('../helper/select_helper.php');
             </div>
 
             <div class="col-12">
-                <div class="owl-carousel">
+                <div class="owl-carousel" style="height: 300px;">
                     <?php    
                         $img_result = mysqli_query($conn,"SELECT * FROM clinic_images WHERE clinic_id = ".$clinic_row["clinic_id"]." ");
                         while($img_row = mysqli_fetch_assoc($img_result)) {
-                            echo '<div class="item"><img src="../uploads/'.$clinic_row["clinic_id"].'/clinic/'.$img_row["clinicimg_filename"].'"></div>';
+                            echo '<div class="item"  style="height: 300px;"><img style="height: 300px;" src="../uploads/'.$clinic_row["clinic_id"].'/clinic/'.$img_row["clinicimg_filename"].'"></div>';
                         }
                     ?>
                 </div>
