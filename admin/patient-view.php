@@ -4,7 +4,7 @@ include("includes/session.inc.php");
 include("includes/path.inc.php");
 
 $pid = decrypt_url($_REQUEST["pid"]);
-$result = mysqli_query($conn, "SELECT * FROM patients WHERE patient_id = $pid");
+$result = mysqli_query($conn, "SELECT * FROM patients WHERE patient_id = '$pid'");
 $row = mysqli_fetch_assoc($result);
 ?>
 <!DOCTYPE html>
@@ -23,7 +23,7 @@ $row = mysqli_fetch_assoc($result);
                 <div class="card shadow-sm rounded">
                     <div class="card-body">
                         <div class="d-flex mb-3">
-                            <h5 class="card-title mr-auto">View Patient : <?php echo strtoupper($row["patient_firstname"].' '.$row["patient_lastname"])?></h5>
+                            <h5 class="card-title mr-auto">View Patient : <?php echo strtoupper($row["patient_firstname"])?></h5>
                         </div>
                         <div class="card-inner">
                             <!-- View -->
@@ -48,40 +48,25 @@ $row = mysqli_fetch_assoc($result);
                                         </tr>
                                         <tr>
                                             <th scope="row">Name</th>
-                                            <td><?php echo $row["patient_firstname"].' '.$row["patient_lastname"];?></td>
+                                            <td><?php echo $row["patient_firstname"];?></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Age</th>
+                                            <td><?php echo $row["patient_age"];?></td>
                                         </tr>
                                         <tr>
                                             <th scope="row">Identity</th>
                                             <td><?php echo $row["patient_identity"];?></td>
                                         </tr>
-                                        <tr>
-                                            <th scope="row">Gender</th>
-                                            <td><?php echo $row["patient_gender"];?></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Marital Status</th>
-                                            <td><?php echo $row["patient_maritalstatus"];?></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Email</th>
-                                            <td><?php echo $row["patient_email"];?></td>
-                                        </tr>
+                                  
+                                      
                                         <tr>
                                             <th scope="row">Contact</th>
                                             <td><?php echo $row["patient_contact"];?></td>
                                         </tr>
-                                        <tr>
-                                            <th scope="row">Nationality</th>
-                                            <td><?php echo $row["patient_nationality"];?></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Date of Birth</th>
-                                            <td><?php echo $row["patient_dob"];?></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Address</th>
-                                            <td><?php echo $row["patient_address"].' '.$row["patient_zipcode"].' '.$row["patient_city"].' '.$row["patient_state"]?></td>
-                                        </tr>
+                                       
+                                        
+                                        
                                         <?php
                                         } ?>
                                     </table>

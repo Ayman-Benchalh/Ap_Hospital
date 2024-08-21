@@ -16,14 +16,15 @@ $error_html = [
     'errAge' => 'Age is required.',
     'errdate' => 'Date is required.',
     'errtime' => 'Time is required.',
+    'errDoctor_ext' => 'médecin is required.',
     'errContact' => 'Contact Number is required.',
     'errClass' => 'is-invalid',
     'invalidText' => 'Invalid input. Only letters and spaces are allowed.',
     'invalidContact' => 'Invalid contact number.'
 ];
 
-$errNomComplet = $errCin = $errTele = $errAge = $errdata = $errtime = "";
-$classNomComplet = $classCin = $classTele = $classAge = $classdata = $classtime = "";
+$errNomComplet = $errCin = $errTele = $errAge =$errDoctor_ext = $errdata = $errtime = "";
+$classNomComplet = $classCin = $classTele = $classAge = $classNomComplet = $classdata = $classtime = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $NomComplet = isset($_POST['NomComplet']) ? escape_input($_POST['NomComplet']) : '';
@@ -32,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $time = isset($_POST['time']) ? escape_input($_POST['time']) : '';
     $Age = isset($_POST['Age']) ? escape_input($_POST['Age']) : '';
     $Tele = isset($_POST['Tele']) ? escape_input($_POST['Tele']) : '';
+    $Doctor_ext = isset($_POST['Doctor_ext']) ? escape_input($_POST['Doctor_ext']) : '';
 
     // Validation
     if (empty($NomComplet)) {
@@ -65,6 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($time)) {
         $errtime = $error_html['errtime'];
+        $classtime = $error_html['errClass'];
+    }
+    if (empty($Doctor_ext)) {
+        $errtime = $error_html['errDoctor_ext'];
         $classtime = $error_html['errClass'];
     }
 
@@ -117,6 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css">
     <!-- <link rel="shortcut icon" href="./img/logoCAbi.ico" type="image/x-icon"> -->
      <link rel="shortcut icon" href="./assets/img/icon/logoCAbi.ico" type="image/x-icon">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         .my-calendar {
@@ -219,19 +226,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <a href="index.php" class="nav-item nav-link active">Accueil</a>
                 <a href="about.php" class="nav-item nav-link">À propos</a>
                 <a href="service.php" class="nav-item nav-link">Service</a>
-                <div class="nav-item dropdown">
+                <!-- <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Plus</a>
                     <div class="dropdown-menu rounded-0 rounded-bottom m-0">
                         <a href="feature.php" class="dropdown-item">Fonctionnalité</a>
                         <a href="team.php" class="dropdown-item">Nos Docteurs</a>
                         <a href="appointment.php" class="dropdown-item">Rendez-vous</a>
-                        <!-- <a href="./admin/login.php" class="dropdown-item">Espace Admin</a>
+                        <a href="./admin/login.php" class="dropdown-item">Espace Admin</a>
                         <a href="./clinic/login.php" class="dropdown-item">Espace Clinique</a>
-                        <a href="./doctor/login.php" class="dropdown-item">Espace Docteur</a> -->
-                        <!-- <a href="testimonial.php" class="dropdown-item">Témoignages</a>
-                        <a href="404.php" class="dropdown-item">Page 404</a> -->
+                        <a href="./doctor/login.php" class="dropdown-item">Espace Docteur</a>
+                        <a href="testimonial.php" class="dropdown-item">Témoignages</a>
+                        <a href="404.php" class="dropdown-item">Page 404</a>
                     </div>
-                </div>
+                </div> -->
                 <!-- <a href="contact.php" class="nav-item nav-link">Contact</a> -->
             </div>
             <a href="appointment.php" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Rendez-vous<i class="fa fa-arrow-right ms-3"></i></a>
@@ -308,7 +315,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                 <p class="d-inline-block border rounded-pill py-1 px-4">À Propos de Nous</p>
                 <h1 class="mb-4">Pourquoi devriez-vous nous faire confiance ? Apprenez à nous connaître !</h1>
-                <p>Tempora erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                <p>
+                    Tempora erat elitr rebum at clita. Diam dolor 
+                    diam ipsum sit. Aliqu diam amet diam et eos. Clit
+                    a erat ipsum et lorem et sit, sed stet lorem sit clita
+                     duo justo magna dolore erat amet</p>
                 <p class="mb-4">Stet no et lorem dolor et diam, amet duo ut dolore vero eos. No stet est diam rebum amet diam ipsum. Clita clita labore, dolor duo nonumy clita sit at, sed sit sanctus dolor eos.</p>
                 <p><i class="far fa-check-circle text-primary me-3"></i>Soins de santé de qualité</p>
                 <p><i class="far fa-check-circle text-primary me-3"></i>Seulement des Médecins Qualifiés</p>
@@ -405,7 +416,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="p-lg-5 ps-lg-0">
                     <p class="d-inline-block border rounded-pill text-light py-1 px-4">Caractéristiques</p>
                     <h1 class="text-white mb-4">Pourquoi Nous Choisir</h1>
-                    <p class="text-white mb-4 pb-2">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo erat amet</p>
+                    <p class="text-white mb-4 pb-2">
+                    Choisissez-nous pour des soins personnalisés qui mettent votre bien-être en priorité. Notre centre offre des traitements de kinésithérapie et de physiothérapie adaptés à chaque individu, assurant un soulagement efficace et durable de vos douleurs. Votre santé est notre priorité</p>
                     <div class="row g-4">
                         <div class="col-6">
                             <div class="d-flex align-items-center">
@@ -414,7 +426,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                                 <div class="ms-4">
                                     <p class="text-white mb-2">Expérience</p>
-                                    <h5 class="text-white mb-0">Médecins</h5>
+                                    <h5 class="text-white mb-0">5 ANS</h5>
                                 </div>
                             </div>
                         </div>
@@ -467,7 +479,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     <!-- Team Start -->
-    <div class="container-xxl py-5">
+    <!-- <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
             <p class="d-inline-block border rounded-pill py-1 px-4">Médecins</p>
@@ -540,7 +552,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
     <!-- Team End -->
 
@@ -577,11 +589,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="bg-light rounded h-auto d-flex align-items-center p-5">
                     <form name="Appointment_form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
                         <div class="row g-3">
-                            <div class="col-12">
+                            <div class="col-12 ">
                                 <input type="text" name="NomComplet"<?php echo $classNomComplet?> class="form-control border-0" placeholder="Entrez Nom Complet" style="height: 55px;">
                                 <?php echo $errNomComplet; ?>
                             </div>
-                            <div class="col-12">
+                            <div class="col-12 col-sm-6">
+                                <input type="text" name="Doctor_ext"<?php echo $classDoctor_ext?> class="form-control border-0" placeholder="Entrez Docter Nom" style="height: 55px;">
+                                <?php echo $errDoctor_ext; ?>
+                            </div>
+                            <div class="col-12 col-sm-6">
                                 <input type="text" name="Cin" class="form-control border-0" <?php echo $classCin?> placeholder="Entrez CIN" style="height: 55px;">
                                 <?php echo $errCin; ?>
                             </div>
@@ -624,105 +640,104 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <!-- Testimonial Start -->
     <div class="container-xxl py-5">
-    <div class="container">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <p class="d-inline-block border rounded-pill py-1 px-4">Témoignages</p>
-            <h1>Ce que disent nos patients !</h1>
-        </div>
-        <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-            <div class="testimonial-item text-center">
-                <img class="img-fluid bg-light rounded-circle p-2 mx-auto mb-4" src="img/testimonial-1.jpg" style="width: 100px; height: 100px;">
-                <div class="testimonial-text rounded text-center p-4">
-                    <p>Clita clita tempor justo dolor ipsum amet kasd amet duo justo duo duo labore sed sed. Magna ut diam sit et amet stet eos sed clita erat magna elitr erat sit sit erat at rebum justo sea clita.</p>
-                    <h5 class="mb-1">Nom du Patient</h5>
-                    <span class="fst-italic">Profession</span>
-                </div>
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <p class="d-inline-block border rounded-pill py-1 px-4">Témoignage</p>
+                <h1>Que disent nos patients !</h1>
             </div>
-            <div class="testimonial-item text-center">
-                <img class="img-fluid bg-light rounded-circle p-2 mx-auto mb-4" src="img/testimonial-2.jpg" style="width: 100px; height: 100px;">
-                <div class="testimonial-text rounded text-center p-4">
-                    <p>Clita clita tempor justo dolor ipsum amet kasd amet duo justo duo duo labore sed sed. Magna ut diam sit et amet stet eos sed clita erat magna elitr erat sit sit erat at rebum justo sea clita.</p>
-                    <h5 class="mb-1">Nom du Patient</h5>
-                    <span class="fst-italic">Profession</span>
+            <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                <div class="testimonial-item text-center">
+                   
+                    <div class="testimonial-text rounded text-center p-4">
+                        <p>“Je suis extrêmement reconnaissante envers le Cabinet Chaibi pour leur expertise en kinésithérapie. Grâce à leur approche attentionnée et personnalisée, j’ai pu récupérer de ma blessure plus rapidement que prévu. Les thérapeutes sont compétents et à l’écoute. Je recommande vivement leurs services !”</p>
+                        <h5 class="mb-1">Fatima belqadi</h5>
+                        
+                    </div>
                 </div>
-            </div>
-            <div class="testimonial-item text-center">
-                <img class="img-fluid bg-light rounded-circle p-2 mx-auto mb-4" src="img/testimonial-3.jpg" style="width: 100px; height: 100px;">
-                <div class="testimonial-text rounded text-center p-4">
-                    <p>Clita clita tempor justo dolor ipsum amet kasd amet duo juste duo duo labore sed sed. Magna ut diam sit et amet stet eos sed clita erat magna elitr erat sit sit erat at rebum justo sea clita.</p>
-                    <h5 class="mb-1">Nom du Patient</h5>
-                    <span class="fst-italic">Profession</span>
+                <div class="testimonial-item text-center">
+                   
+                    <div class="testimonial-text rounded text-center p-4">
+                        <p>“Le Cabinet Chaibi est le meilleur endroit pour des soins de kinésithérapie de qualité. J’ai été impressionné par leur professionnalisme et leur engagement envers ma guérison. Les séances de traitement étaient efficaces et les conseils prodigués étaient très utiles. Je me sens tellement mieux maintenant, merci au Cabinet Chaibi !”</p>
+                        <h5 class="mb-1">Ahmed bourzik</h5>
+                        
+                    </div>
+                </div>
+                <div class="testimonial-item text-center">
+                  
+                    <div class="testimonial-text rounded text-center p-4">
+                        <p>“Je ne peux que recommander le Cabinet Chaibi pour leurs services de kinésithérapie exceptionnels. J’ai été agréablement surprise par l’attention particulière que j’ai reçue dès mon premier rendez-vous. Les kinésithérapeutes étaient très compétents, patients et dévoués à mon rétablissement. Je suis ravie des résultats obtenus et je leur suis reconnaissante.”</p>
+                        <h5 class="mb-1">Sara aalami</h5>
+                      
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
     <!-- Testimonial End -->
 
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container py-5">
-        <div class="row g-5">
-            <div class="col-lg-3 col-md-6">
-                <h5 class="text-light mb-4">Adresse</h5>
-                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Derrière l'hôpital Dalia et devant Café Paris TIFLET 15400</p>
-                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+212 6 66 74 16 66</p>
-                <p class="mb-2"><i class="fa fa-envelope me-3"></i>chaibikine@gmail.com</p>
-                <div class="d-flex pt-2">
-                    <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-youtube"></i></a>
-                    <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-light mb-4">Adresse</h5>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Derrière l'hôpital Dalia et devant Café Paris TIFLET 15400</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+212 6 66 74 16 66</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>chaibikine@gmail.com</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-light mb-4">Services</h5>
+                    <a class="btn btn-link" href="">Cardiologie</a>
+                    <a class="btn btn-link" href="">Pneumologie</a>
+                    <a class="btn btn-link" href="">Neurologie</a>
+                    <a class="btn btn-link" href="">Orthopédie</a>
+                    <a class="btn btn-link" href="">Laboratoire</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-light mb-4">Liens Rapides</h5>
+                    <a class="btn btn-link" href="">À Propos</a>
+                    <a class="btn btn-link" href="">Contactez-nous</a>
+                    <a class="btn btn-link" href="">Nos Services</a>
+                    <a class="btn btn-link" href="">Termes & Conditions</a>
+                    <a class="btn btn-link" href="">Support</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-light mb-4">Newsletter</h5>
+                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Votre email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">S'inscrire</button>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <h5 class="text-light mb-4">Services</h5>
-                <a class="btn btn-link" href="">Cardiologie</a>
-                <a class="btn btn-link" href="">Pneumologie</a>
-                <a class="btn btn-link" href="">Neurologie</a>
-                <a class="btn btn-link" href="">Orthopédie</a>
-                <a class="btn btn-link" href="">Laboratoire</a>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h5 class="text-light mb-4">Liens Rapides</h5>
-                <a class="btn btn-link" href="">À Propos</a>
-                <a class="btn btn-link" href="">Contactez-nous</a>
-                <a class="btn btn-link" href="">Nos Services</a>
-                <a class="btn btn-link" href="">Termes & Conditions</a>
-                <a class="btn btn-link" href="">Support</a>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h5 class="text-light mb-4">Newsletter</h5>
-                <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                <div class="position-relative mx-auto" style="max-width: 400px;">
-                    <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Votre email">
-                    <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">S'inscrire</button>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">Nom de Votre Site</a>, Tous droits réservés.
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        Conçu par <a class="border-bottom" href="https://ritechco.ma/">Ritechco</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="copyright">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a class="border-bottom" href="#">Nom de Votre Site</a>, Tous droits réservés.
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    Conçu par <a class="border-bottom" href="https://ritechco.ma/">Ritechco</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
     <!-- Footer End -->
 
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
-    <a href="https://web.whatsapp.com/send/?phone=212666741666" class="btn  rounded-circle " id="btnwpts" ><i class="fa-brands fa-whatsapp"></i></a>
+    <a href="https://wa.me/0666741666" class="btn  rounded-circle " id="btnwpts" ><i class="fa-brands fa-whatsapp"></i></a>
 
 
     <!-- JavaScript Libraries -->
@@ -755,7 +770,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
      
   
     const printdata = (data)=>{
-        const timevalid=['09:00 AM','10:00 AM','11:00 AM','12:00 AM','1:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM'];
+        const timevalid=['09:00 AM','09:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 AM','12:30 AM','1:00 PM','1:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM','6:00 PM'];
         const select =document.getElementById('time2');
 
 
@@ -839,7 +854,7 @@ if (isset($_POST['btnform'])) {
 
 
    
-     if (empty($errNomComplet) && empty($errCin) && empty($errTele) && empty($errAge) && empty($errdata) && empty($errtime)) {
+     if (empty($errNomComplet) && empty($errCin) && empty($errTele) && empty($errAge) && empty($errdata) && empty($errtime)&& empty($errDoctor_ext)) {
         // echo "good form : " ,  $NomComplet, $Cin, $Tele, $Age, $date, $time;
         $nameclinc = "CabinetChaibi";
         $sql = $conn->prepare("SELECT * FROM clinics WHERE clinic_name = ?");
@@ -906,7 +921,7 @@ if (isset($_POST['btnform'])) {
                     text: 'Appointment has been successfully booked!',
                     icon: 'success'
                     }) </script>;";
-                    $stmt->close();
+                 
                 }else{
                     echo  " <script>Swal.fire({
                         title: 'Appointment Error  !',

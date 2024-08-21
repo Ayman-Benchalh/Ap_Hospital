@@ -7,7 +7,7 @@ $patient_id = decrypt_url($_GET["id"]);
 $result = $conn->query("SELECT * FROM patients WHERE patient_id = '".$patient_id."'");
 $row = $result->fetch_assoc();
 
-$patient_age = date('Y') - date('Y', strtotime($row['patient_dob']));
+$patient_age = $row['patient_age'];
 
 $medresult = $conn->query(
 	"SELECT * FROM medical_record M 
@@ -145,7 +145,7 @@ if (isset($_POST['appointmentbtn'])) {
 					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h6 class="modal-title">Add <strong><?= $row["patient_firstname"] . ' ' . $row["patient_lastname"] ?></strong> Follow Up Visit</h6>
+								<h6 class="modal-title">Add <strong><?php $row["patient_firstname"] ?></strong> Follow Up Visit</h6>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
@@ -243,7 +243,7 @@ if (isset($_POST['appointmentbtn'])) {
 						<form action="<?= htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="POST">
 							<div class="modal-body">
 								<input type="hidden" name="treatmentID" value="<?= $patient_id ?>">
-								Case Complete for <b><?= $row["patient_lastname"].' '.$row["patient_firstname"] ?></b>
+								Case Complete for <b><?= $row["patient_firstname"] ?></b>
 							</div>
 							<div class="modal-footer" style="border:none;">
 								<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
@@ -261,8 +261,8 @@ if (isset($_POST['appointmentbtn'])) {
 						<div class="d-flex bd-highlight">
 							<div class="flex-fill bd-highlight">
 								<p class="text-muted">Patient Info</p>
-								<h5 class="font-weight-bold"><?php echo $row["patient_lastname"] . ' ' . $row["patient_firstname"] ?></h5>
-								<p><?= $patient_age ?>,&nbsp; <?= strtoupper($row["patient_gender"]) ?> </p>
+								<h5 class="font-weight-bold"><?php echo  $row["patient_firstname"] ?></h5>
+								<p><?= $patient_age ?> </p>
 							</div>
 							<div class="flex-fill bd-highlight">
 								<p class="text-muted">Last Visit</p>

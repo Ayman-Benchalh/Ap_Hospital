@@ -16,21 +16,21 @@ require_once('./includes/session.inc.php');
         <?php include HEADER; ?>
         <!-- Page content -->
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <div id="datepicker"></div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
                         <!-- Datatable -->
                         <?php
                         function headerTable()
                         {
-                            $header = array("App ID #", "Patient", "App Date", "Time", "Treatment Type", "Confirmation", "Action");
+                            $header = array("App ID #", "Patient", "App Date", "Time","Seance", "Treatment Type", "Confirmation", "Action");
                             $arrlen = count($header);
                             for ($i = 0; $i < $arrlen; $i++) {
                                 echo "<th>" . $header[$i] . "</th>" . PHP_EOL;
@@ -86,6 +86,7 @@ require_once('./includes/session.inc.php');
 				data: {
 					date: formatted,
 					id: id,
+                   
 				},
 				url: 'loadAppointment.php',
 				dateType: "html",
@@ -96,12 +97,15 @@ require_once('./includes/session.inc.php');
 		}
     </script>
     <script>
-        function updateId(id)
+        function updateId(id,Pid)
         {
+            console.log('Appointment ID:', id);
+            console.log('Patient ID:', Pid);
             $.ajax({
                 type: "POST",
                 data: {
-                    id: id
+                    id: id,
+                    patient_Seance : Pid
                 },
                 url: 'updateArrive.php',
                 success: function(data) {

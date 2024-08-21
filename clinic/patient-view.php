@@ -7,11 +7,11 @@ $patient_id = decrypt_url($_GET["cid"]);
 $result = mysqli_query($conn,"SELECT * FROM patients WHERE patient_id = '".$patient_id."' ");
 $row = mysqli_fetch_assoc($result);
 
-$dobDate = date('d-m-Y', strtotime($row["patient_dob"]));
-$dobDate = explode("-", $dobDate);
-$age = (date("md", date("U", mktime(0, 0, 0, $dobDate[0], $dobDate[1], $dobDate[2]))) > date("md")
-    ? ((date("Y") - $dobDate[2]) - 1)
-    : (date("Y") - $dobDate[2]));
+$age =$row["patient_age"];
+// $dobDate = explode("-", $dobDate);
+// $age = (date("md", date("U", mktime(0, 0, 0, $dobDate[0], $dobDate[1], $dobDate[2]))) > date("md")
+//     ? ((date("Y") - $dobDate[2]) - 1)
+//     : (date("Y") - $dobDate[2]));
 
 
 $medresult = $conn->query(
@@ -60,8 +60,8 @@ tbody tr td:first-child {
                         <div class="d-flex bd-highlight">
                             <div class="flex-fill bd-highlight">
                                 <p class="text-muted">Patient Info</p>
-                                <h5 class="font-weight-bold"><?php echo $row["patient_lastname"].' '.$row["patient_firstname"]; ?></h5>
-                                <p><?php echo $age; ?>,&nbsp; <?php echo $row["patient_gender"]; ?> </p>
+                                <h5 class="font-weight-bold"><?php echo $row["patient_firstname"]; ?></h5>
+                                <p><?php echo $age; ?></p>
                             </div>
                             <div class="flex-fill bd-highlight">
                                 <p class="text-muted">Last Visit</p>

@@ -29,7 +29,7 @@ $sql = "SELECT * FROM clinics WHERE clinic_id = ?";
                                         <tr>
                                             <th>Patient ID #</th>
                                             <th>Patient Name</th>
-                                            <th>Date of Birth</th>
+                                            <th>Seance</th>
                                             <th>Phone Number</th>
                                             <th>Date Added</th>
                                             <th>Action</th>
@@ -42,8 +42,8 @@ $sql = "SELECT * FROM clinics WHERE clinic_id = ?";
                                         ?>
                                         <tr>
                                             <td><?php echo $table_row["patient_id"];?></td>
-                                            <td><?php echo $table_row["patient_lastname"].' '.$table_row["patient_firstname"];?></td>
-                                            <td><?php echo $table_row["patient_dob"];?></td>
+                                            <td><?php echo $table_row["patient_firstname"];?></td>
+                                            <td><?php echo $table_row["patient_Seance"];?></td>
                                             <td><?php echo $table_row["patient_contact"];?></td>
                                             <td><?php echo $table_row["date_created"];?></td>
                                             <td><a href="patient-view.php?pid=<?php echo encrypt_url($table_row["patient_id"]);?>" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a></td>
