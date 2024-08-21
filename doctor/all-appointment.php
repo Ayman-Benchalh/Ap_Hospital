@@ -5,11 +5,11 @@ require_once('./includes/path.inc.php');
 require_once('./includes/session.inc.php');
 
 // Ensure $clinic_row and $conn are properly initialized in session.inc.php
-if (!isset($clinic_row['clinic_id']) || !isset($conn)) {
+if (!isset($doctor_row['clinic_id']) || !isset($conn)) {
     die('Required data not set.');
 }
 
-$clinic_id = $clinic_row['clinic_id'];
+$clinic_id = $doctor_row['clinic_id'];
 $rows_per_page = 15; // Number of rows to display per page
 
 // Get the current page from the URL, default to 1 if not set

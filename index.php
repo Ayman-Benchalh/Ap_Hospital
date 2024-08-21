@@ -24,16 +24,18 @@ $error_html = [
 ];
 
 $errNomComplet = $errCin = $errTele = $errAge =$errDoctor_ext = $errdata = $errtime = "";
-$classNomComplet = $classCin = $classTele = $classAge = $classNomComplet = $classdata = $classtime = "";
+$classNomComplet = $classCin = $classTele = $classAge= $classDoctor_ext = $classNomComplet = $classdata = $classtime = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $NomComplet = isset($_POST['NomComplet']) ? escape_input($_POST['NomComplet']) : '';
-    $Cin = isset($_POST['Cin']) ? escape_input($_POST['Cin']) : '';
     $date = isset($_POST['date']) ? escape_input($_POST['date']) : '';
     $time = isset($_POST['time']) ? escape_input($_POST['time']) : '';
     $Age = isset($_POST['Age']) ? escape_input($_POST['Age']) : '';
     $Tele = isset($_POST['Tele']) ? escape_input($_POST['Tele']) : '';
-    $Doctor_ext = isset($_POST['Doctor_ext']) ? escape_input($_POST['Doctor_ext']) : '';
+    // strtoupper
+    $Cinlower = isset($_POST['Cin']) ? escape_input($_POST['Cin']) : '';
+    $Cin =strtoupper($Cinlower);
+    $Doctor_ext = isset($_POST['Doctorext']) ? escape_input($_POST['Doctorext']) : '';
 
     // Validation
     if (empty($NomComplet)) {
@@ -70,8 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $classtime = $error_html['errClass'];
     }
     if (empty($Doctor_ext)) {
-        $errtime = $error_html['errDoctor_ext'];
-        $classtime = $error_html['errClass'];
+        $errDoctor_ext = $error_html['errDoctor_ext'];
+        $classDoctor_ext = $error_html['errClass'];
     }
 
 
@@ -594,7 +596,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <?php echo $errNomComplet; ?>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <input type="text" name="Doctor_ext"<?php echo $classDoctor_ext?> class="form-control border-0" placeholder="Entrez Docter Nom" style="height: 55px;">
+                                <input type="text" name="Doctorext"<?php echo $classDoctor_ext?> class="form-control border-0" placeholder="Entrez Docter Nom" style="height: 55px;">
                                 <?php echo $errDoctor_ext; ?>
                             </div>
                             <div class="col-12 col-sm-6">
@@ -882,15 +884,15 @@ if (isset($_POST['btnform'])) {
         $stmt->close();
 
         if ($count > 0) {
-            echo "
-            <script>
-                Swal.fire({ 
-                title: 'Error!',
-                text: 'You cannot select this time. The selected time slot is invalid.!',
-                type: 'error' })
-                </script>
-            ";
-            exit();
+            // echo "
+            // <script>
+            //     Swal.fire({ 
+            //     title: 'Error!',
+            //     text: 'You cannot select this time. The selected time slot is invalid.!',
+            //     type: 'error' })
+            //     </script>
+            // ";
+            // exit();
            
         } else {
             $date_created = $date . " " . $time;
@@ -902,7 +904,7 @@ if (isset($_POST['btnform'])) {
 
 
           
-            // echo  $row2['clinic_id'] ,$row3['doctor_id'] ;
+            
 
 
             $docter_id=$docter_idF;
@@ -913,8 +915,8 @@ if (isset($_POST['btnform'])) {
             if($row){
                
                 $patient_id=$Cin ;
-                $stmt = $conn->prepare("INSERT INTO appointment (app_date, app_time ,patient_id, doctor_id, clinic_id,status, consult_status,arrive_status) VALUES (?, ?, ?, ?, ?,?,?,?)");
-                $stmt->bind_param("sssiiiii", $date, $time, $patient_id , $docter_id , $clini_id, $status, $consult_status,$arrive_status);
+                $stmt = $conn->prepare("INSERT INTO appointment (app_date, app_time ,patient_id, doctor_id, clinic_id,doctor_ext,status, consult_status,arrive_status) VALUES (?, ?, ?, ?, ?,?,?,?,?)");
+                $stmt->bind_param("sssiisiii", $date, $time, $patient_id , $docter_id , $clini_id,$Doctor_ext, $status, $consult_status,$arrive_status);
                 if(  $stmt->execute()){
                     echo " <script>Swal.fire({
                     title: 'Appointment success!',
@@ -928,16 +930,17 @@ if (isset($_POST['btnform'])) {
                         text: 'Appointment has not been successfully booked.!',
                         icon: 'error'
                         }) </script>;";
-                    exit();
+                   
                 }
             }else{
                 $patient_id=$Cin;
-                $date_createdNom= date('Y-m-d H:m:s');
-                $stmt = $conn->prepare("INSERT INTO patients (patient_id,patient_firstname, patient_identity ,patient_contact, patient_age, date_created) VALUES (?,?, ?, ?, ?, ?)");
-                $stmt->bind_param("ssssss",$patient_id, $NomComplet, $Cin, $Tele, $Age, $date_createdNom);
+               $patient_Seance=0;
+               $date_createdNom= date('Y-m-d H:m:s');
+               $stmt = $conn->prepare("INSERT INTO patients (patient_id,patient_firstname, patient_identity ,patient_Seance,patient_contact, patient_age, date_created) VALUES (?,?, ?, ?, ?,?, ?)");
+               $stmt->bind_param("sssisss",$patient_id, $NomComplet, $Cin,$patient_Seance, $Tele, $Age, $date_createdNom);
                 if($stmt->execute()){
-                    $stmt = $conn->prepare("INSERT INTO appointment (app_date, app_time ,patient_id, doctor_id, clinic_id,status, consult_status,arrive_status) VALUES (?, ?, ?, ?, ?,?,?,?)");
-                    $stmt->bind_param("sssiiiii", $date, $time, $patient_id , $docter_id , $clini_id, $status, $consult_status,$arrive_status);
+                    $stmt = $conn->prepare("INSERT INTO appointment (app_date, app_time ,patient_id, doctor_id, clinic_id,doctor_ext,status, consult_status,arrive_status) VALUES (?, ?, ?, ?, ?,?,?,?,?)");
+                    $stmt->bind_param("sssiisiii", $date, $time, $patient_id , $docter_id , $clini_id,$Doctor_ext, $status, $consult_status,$arrive_status);
                    if($stmt->execute()){
                         echo " <script>Swal.fire({
                         title: 'Appointment success !',
@@ -951,7 +954,7 @@ if (isset($_POST['btnform'])) {
                         text: 'Appointment has not been successfully booked.!',
                         icon: 'error'
                         }) </script>;";
-                        exit();
+                       
                    }
                   
                  }else{
@@ -960,7 +963,7 @@ if (isset($_POST['btnform'])) {
                         text: 'Appointment has not been successfully booked.!',
                         icon: 'error'
                         }) </script>;";
-                    exit();
+                  
                 }
                 
               

@@ -175,7 +175,7 @@ include('includes/session.inc.php');
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                     <canvas id="PieChart"></canvas>
@@ -188,23 +188,23 @@ include('includes/session.inc.php');
                                     // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
                                     labels: [
                                         <?php
-                                        $idquery = array();
-                                        $result = mysqli_query($conn,"SELECT DISTINCT patient_nationality FROM appointment INNER JOIN patients ON appointment.patient_id = patients.patient_id WHERE clinic_id = ".$clinic_row['clinic_id']." ");
-                                        while($row = mysqli_fetch_assoc($result)) {
-                                            echo '"'.ucwords($row['patient_nationality']).'",';
-                                            $idquery[] = $row["patient_nationality"];
-                                        }
+                                        // $idquery = array();
+                                        // $result = mysqli_query($conn,"SELECT DISTINCT patient_nationality FROM appointment INNER JOIN patients ON appointment.patient_id = patients.patient_id WHERE clinic_id = ".$clinic_row['clinic_id']." ");
+                                        // while($row = mysqli_fetch_assoc($result)) {
+                                        //     echo '"'.ucwords($row['patient_nationality']).'",';
+                                        //     $idquery[] = $row["patient_nationality"];
+                                        // }
                                         ?>
                                     ],
                                     datasets: [{
                                         label: '# of Appointment',
                                         data: [
                                             <?php
-                                            foreach ($idquery as $arrvalue) {
-                                                $newsql = "SELECT * FROM appointment INNER JOIN patients ON appointment.patient_id = patients.patient_id WHERE patients.patient_nationality = '$arrvalue' AND appointment.consult_status = 1 ";
-                                                $idnum = mysqli_num_rows(mysqli_query($conn,$newsql));
-                                                echo $idnum.',';
-                                            }
+                                            // foreach ($idquery as $arrvalue) {
+                                            //     $newsql = "SELECT * FROM appointment INNER JOIN patients ON appointment.patient_id = patients.patient_id WHERE patients.patient_nationality = '$arrvalue' AND appointment.consult_status = 1 ";
+                                            //     $idnum = mysqli_num_rows(mysqli_query($conn,$newsql));
+                                            //     echo $idnum.',';
+                                            // }
                                             ?>
                                         ],
                                         backgroundColor: [
@@ -236,7 +236,7 @@ include('includes/session.inc.php');
                         </script>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
     </div>

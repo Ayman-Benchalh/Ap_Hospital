@@ -44,7 +44,7 @@ include("includes/session.inc.php");
                                         } else {
                                             ?>
                                             <tr>
-                                                <td><?= $row["patient_lastname"].' '.$row["patient_firstname"] ?></td>
+                                                <td><?= $row["patient_firstname"] ?></td>
                                                 <td><?= $row["app_date"] ?></td>
                                                 <td><?= $row["app_time"] ?></td>
                                                 <td>Dr. <?= $row["doctor_lastname"].' '.$row["doctor_firstname"] ?></td>

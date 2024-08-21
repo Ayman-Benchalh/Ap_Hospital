@@ -72,7 +72,7 @@ require_once('./includes/session.inc.php');
 		$(function() {
 			$('#datepicker').datetimepicker({
 				inline: true,
-				minDate: '<?= $current_date ?>',
+				// minDate: '<?= $current_date ?>',
 				format: 'YYY-MM-DD',
 			});
 		}).on('dp.change', function(event) {

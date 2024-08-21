@@ -21,9 +21,13 @@
                 <li class="nav-item <?php if (stripos($_SERVER['REQUEST_URI'],'patient-list.php') !== FALSE) {echo 'mm-active';} ?>">
                     <a href="patient-list.php" class="nav-link" ><i class="fas fa-user-injured mr-3 fa-fw"></i>Patients</a>
                 </li>
-                <li class="nav-item <?php if (stripos($_SERVER['REQUEST_URI'],'appointment.php') !== FALSE) {echo 'mm-active';} ?>">
-                    <a href="appointment.php" class="nav-link" ><i class="fas fa-calendar-check mr-3 fa-fw"></i>Appointment</a>
+                <li class="nav-item <?php echo (basename($_SERVER['REQUEST_URI']) == 'appointment.php') ? 'mm-active' : ''; ?>">
+                    <a href="appointment.php" class="nav-link"><i class="fas fa-calendar-check mr-3 fa-fw"></i>Appointment</a>
                 </li>
+                <li class="nav-item <?php echo (basename($_SERVER['REQUEST_URI']) == 'all-appointment.php') ? 'mm-active' : ''; ?>">
+                    <a href="all-appointment.php" class="nav-link"><i class="fas fa-calendar-alt mr-3 fa-fw"></i>All Appointment</a>
+                </li>
+
                 <li class="nav-item <?php if (preg_match('/(schedule)/',$_SERVER["REQUEST_URI"]) == TRUE) {echo 'mm-active';} ?>">
                     <a href="#" class="nav-link has-arrow" aria-expanded="false"><i class="fa fa-user-clock mr-3 fa-fw"></i>Schedule</a>
                     <ul class="side-collapse">

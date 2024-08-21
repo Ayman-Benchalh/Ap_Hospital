@@ -23,6 +23,14 @@
                             <a href="doctor-add.php" class="nav-link"><i class="fa fa-user-plus mr-3 fa-fw"></i>Add Doctor</a>
                         </ul>
                     </li>
+                    <!-- <li class="nav-item <?php echo (preg_match('/doctor/', $_SERVER["REQUEST_URI"]) == TRUE) ? 'mm-active' : ''; ?>">
+                        <a href="#" class="nav-link has-arrow" aria-expanded="false"><i class="fas fa-stethoscope mr-3 fa-fw"></i>Doctors</a>
+                        <ul class="side-collapse collapse">
+                            <li><a href="doctor-list.php" class="nav-link"><i class="fas fa-list-ol mr-3 fa-fw"></i>Doctor List</a></li>
+                            <li><a href="doctor-add.php" class="nav-link"><i class="fa fa-user-plus mr-3 fa-fw"></i>Add Doctor</a></li>
+                        </ul>
+                    </li> -->
+
                 <?php endif; ?>
                 <li class="nav-item <?php echo (preg_match('/patient/', $_SERVER["REQUEST_URI"]) == TRUE) ? 'mm-active' : ''; ?>">
                     <a href="#" class="nav-link has-arrow" aria-expanded="false"><i class="fa fa-user-injured mr-3 fa-fw"></i>Patients</a>
