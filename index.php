@@ -884,15 +884,15 @@ if (isset($_POST['btnform'])) {
         $stmt->close();
 
         if ($count > 0) {
-            // echo "
-            // <script>
-            //     Swal.fire({ 
-            //     title: 'Error!',
-            //     text: 'You cannot select this time. The selected time slot is invalid.!',
-            //     type: 'error' })
-            //     </script>
-            // ";
-            // exit();
+            echo "
+            <script>
+                Swal.fire({ 
+                title: 'Error!',
+                text: 'You cannot select this time. The selected time slot is invalid.!',
+                type: 'error' })
+                </script>
+            ";
+            exit();
            
         } else {
             $date_created = $date . " " . $time;
