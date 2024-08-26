@@ -1,255 +1,240 @@
 <?php
-header('Content-Type: text/html; charset=UTF-8');
+
 include('../config/autoload.php');
 include('./includes/path.inc.php');
 include('./includes/session.inc.php');
 
-if (isset($_POST['submitbtn'])) {
-	$from = $_POST['datefrom'];
-	$to = $_POST['dateto'];
-	$week = $_POST['inputDay'];
-	$status = 1;
-
-	$stmt = $conn->prepare("INSERT INTO schedule (date_from, date_to, schedule_week, status, doctor_id, clinic_id) VALUE (?,?,?,?,?,?)");
-	$stmt->bind_param("ssssss", $from, $to, $week, $status, $doctor_row['doctor_id'], $doctor_row['clinic_id']);
-	$stmt->execute();
-	$stmt->close();
-	$id = $conn->insert_id;
-
-	header('Location: sch-edit.php?scheduleid=' . $id);
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<?php include CSS_PATH; ?>
+<link rel="stylesheet" href="../fullcalendar/lib/main.min.css">
+<?php include CSS_PATH; ?>
+<script src="../fullcalendar/lib/main.min.js"></script>
+<!-- Bootstrap 5 -->
+
+
+<style>
+    #calendar {
+        width: 100%;
+        height: 80%;
+    }
+</style>
 </head>
 
-<body>
-	<?php include NAVIGATION; ?>
-	<div class="page-content" id="content">
-		<?php include HEADER; ?>
-		<div class="row">
-			<div class="modal fade" id="addschedule">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h6 class="modal-title">Create New Schedule</h6>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						</div>
-						<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-							<div class="modal-body">
-								<div class="form-group">
-									<label for="">Week</label>
-									<select name="inputDay" id="inputDay" class="form-control">
-										<?php $dayval = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
-										foreach ($dayval as $week) : ?>
-											<option value="<?= $week ?>"><?= $week ?></option>
-										<?php endforeach ?>
-									</select>
-								</div>
-								<div class="form-group">
-									<label for="datepickerfrom">From Date</label>
-									<input type="text" id="datepickerfrom" name="datefrom" class="form-control">
-								</div>
-								<div class="form-group">
-									<label for="datepickerto">Until Date</label>
-									<input type="text" id="datepickerto" name="dateto" class="form-control">
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="reset" class="btn btn-light" name="clearbtn">Clear</button>
-								<button type="submit" class="btn btn-primary" name="submitbtn">Add</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
+<body id="body">
+<?php include NAVIGATION; ?>
+<div class="page-content" id="content">
+    <?php include HEADER; ?>
+    <div class="row">
+        <div class="col-md-12 pt-3">
+            <div class="card rounded-0 shadow">
+                <div class="card-header bg-gradient text-light" style="background-color: var(--primary-color);">
+                    <h5 class="card-title">Schedule Form</h5>
+                </div>
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <form action="save_schedule.php" method="post" id="schedule-form">
+                            <input type="hidden" name="id" value="">
+                            <div class="row g-2">
+                                <div class="col-md-3 mb-2">
+                                    <label for="title" class="control-label">Title</label>
+                                    <input type="text" class="form-control form-control-sm rounded-0" name="title" id="title" required>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="description" class="control-label">Description</label>
+                                    <input type="text" class="form-control form-control-sm rounded-0" name="description" id="description" required>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="start_datetime" class="control-label">Start</label>
+                                    <input type="datetime-local" class="form-control form-control-sm rounded-0" name="start_datetime" id="start_datetime" required>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <label for="end_datetime" class="control-label">End</label>
+                                    <input type="datetime-local" class="form-control form-control-sm rounded-0" name="end_datetime" id="end_datetime" required>
+                                </div>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button class="btn btn-primary col-md-2 btn-sm rounded-0" type="submit" form="schedule-form"><i class="fa fa-save"></i> Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-body">
-						<button class="btn btn-sm btn-primary px-5 mb-3" data-toggle="modal" data-target="#addschedule">Add Schedule</button>
-						<div class="data-tables">
-							<table id="datatable2" class="table table-responsive-lg nowrap" style="width:100%">
-								<thead>
-									<tr>
-										<th>Date From -- Until</th>
-										<th>Week</th>
-										<th>Status</th>
-										<th>Action</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php
-										$tresult = mysqli_query($conn, "SELECT * FROM schedule WHERE doctor_id = '" . $doctor_row['doctor_id'] . "'");
-										if ($tresult->num_rows == 0) {
-											echo '<tr><td>No Record Found</td></tr>';
-										} else {
-											while ($trow = mysqli_fetch_assoc($tresult)) 
-											{ ?>
-											<tr>
-												<td><?= $trow["date_from"] . ' -- ' . $trow["date_to"]; ?></td>
-												<td><?= $trow["schedule_week"]; ?></td>
-												<td><?= ($trow['status'] == 1) ? '<span class="badge badge-success px-3 py-1">Active</span></td>' : '<span class="badge badge-warning px-3 py-1">Inactive</span></td>'; ?>
-												<td>
-													<a href="sch-edit.php?scheduleid=<?= $trow["schedule_id"]; ?>" class="btn btn-sm btn-outline-secondary"><i class="fa fa-plus"></i> Time Slot</a>
-													<a data-toggle="modal" href="#editscheduleid<?= $trow["schedule_id"]; ?>" class="btn btn-sm btn-outline-info"><i class="fa fa-pen"></i> Edit</a>
-													<a data-toggle="modal" href="#deletescheduleid<?= $trow["schedule_id"]; ?>" class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i> Delete</a>
-												</td>
-											</tr>
+        <div class="col-md-12 pt-3">
+            <div id="calendar"></div>
+        </div>
+    </div>
+</div>
 
-											<div class="modal fade" tabindex="-1" role="dialog" id="editscheduleid<?= $trow["schedule_id"]; ?>">
-												<div class="modal-dialog" role="document">
-													<div class="modal-content">
-														<div class="modal-header">
-															<h5 class="modal-title">Edit</h5>
-															<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-														</div>
-														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-														<div class="modal-body">
-															<input type="hidden" name="inputID" value="<?= $trow["schedule_id"]; ?>">
-															<div class="form-group">
-																<label for="">Week</label>
-																<select name="inputEditDay" id="inputDay" class="form-control">
-																	<?php $dayval = array("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
-																	foreach ($dayval as $week) { ?>
-																		<option value="<?= $week ?>" <?= ($week == $trow['schedule_week']) ? 'selected' : '' ?> ><?= $week ?></option>
-																	<?php } ?>
-																</select>
-															</div>
-															<div class="form-group">
-																<label for="datepickerfrom">From Date</label>
-																<input type="text" id="editdatepickerfrom<?= $trow["schedule_id"]; ?>" name="editdatefrom" class="form-control" value="<?= $trow['date_from'] ?>">
-															</div>
-															<div class="form-group">
-																<label for="datepickerto">Until Date</label>
-																<input type="text" id="editdatepickerto<?= $trow["schedule_id"]; ?>" name="editdateto" class="form-control" value="<?= $trow['date_to'] ?>">
-															</div>
-														</div>
-														<div class="modal-footer">
-															<button type="submit" name="editbtn" class="btn btn-primary">Save</button>
-															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-														</div>
-														</form>
-														<script>
-															$(function() {
-																$('#editdatepickerfrom<?= $trow["schedule_id"]; ?>').datetimepicker({
-																	format: 'YYYY-MM-DD',
-																});
-																$('#editdatepickerto<?= $trow["schedule_id"]; ?>').datetimepicker({
-																	useCurrent: false,
-																	format: 'YYYY-MM-DD',
-																});
-																$("#editdatepickerfrom<?= $trow["schedule_id"]; ?>").on("dp.change", function(e<?= $trow["schedule_id"]; ?>) {
-																	$('#editdatepickerto<?= $trow["schedule_id"]; ?>').data("DateTimePicker").minDate(e<?= $trow["schedule_id"]; ?>.date);
-																});
-																$("#editdatepickerto<?= $trow["schedule_id"]; ?>").on("dp.change", function(e<?= $trow["schedule_id"]; ?>) {
-																	$('#editdatepickerfrom<?= $trow["schedule_id"]; ?>').data("DateTimePicker").maxDate(e<?= $trow["schedule_id"]; ?>.date);
-																});
-															});
-														</script>
-													</div>
-												</div>
-											</div>
-											
-											<div class="modal fade" tabindex="-1" role="dialog" id="deletescheduleid<?= $trow["schedule_id"]; ?>">
-												<div class="modal-dialog" role="document">
-													<div class="modal-content">
-														<div class="modal-header">
-															<h5 class="modal-title">Delete</h5>
-															<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-														</div>
-														<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-														<div class="modal-body">
-															<input type="hidden" name="inputDeleteID" value="<?= $trow["schedule_id"]; ?>">
-															<p>Are you sure to remove ?</p>
-														</div>
-														<div class="modal-footer">
-															<button type="submit" name="deletebtn" class="btn btn-danger">Delete</button>
-															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-														</div>
-														</form>
-													</div>
-												</div>
-											</div>
-									<?php
-											}
-										}
-									?>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<?php include JS_PATH; ?>
-	<script type="text/javascript">
-		$(function() {
-			$('#timepicker').datetimepicker({
-				format: 'LT',
-			});
-			$('#datepickerfrom').datetimepicker({
-				format: 'YYYY-MM-DD',
-			});
-			$('#datepickerto').datetimepicker({
-				useCurrent: false,
-				format: 'YYYY-MM-DD',
-			});
-			$("#datepickerfrom").on("dp.change", function(e) {
-				$('#datepickerto').data("DateTimePicker").minDate(e.date);
-			});
-			$("#datepickerto").on("dp.change", function(e) {
-				$('#datepickerfrom').data("DateTimePicker").maxDate(e.date);
-			});
-		});
-	</script>
-</body>
+<!-- Modal for Event Details -->
+<div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-0">
+            <div class="modal-header rounded-0">
+                <h5 class="modal-title">Schedule Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body rounded-0">
+                <div class="container-fluid">
+                    <dl>
+                        <dt class="text-muted">Title</dt>
+                        <dd id="event-title" class="fw-bold fs-4"></dd>
+                        <dt class="text-muted">Description</dt>
+                        <dd id="event-description"></dd>
+                        <dt class="text-muted">Start</dt>
+                        <dd id="event-start"></dd>
+                        <dt class="text-muted">End</dt>
+                        <dd id="event-end"></dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="modal-footer rounded-0">
+                <div class="text-end">
+                    <button type="button" class="btn btn-primary btn-sm rounded-0" id="edit" data-id="">Edit</button>
+                    <button type="button" class="btn btn-danger btn-sm rounded-0" id="delete" data-id="">Delete</button>
+                    <button type="button" class="btn btn-secondary btn-sm rounded-0" data-bs-dismiss="modal" id="modal-close">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-</html>
+<?php include JS_PATH; ?>
 <?php
-if (isset($_POST['editbtn'])) {
-	$id = escape_input($_POST['inputID']);
-	$from = $_POST['editdatefrom'];
-	$to = $_POST['editdateto'];
-	$week = escape_input($_POST['inputEditDay']);
-	$status = 1;
-
-	$stmt = $conn->prepare("UPDATE schedule SET date_from = ?, date_to = ?, schedule_week = ?, status = ? WHERE schedule_id = ?");
-	$stmt->bind_param("sssss", $from, $to, $week, $status, $id);
-	
-	if ($stmt->execute()) {
-		echo '<script>
-			Swal.fire({ title: "Great!", text: "Successful Updated!", type: "success" }).then((result) => {
-				if (result.value) { window.location.href = "sch-list.php"; }
-			});
-		</script>';
-	} else {
-		echo "Error: " . $query . "<br>" . mysqli_error($conn);
-	}
-	$stmt->close();
+$schedules = $conn->query("SELECT * FROM `schedule_list`");
+$sched_res = [];
+foreach ($schedules->fetch_all(MYSQLI_ASSOC) as $row) {
+    $row['sdate'] = date("F d, Y h:i A", strtotime($row['start_datetime']));
+    $row['edate'] = date("F d, Y h:i A", strtotime($row['end_datetime']));
+    $sched_res[$row['id']] = $row;
 }
+if (isset($conn)) $conn->close();
+?>
+<script>
+    var scheds = <?= json_encode($sched_res) ?>;
+console.log(scheds);
 
-if (isset($_POST['deletebtn'])) {
-	$delid = escape_input($_POST['inputDeleteID']);
+document.addEventListener('DOMContentLoaded', function() {
+    var calendar;
+    var Calendar = FullCalendar.Calendar;
+    var events = [];
 
-	$delstmt = $conn->prepare("DELETE FROM schedule WHERE schedule_id = ?");
-	$delstmt->bind_param("s", $delid);
+    if (scheds) {
+        Object.keys(scheds).forEach(k => {
+            var row = scheds[k];
+            events.push({
+                id: row.id,
+                title: row.title,
+                start: row.start_datetime,
+                end: row.end_datetime
+            });
+        });
+    }
 
-	$detailstmt = $conn->prepare("DELETE FROM schedule_detail WHERE schedule_id = ?");
-	$detailstmt->bind_param("s", $delid);
+    calendar = new Calendar(document.getElementById('calendar'), {
+        headerToolbar: {
+            left: 'prev,next today',
+            right: 'dayGridMonth,dayGridWeek,list',
+            center: 'title',
+        },
+        selectable: true,
+        themeSystem: 'bootstrap',
+        events: events,
+        eventClick: function(info) {
+            var _details = document.getElementById('event-details-modal');
+            var id = info.event.id;
+            if (scheds[id]) {
+                document.getElementById('event-title').textContent = scheds[id].title;
+                document.getElementById('event-description').textContent = scheds[id].description;
+                document.getElementById('event-start').textContent = scheds[id].sdate;
+                document.getElementById('event-end').textContent = scheds[id].edate;
+                document.getElementById('edit').setAttribute('data-id', id);
+                document.getElementById('delete').setAttribute('data-id', id);
+                var modalInstance = new bootstrap.Modal(_details);
+                modalInstance.show();
+            } else {
+                alert("Event is undefined");
+            }
+        },
+        editable: true
+    });
 
-	if ($delstmt->execute() && $detailstmt->execute()) {
-		echo '<script>
-			Swal.fire({ title: "Great!", text: "Successful Deleted!", type: "success" }).then((result) => {
-				if (result.value) { window.location.href = "sch-list.php"; }
-			});
-		</script>';
-	} else {
-		echo "Error: " . $query . "<br>" . mysqli_error($conn);
-	}
-	$delstmt->close();
-}
+    calendar.render();
+
+    document.getElementById('schedule-form').addEventListener('reset', function() {
+        var form = this;
+        form.querySelectorAll('input[type="hidden"]').forEach(input => input.value = '');
+        form.querySelector('input:visible').focus();
+    });
+
+    document.getElementById('edit').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent any default action
+
+        var id = this.getAttribute('data-id');
+        if (scheds[id]) {
+            var _form = document.getElementById('schedule-form');
+            _form.querySelector('[name="id"]').value = id;
+            _form.querySelector('[name="title"]').value = scheds[id].title;
+            _form.querySelector('[name="description"]').value = scheds[id].description;
+            _form.querySelector('[name="start_datetime"]').value = scheds[id].start_datetime.replace(" ", "T");
+            _form.querySelector('[name="end_datetime"]').value = scheds[id].end_datetime.replace(" ", "T");
+
+            // Close the Schedule Details modal
+            var _details = document.getElementById('event-details-modal');
+            var modelbk = document.querySelector('.modal-backdrop');
+            var bodyOpen = document.getElementById('body');
+      
+            _details.style.display='none';
+            bodyOpen.className='';
+            modelbk.className='';
+            if ( document.getElementById("body").classList.contains('modal-close') ){
+                console.log(bodyOpen);
+                bodyOpen.className='';
+                
+            }else{
+                console.log(bodyOpen);
+                bodyOpen.className='';
+               
+            }
+            // var modalInstance = bootstrap.Modal.getInstance(_details);
+            // if (modalInstance) {
+            //     modalInstance.clode();
+            // }
+
+            // Focus on the title field for editing
+            _form.querySelector('[name="title"]').focus();
+        } else {
+            alert("Event is undefined");
+        }
+    });
+
+    document.getElementById('delete').addEventListener('click', function() {
+        var id = this.getAttribute('data-id');
+        if (scheds[id]) {
+            var confirmation = confirm("Are you sure to delete this scheduled event?");
+            if (confirmation === true) {
+                window.location.href = "./delete_schedule.php?id=" + id;
+            }
+        } else {
+            alert("Event is undefined");
+        }
+    });
+    document.getElementById('modal-close').addEventListener('click', function() {
+        var _details = document.getElementById('event-details-modal');
+            var modelbk = document.querySelector('.modal-backdrop');
+            var bodyOpen = document.querySelector('.modal-open');
+           
+            _details.style.display='none';
+            bodyOpen.className='';
+            modelbk.className='';
+    });
+});
+
+</script>
+
+</body>
+</html>
