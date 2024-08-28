@@ -89,20 +89,20 @@
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="index.php" class="nav-item nav-link ">Accueil</a>
                 <a href="about.php" class="nav-item nav-link">À propos</a>
-                <a href="service.php" class="nav-item nav-link active">Service</a>
-                <!-- <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Plus</a>
+                <!-- <a href="service.php" class="nav-item nav-link active">Service</a> -->
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Service</a>
                     <div class="dropdown-menu rounded-0 rounded-bottom m-0">
-                        <a href="feature.php" class="dropdown-item">Fonctionnalité</a>
-                        <a href="team.php" class="dropdown-item">Nos Docteurs</a>
-                        <a href="appointment.php" class="dropdown-item">Rendez-vous</a>
-                        <a href="./admin/login.php" class="dropdown-item">Espace Admin</a>
-                        <a href="./clinic/login.php" class="dropdown-item">Espace Clinique</a>
-                        <a href="./doctor/login.php" class="dropdown-item">Espace Docteur</a>
-                        <a href="testimonial.php" class="dropdown-item">Témoignages</a>
-                        <a href="404.php" class="dropdown-item">Page 404</a>
+                        <a href="feature.php" class="dropdown-item">Rééducation post-opératoire</a>
+                        <a href="team.php" class="dropdown-item"> Traitement des blessures sportives</a>
+                        <a href="appointment.php" class="dropdown-item">Thérapie manuelle</a>
+                        <a href="./admin/login.php" class="dropdown-item">Rééducation neurologique</a>
+                        <a href="./clinic/login.php" class="dropdown-item">Rééducation respiratoire</a>
+                        <a href="./doctor/login.php" class="dropdown-item">Rééducation périnéale</a>
+                        <a href="testimonial.php" class="dropdown-item">Traitement des douleurs chroniques</a>
+                        <a href="404.php" class="dropdown-item">Prévention des blessures</a>
                     </div>
-                </div> -->
+                </div>
                 <!-- <a href="contact.php" class="nav-item nav-link">Contact</a> -->
             </div>
             <a href="appointment.php" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Rendez-vous<i class="fa fa-arrow-right ms-3"></i></a>

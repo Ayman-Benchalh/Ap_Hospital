@@ -75,10 +75,10 @@
 
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 wow fadeIn" data-wow-delay="0.1s">
-        <a href="index.php" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <a href="../index.php" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
             <!-- <h1 class="m-0 text-primary"><i class="far fa-hospital me-3"></i>Cabinet Chaibi</h1> -->
             <h1 class="m-0 text-primary">
-                <img src="./assets/img/widget/logo.png"  style="width: 80px;">
+                <img src="../assets/img/widget/logo.png"  style="width: 80px;">
                     Cabinet Chaibi
             </h1>
         </a>
@@ -87,22 +87,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.php" class="nav-item nav-link ">Accueil</a>
-                <a href="about.php" class="nav-item nav-link">À propos</a>
-                <a href="service.php" class="nav-item nav-link active">Service</a>
-                <!-- <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Plus</a>
+                <a href="../index.php" class="nav-item nav-link ">Accueil</a>
+                <a href="../about.php" class="nav-item nav-link">À propos</a>
+                <!-- <a href="service.php" class="nav-item nav-link active">Service</a> -->
+                <div class="nav-item dropdown">
+                    <a  class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Service</a>
                     <div class="dropdown-menu rounded-0 rounded-bottom m-0">
-                        <a href="feature.php" class="dropdown-item">Fonctionnalité</a>
-                        <a href="team.php" class="dropdown-item">Nos Docteurs</a>
-                        <a href="appointment.php" class="dropdown-item">Rendez-vous</a>
-                        <a href="./admin/login.php" class="dropdown-item">Espace Admin</a>
-                        <a href="./clinic/login.php" class="dropdown-item">Espace Clinique</a>
-                        <a href="./doctor/login.php" class="dropdown-item">Espace Docteur</a>
-                        <a href="testimonial.php" class="dropdown-item">Témoignages</a>
-                        <a href="404.php" class="dropdown-item">Page 404</a>
+                        <a href="rpd.php" class="dropdown-item active">Rééducation post-opératoire</a>
+                        <a href="tbs.php" class="dropdown-item"> Traitement des blessures sportives</a>
+                        <a href="tm.php" class="dropdown-item">Thérapie manuelle</a>
+                        <a href="rn.php" class="dropdown-item">Rééducation neurologique</a>
+                        <a href="rr.php" class="dropdown-item">Rééducation respiratoire</a>
+                        <a href="rp.php" class="dropdown-item">Rééducation périnéale</a>
+                        <a href="tdc.php" class="dropdown-item">Traitement des douleurs chroniques</a>
+                        <a href="pb.php" class="dropdown-item">Prévention des blessures</a>
                     </div>
-                </div> -->
+                </div>
                 <!-- <a href="contact.php" class="nav-item nav-link">Contact</a> -->
             </div>
             <a href="appointment.php" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Rendez-vous<i class="fa fa-arrow-right ms-3"></i></a>
@@ -134,28 +134,29 @@
             <!-- Sidebar -->
             <div class="col-md-4 sidebar rounded" style="background-color: #eeee;">
             <nav class="nav flex-column text-light w-100">
-                <a class="nav-link link-light active bg-primary py-3 rounded" href="#">
+            <a class="nav-link link-dark py-3" href="rpd.php">
+               
                     <i class="fas fa-user-md"></i> Rééducation Post-Opératoire
                 </a>
-                <a class="nav-link link-dark py-3" href="#">
+                <a class="nav-link link-dark py-3" href="tbs.php">
                     <i class="fas fa-running"></i> Traitement Des Blessures Sportives
                 </a>
-                <a class="nav-link link-dark py-3" href="#">
+                <a class="nav-link link-light active bg-primary py-3 rounded" href="tm.php">
                     <i class="fas fa-hands"></i> Thérapie Manuelle
                 </a>
-                <a class="nav-link link-dark py-3" href="#">
+                <a class="nav-link link-dark py-3" href="rn.php">
                     <i class="fas fa-brain"></i> Rééducation Neurologique
                 </a>
-                <a class="nav-link link-dark py-3" href="#">
+                <a class="nav-link link-dark py-3" href="rr.php">
                     <i class="fas fa-lungs"></i> Rééducation Respiratoire
                 </a>
-                <a class="nav-link link-dark py-3" href="#">
+                <a class="nav-link link-dark py-3" href="rp.php">
                     <i class="fas fa-female"></i> Rééducation Périnéale
                 </a>
-                <a class="nav-link link-dark py-3" href="#">
+                <a class="nav-link link-dark py-3" href="tdc.php">
                     <i class="fas fa-hand-holding-medical"></i> Traitement Des Douleurs Chroniques
                 </a>
-                <a class="nav-link link-dark py-3" href="#">
+                <a class="nav-link link-dark py-3" href="pb.php">
                     <i class="fas fa-shield-alt"></i> Prévention Des Blessures
                 </a>
             </nav>

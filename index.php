@@ -227,20 +227,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="index.php" class="nav-item nav-link active">Accueil</a>
                 <a href="about.php" class="nav-item nav-link">À propos</a>
-                <a href="service.php" class="nav-item nav-link">Service</a>
-                <!-- <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Plus</a>
+                <!-- <a href="service.php" class="nav-item nav-link">Service</a> -->
+                <div class="nav-item dropdown">
+                    <a  class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Service</a>
                     <div class="dropdown-menu rounded-0 rounded-bottom m-0">
-                        <a href="feature.php" class="dropdown-item">Fonctionnalité</a>
-                        <a href="team.php" class="dropdown-item">Nos Docteurs</a>
-                        <a href="appointment.php" class="dropdown-item">Rendez-vous</a>
-                        <a href="./admin/login.php" class="dropdown-item">Espace Admin</a>
-                        <a href="./clinic/login.php" class="dropdown-item">Espace Clinique</a>
-                        <a href="./doctor/login.php" class="dropdown-item">Espace Docteur</a>
-                        <a href="testimonial.php" class="dropdown-item">Témoignages</a>
-                        <a href="404.php" class="dropdown-item">Page 404</a>
+                        <a href="./groupe-services/rpd.php" class="dropdown-item">Rééducation post-opératoire</a>
+                        <a href="./groupe-services/tbs.php" class="dropdown-item"> Traitement des blessures sportives</a>
+                        <a href="./groupe-services/tm.php" class="dropdown-item">Thérapie manuelle</a>
+                        <a href="./groupe-services/rn.php" class="dropdown-item">Rééducation neurologique</a>
+                        <a href="./groupe-services/rr.php" class="dropdown-item">Rééducation respiratoire</a>
+                        <a href="./groupe-services/rp.php" class="dropdown-item">Rééducation périnéale</a>
+                        <a href="./groupe-services/rpd.php" class="dropdown-item">Traitement des douleurs chroniques</a>
+                        <a href="./groupe-services/rpd.php" class="dropdown-item">Prévention des blessures</a>
                     </div>
-                </div> -->
+                </div>
                 <!-- <a href="contact.php" class="nav-item nav-link">Contact</a> -->
             </div>
             <a href="appointment.php" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Rendez-vous<i class="fa fa-arrow-right ms-3"></i></a>
@@ -251,7 +251,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     <!-- Header Start -->
-    <div class="container-fluid header bg-primary p-0 mb-5">
+    <div class="container-fluid header bg-primary p-0 mb-5" >
     <div class="row g-0 align-items-center flex-column-reverse flex-lg-row">
         <div class="col-lg-6 p-5 wow fadeIn" data-wow-delay="0.1s">
             <h1 class="display-4 text-white mb-5">Une bonne santé est la racine de tout bonheur</h1>
@@ -262,15 +262,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <p class="text-light mb-0">Médecins Experts</p>
                     </div>
                 </div>
-                <div class="col-sm-4">
+                <!-- <div class="col-sm-4">
                     <div class="border-start border-light ps-4">
                         <h2 class="text-white mb-1" data-toggle="counter-up">1234</h2>
                         <p class="text-light mb-0">Personnel Médical</p>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-sm-4">
                     <div class="border-start border-light ps-4">
-                        <h2 class="text-white mb-1" data-toggle="counter-up">12345</h2>
+                        <h2 class="text-white mb-1" data-toggle="counter-up">100</h2>
                         <p class="text-light mb-0">Nombre Total de Patients</p>
                     </div>
                 </div>
@@ -279,21 +279,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
             <div class="owl-carousel header-carousel">
                 <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="img/carousel-1.jpg" alt="">
+                    <img class="img-fluid"  style="width: 760px;height:760px; object-fit: cover; " src="./assets/img/widget/carousel1.jpeg" alt="">
                     <div class="owl-carousel-text">
-                        <h1 class="display-1 text-white mb-0">Cardiologie</h1>
+                        <h1 class="display-1 text-white mb-0">
+                        Rééducation Post-Opératoire</h1>
                     </div>
                 </div>
                 <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="img/carousel-2.jpg" alt="">
+                    <img class="img-fluid"style="width: 760px;height:760px; object-fit: cover; " src="./assets/img/widget/carousel2.jpg"  alt="">
                     <div class="owl-carousel-text">
-                        <h1 class="display-1 text-white mb-0">Neurologie</h1>
+                        <h1 class="display-1 text-white mb-0">Traitement Des Blessures Sportives</h1>
                     </div>
                 </div>
                 <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="img/carousel-3.jpg" alt="">
+                    <img class="img-fluid"style="width: 760px;height:760px; object-fit: cover; " src="./assets/img/widget/caroussel3.jpg">
                     <div class="owl-carousel-text">
-                        <h1 class="display-1 text-white mb-0">Pneumologie</h1>
+                        <h1 class="display-1 text-white mb-0">Thérapie Manuelle</h1>
                     </div>
                 </div>
             </div>
@@ -310,19 +311,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="row g-5">
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                 <div class="d-flex flex-column">
-                    <img class="img-fluid rounded w-75 align-self-end" src="img/about-1.jpg" alt="">
-                    <img class="img-fluid rounded w-50 bg-white pt-3 pe-3" src="img/about-2.jpg" alt="" style="margin-top: -25%;">
+                    <img class="img-fluid rounded w-100 align-self-end" src="./img/keni9.jpg" alt="">
+                    <img class="img-fluid rounded w-75 bg-white pt-3 pe-3" src="./img/keni7.jpg" alt="" style="margin-top: -25%;">
                 </div>
             </div>
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                 <p class="d-inline-block border rounded-pill py-1 px-4">À Propos de Nous</p>
                 <h1 class="mb-4">Pourquoi devriez-vous nous faire confiance ? Apprenez à nous connaître !</h1>
                 <p>
-                    Tempora erat elitr rebum at clita. Diam dolor 
-                    diam ipsum sit. Aliqu diam amet diam et eos. Clit
-                    a erat ipsum et lorem et sit, sed stet lorem sit clita
-                     duo justo magna dolore erat amet</p>
-                <p class="mb-4">Stet no et lorem dolor et diam, amet duo ut dolore vero eos. No stet est diam rebum amet diam ipsum. Clita clita labore, dolor duo nonumy clita sit at, sed sit sanctus dolor eos.</p>
+                Nos services s'adressent à toute personne cherchant à soulager ses douleurs. Depuis l'établissement du centre, il est devenu un lieu où le bien-être et la santé sont prioritaires. Nous offrons des traitements de kinésithérapie et de physiothérapie. Chaque individu est unique à nos yeux et notre objectif est de trouver la prise en charge la plus adaptée afin de vous débarrasser de vos douleurs.</p>
+                <p class="mb-4"></p>
                 <p><i class="far fa-check-circle text-primary me-3"></i>Soins de santé de qualité</p>
                 <p><i class="far fa-check-circle text-primary me-3"></i>Seulement des Médecins Qualifiés</p>
                 <p><i class="far fa-check-circle text-primary me-3"></i>Professionnels de la Recherche Médicale</p>
@@ -331,7 +329,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 </div>
-
     <!-- About End -->
 
 
@@ -346,66 +343,80 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="service-item bg-light rounded h-100 p-5">
                     <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                        <i class="fa fa-heartbeat text-primary fs-4"></i>
+                        <i class="fa fa-user-md text-primary fs-4"></i>
                     </div>
-                    <h4 class="mb-3">Cardiologie</h4>
-                    <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
+                    <h4 class="mb-3">Rééducation Post-Opératoire</h4>
+                    <p class="mb-4">
+                        La rééducation post-opératoire est essentielle pour retrouver mobilité et force après une intervention chirurgicale.
+                    </p>
                     <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="service-item bg-light rounded h-100 p-5">
                     <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                        <i class="fa fa-x-ray text-primary fs-4"></i>
+                        <i class="fa fa-running text-primary fs-4"></i>
                     </div>
-                    <h4 class="mb-3">Pneumologie</h4>
-                    <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
+                    <h4 class="mb-3">Traitement Des Blessures Sportives</h4>
+                    <p class="mb-4">
+                        Les blessures sportives nécessitent un traitement spécialisé pour permettre un retour rapide à l'activité.
+                    </p>
                     <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="service-item bg-light rounded h-100 p-5">
                     <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                        <i class="fa fa-brain text-primary fs-4"></i>
+                        <i class="fa fa-hands text-primary fs-4"></i>
                     </div>
-                    <h4 class="mb-3">Neurologie</h4>
-                    <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
+                    <h4 class="mb-3">Thérapie Manuelle</h4>
+                    <p class="mb-4">
+                        La thérapie manuelle est utilisée pour traiter les douleurs et dysfonctionnements musculosquelettiques.
+                    </p>
                     <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="service-item bg-light rounded h-100 p-5">
                     <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                        <i class="fa fa-wheelchair text-primary fs-4"></i>
+                        <i class="fa fa-brain text-primary fs-4"></i>
                     </div>
-                    <h4 class="mb-3">Orthopédie</h4>
-                    <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
+                    <h4 class="mb-3">Rééducation Neurologique</h4>
+                    <p class="mb-4">
+                        La rééducation neurologique vise à améliorer les fonctions motrices et cognitives chez les patients atteints de troubles neurologiques.
+                    </p>
                     <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="service-item bg-light rounded h-100 p-5">
                     <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                        <i class="fa fa-tooth text-primary fs-4"></i>
+                        <i class="fa fa-lungs text-primary fs-4"></i>
                     </div>
-                    <h4 class="mb-3">Chirurgie Dentaire</h4>
-                    <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
+                    <h4 class="mb-3">Rééducation Respiratoire</h4>
+                    <p class="mb-4">
+                        La rééducation respiratoire aide à améliorer la fonction pulmonaire et à dégager les voies respiratoires.
+                    </p>
                     <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="service-item bg-light rounded h-100 p-5">
                     <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                        <i class="fa fa-vials text-primary fs-4"></i>
+                        <i class="fa fa-band-aid text-primary fs-4"></i>
                     </div>
-                    <h4 class="mb-3">Laboratoire</h4>
-                    <p class="mb-4">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet.</p>
+                    <h4 class="mb-3">Traitement Des Douleurs Chroniques</h4>
+                    <p class="mb-4">
+                        Les douleurs chroniques nécessitent un traitement continu pour améliorer la qualité de vie des patients.
+                    </p>
                     <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
     <!-- Service End -->
 
@@ -565,7 +576,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="row g-5">
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                 <p class="d-inline-block border rounded-pill py-1 px-4">Rendez-vous</p>
-                <h1 class="mb-4">Prenez Rendez-vous Pour Consulter Notre Médecin</h1>
+                <h1 class="mb-4">Prenez Rendez-vous Pour Consulter Mr. Soufiyan Chaibi</h1>
                 <!-- <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
                 -->
                 <div class="bg-light rounded d-flex align-items-center p-5 mb-4">
@@ -649,7 +660,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
                 <div class="testimonial-item text-center">
-                   
+                <img class="img-fluid bg-light rounded-circle p-2 mx-auto mb-4" src="./assets/img/widget/woman2.jpeg" style="width: 100px; height: 100px;">
                     <div class="testimonial-text rounded text-center p-4">
                         <p>“Je suis extrêmement reconnaissante envers le Cabinet Chaibi pour leur expertise en kinésithérapie. Grâce à leur approche attentionnée et personnalisée, j’ai pu récupérer de ma blessure plus rapidement que prévu. Les thérapeutes sont compétents et à l’écoute. Je recommande vivement leurs services !”</p>
                         <h5 class="mb-1">Fatima belqadi</h5>
@@ -657,7 +668,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
-                   
+                <img class="img-fluid bg-light rounded-circle p-2 mx-auto mb-4" src="./assets/img/widget/man1.jpeg" style="width: 100px; height: 100px;">
                     <div class="testimonial-text rounded text-center p-4">
                         <p>“Le Cabinet Chaibi est le meilleur endroit pour des soins de kinésithérapie de qualité. J’ai été impressionné par leur professionnalisme et leur engagement envers ma guérison. Les séances de traitement étaient efficaces et les conseils prodigués étaient très utiles. Je me sens tellement mieux maintenant, merci au Cabinet Chaibi !”</p>
                         <h5 class="mb-1">Ahmed bourzik</h5>
@@ -665,7 +676,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
-                  
+                <img class="img-fluid bg-light rounded-circle p-2 mx-auto mb-4" src="./assets/img/widget/woman1.jpeg" style="width: 100px; height: 100px;">
                     <div class="testimonial-text rounded text-center p-4">
                         <p>“Je ne peux que recommander le Cabinet Chaibi pour leurs services de kinésithérapie exceptionnels. J’ai été agréablement surprise par l’attention particulière que j’ai reçue dès mon premier rendez-vous. Les kinésithérapeutes étaient très compétents, patients et dévoués à mon rétablissement. Je suis ravie des résultats obtenus et je leur suis reconnaissante.”</p>
                         <h5 class="mb-1">Sara aalami</h5>
@@ -710,14 +721,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <a class="btn btn-link" href="">Termes & Conditions</a>
                     <a class="btn btn-link" href="">Support</a>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <!-- <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Newsletter</h5>
                     <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
                     <div class="position-relative mx-auto" style="max-width: 400px;">
                         <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Votre email">
                         <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">S'inscrire</button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="container">
