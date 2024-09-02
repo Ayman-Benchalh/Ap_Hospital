@@ -191,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="h-100 d-inline-flex align-items-center py-3">
                     <small class="far fa-clock text-primary me-2"></small>
-                    <small>Mon - Fri : 09.00  - 18.00 </small>
+                    <small>Lun - Ven : 09.00  - 18.00 </small>
                 </div>
             </div>
             <div class="col-lg-5 px-5 text-end">
@@ -200,10 +200,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <small>+212 666 74 16 66</small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center">
-                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href=""><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-0" href=""><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href="https://wa.me/+212666741666"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href="https://wa.me/+212666741666"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href="https://wa.me/+212666741666"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-0" href="https://wa.me/+212666741666"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
@@ -258,8 +258,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row g-4">
                 <div class="col-sm-4">
                     <div class="border-start border-light ps-4">
-                        <h2 class="text-white mb-1" data-toggle="counter-up">1</h2>
-                        <p class="text-light mb-0">Médecins Experts</p>
+                        <h2 class="text-white mb-1" data-toggle="counter-up">5</h2>
+                        <p class="text-light mb-0">Expérience</p>
                     </div>
                 </div>
                 <!-- <div class="col-sm-4">
@@ -324,7 +324,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <p><i class="far fa-check-circle text-primary me-3"></i>Soins de santé de qualité</p>
                 <p><i class="far fa-check-circle text-primary me-3"></i>Seulement des Médecins Qualifiés</p>
                 <p><i class="far fa-check-circle text-primary me-3"></i>Professionnels de la Recherche Médicale</p>
-                <a class="btn btn-primary rounded-pill py-3 px-5 mt-3" href="">En savoir plus</a>
+                <a class="btn btn-primary rounded-pill py-3 px-5 mt-3" href="service.php">En savoir plus</a>
             </div>
         </div>
     </div>
@@ -349,7 +349,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <p class="mb-4">
                         La rééducation post-opératoire est essentielle pour retrouver mobilité et force après une intervention chirurgicale.
                     </p>
-                    <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
+                    <a class="btn" href="groupe-services/rpd.php"><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -361,7 +361,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <p class="mb-4">
                         Les blessures sportives nécessitent un traitement spécialisé pour permettre un retour rapide à l'activité.
                     </p>
-                    <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
+                    <a class="btn" href="groupe-services/tbs.php"><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
@@ -373,7 +373,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <p class="mb-4">
                         La thérapie manuelle est utilisée pour traiter les douleurs et dysfonctionnements musculosquelettiques.
                     </p>
-                    <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
+                    <a class="btn" href="groupe-services/tm.php"><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -385,7 +385,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <p class="mb-4">
                         La rééducation neurologique vise à améliorer les fonctions motrices et cognitives chez les patients atteints de troubles neurologiques.
                     </p>
-                    <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
+                    <a class="btn" href="groupe-services/rn.php"><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -397,7 +397,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <p class="mb-4">
                         La rééducation respiratoire aide à améliorer la fonction pulmonaire et à dégager les voies respiratoires.
                     </p>
-                    <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
+                    <a class="btn" href="groupe-services/rr.php"><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
@@ -409,7 +409,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <p class="mb-4">
                         Les douleurs chroniques nécessitent un traitement continu pour améliorer la qualité de vie des patients.
                     </p>
-                    <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
+                    <a class="btn" href="groupe-services/tdc.php"><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
                 </div>
             </div>
         </div>
@@ -621,10 +621,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+212 6 66 74 16 66</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>chaibikine@gmail.com</p>
                     <div class="d-flex pt-2">
-                        <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social rounded-circle" href="https://wa.me/+212666741666"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social rounded-circle" href="https://wa.me/+212666741666"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social rounded-circle" href="https://wa.me/+212666741666"><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social rounded-circle" href="https://wa.me/+212666741666"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -657,7 +657,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="copyright">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="#">Nom de Votre Site</a>, Tous droits réservés.
+                        &copy; <a class="border-bottom" href="https://ritechco.ma/">Ritechco</a>, Tous droits réservés.
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         Conçu par <a class="border-bottom" href="https://ritechco.ma/">Ritechco</a>

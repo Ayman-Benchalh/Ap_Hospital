@@ -62,10 +62,10 @@
                     <small>+212 666 74 16 66</small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center">
-                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href=""><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-0" href=""><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href="https://wa.me/+212666741666"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href="https://wa.me/+212666741666"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href="https://wa.me/+212666741666"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-0" href="https://wa.me/+212666741666"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
@@ -129,76 +129,87 @@
 
     <!-- Service Start -->
     <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <p class="d-inline-block border rounded-pill py-1 px-4">Services</p>
-                <h1>Solutions de soins de santé</h1>
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <p class="d-inline-block border rounded-pill py-1 px-4">Services</p>
+            <h1>Solutions de Soins de Santé</h1>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
+                        <i class="fa fa-user-md text-primary fs-4"></i>
+                    </div>
+                    <h4 class="mb-3">Rééducation Post-Opératoire</h4>
+                    <p class="mb-4">
+                        La rééducation post-opératoire est essentielle pour retrouver mobilité et force après une intervention chirurgicale.
+                    </p>
+                    <a class="btn" href="groupe-services/rpd.php"><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
+                </div>
             </div>
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item bg-light rounded h-100 p-5">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                            <i class="fa fa-heartbeat text-primary fs-4"></i>
-                        </div>
-                        <h4 class="mb-3">Rééducation Post-Opératoire</h4>
-                        <p class="mb-4">Rééducation Post-Opératoire La thérapie manuelle orthopédique ou TMO, est un terme peu connu du grand public. Pourtant, cette discipline est pratiquée par des professionnels de santé depuis plusieurs décennies</p>
-                        <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
+                        <i class="fa fa-running text-primary fs-4"></i>
                     </div>
+                    <h4 class="mb-3">Traitement Des Blessures Sportives</h4>
+                    <p class="mb-4">
+                        Les blessures sportives nécessitent un traitement spécialisé pour permettre un retour rapide à l'activité.
+                    </p>
+                    <a class="btn" href="groupe-services/tbs.php"><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-item bg-light rounded h-100 p-5">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                            <i class="fa fa-x-ray text-primary fs-4"></i>
-                        </div>
-                        <h4 class="mb-3">Traitement Des Blessures Sportives</h4>
-                        <p class="mb-4">Traitement Des Blessures Sportives Les blessures sportives sont fréquentes, et peuvent entraîner un arrêt prolongé de l’activité pratiquée. Claquage, entorse, luxation, fracture…</p>
-                        <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
+                        <i class="fa fa-hands text-primary fs-4"></i>
                     </div>
+                    <h4 class="mb-3">Thérapie Manuelle</h4>
+                    <p class="mb-4">
+                        La thérapie manuelle est utilisée pour traiter les douleurs et dysfonctionnements musculosquelettiques.
+                    </p>
+                    <a class="btn" href="groupe-services/tm.php"><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="service-item bg-light rounded h-100 p-5">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                            <i class="fa fa-brain text-primary fs-4"></i>
-                        </div>
-                        <h4 class="mb-3">Thérapie Manuelle</h4>
-                        <p class="mb-4">Thérapie Manuelle La thérapie manuelle orthopédique ou TMO, est un terme peu connu du grand public. Pourtant, cette discipline est pratiquée par des professionnels de santé depuis plusieurs décennies…</p>
-                        <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
+                        <i class="fa fa-brain text-primary fs-4"></i>
                     </div>
+                    <h4 class="mb-3">Rééducation Neurologique</h4>
+                    <p class="mb-4">
+                        La rééducation neurologique vise à améliorer les fonctions motrices et cognitives chez les patients atteints de troubles neurologiques.
+                    </p>
+                    <a class="btn" href="groupe-services/rn.php"><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item bg-light rounded h-100 p-5">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                            <i class="fa fa-wheelchair text-primary fs-4"></i>
-                        </div>
-                        <h4 class="mb-3">Rééducation Neurologique</h4>
-                        <p class="mb-4">Rééducation Neurologique La kinésithérapie neurologique se réfère à l’utilisation de cette thérapie pour évaluer et soigner les problèmes liés au système nerveux: les pathologies et les troubles neurologiques…</p>
-                        <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
+                        <i class="fa fa-lungs text-primary fs-4"></i>
                     </div>
+                    <h4 class="mb-3">Rééducation Respiratoire</h4>
+                    <p class="mb-4">
+                        La rééducation respiratoire aide à améliorer la fonction pulmonaire et à dégager les voies respiratoires.
+                    </p>
+                    <a class="btn" href="groupe-services/rr.php"><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-item bg-light rounded h-100 p-5">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                            <i class="fa fa-tooth text-primary fs-4"></i>
-                        </div>
-                        <h4 class="mb-3">Rééducation Respiratoire</h4>
-                        <p class="mb-4">Rééducation Respiratoire La kinésithérapie respiratoire désigne un ensemble de techniques visant à désobstruer le nez et désencombrer les bronches. En pratique, il s’agit de manœuvres externes,…</p>
-                        <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="service-item bg-light rounded h-100 p-5">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
+                        <i class="fa fa-band-aid text-primary fs-4"></i>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="service-item bg-light rounded h-100 p-5">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4" style="width: 65px; height: 65px;">
-                            <i class="fa fa-vials text-primary fs-4"></i>
-                        </div>
-                        <h4 class="mb-3">
-                        Traitement Des Douleurs Chroniques</h4>
-                        <p class="mb-4">Traitement Des Douleurs Chroniques On définit une douleur chronique comme étant une douleur persistante au delà de ce qui est habituel pour la pathologie en cause….</p>
-                        <a class="btn" href=""><i class="fa fa-plus text-primary me-3"></i>Read More</a>
-                    </div>
+                    <h4 class="mb-3">Traitement Des Douleurs Chroniques</h4>
+                    <p class="mb-4">
+                        Les douleurs chroniques nécessitent un traitement continu pour améliorer la qualité de vie des patients.
+                    </p>
+                    <a class="btn" href="groupe-services/tdc.php"><i class="fa fa-plus text-primary me-3"></i>Lire la suite</a>
                 </div>
             </div>
         </div>
     </div>
+</div>
     <!-- Service End -->
 
 
@@ -250,14 +261,14 @@
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Adresse</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Derrière l'hôpital Dalia et devant Café Paris TIFLET 15400</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Derrière Restaurant Soto Marina et Station Shell,Tiflet 15400</p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+212 6 66 74 16 66</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>chaibikine@gmail.com</p>
                     <div class="d-flex pt-2">
-                        <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social rounded-circle" href="https://wa.me/+212666741666"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social rounded-circle" href="https://wa.me/+212666741666"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social rounded-circle" href="https://wa.me/+212666741666"><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social rounded-circle" href="https://wa.me/+212666741666"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -276,21 +287,21 @@
                     <a class="btn btn-link" href="">Termes & Conditions</a>
                     <a class="btn btn-link" href="">Support</a>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <!-- <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Newsletter</h5>
                     <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
                     <div class="position-relative mx-auto" style="max-width: 400px;">
                         <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Votre email">
                         <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">S'inscrire</button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="container">
             <div class="copyright">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="#">Nom de Votre Site</a>, Tous droits réservés.
+                        &copy; <a class="border-bottom" href="https://ritechco.ma/">Ritechco</a>, Tous droits réservés.
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         Conçu par <a class="border-bottom" href="https://ritechco.ma/">Ritechco</a>
