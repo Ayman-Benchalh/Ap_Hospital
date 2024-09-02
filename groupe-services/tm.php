@@ -3,11 +3,11 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Klinik - Clinic Website Template</title>
+    <title>Cabinet Chaibi</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-   
+
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
 
@@ -42,14 +42,13 @@
     </div>
     <!-- Spinner End -->
 
-
     <!-- Topbar Start -->
     <div class="container-fluid bg-light p-0 wow fadeIn" data-wow-delay="0.1s">
         <div class="row gx-0 d-none d-lg-flex">
             <div class="col-lg-7 px-5 text-start">
                 <div class="h-100 d-inline-flex align-items-center py-3 me-4">
                     <small class="fa fa-map-marker-alt text-primary me-2"></small>
-                    <small>Derrière l'hôpital Dalia et devant Café Paris TIFLET 15400</small>
+                    <small>Derrière Restaurant Soto Marina et Station Shell,Tiflet 15400</small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center py-3">
                     <small class="far fa-clock text-primary me-2"></small>
@@ -72,14 +71,12 @@
     </div>
     <!-- Topbar End -->
 
-
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 wow fadeIn" data-wow-delay="0.1s">
         <a href="../index.php" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-            <!-- <h1 class="m-0 text-primary"><i class="far fa-hospital me-3"></i>Cabinet Chaibi</h1> -->
             <h1 class="m-0 text-primary">
                 <img src="../assets/img/widget/logo.png"  style="width: 80px;">
-                    Cabinet Chaibi
+                Cabinet Chaibi
             </h1>
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -89,9 +86,8 @@
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="../index.php" class="nav-item nav-link ">Accueil</a>
                 <a href="../about.php" class="nav-item nav-link">À propos</a>
-                <!-- <a href="service.php" class="nav-item nav-link active">Service</a> -->
                 <div class="nav-item dropdown">
-                    <a  class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Service</a>
+                    <a class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Service</a>
                     <div class="dropdown-menu rounded-0 rounded-bottom m-0">
                         <a href="rpd.php" class="dropdown-item ">Rééducation post-opératoire</a>
                         <a href="tbs.php" class="dropdown-item"> Traitement des blessures sportives</a>
@@ -103,13 +99,10 @@
                         <a href="pb.php" class="dropdown-item">Prévention des blessures</a>
                     </div>
                 </div>
-                <!-- <a href="contact.php" class="nav-item nav-link">Contact</a> -->
             </div>
-            <a href="appointment.php" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Rendez-vous<i class="fa fa-arrow-right ms-3"></i></a>
+            <a href="../appointment.php" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Rendez-vous<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
-</nav>
-
-
+    </nav>
     <!-- Navbar End -->
 
     <!-- Page Header Start -->
@@ -128,79 +121,65 @@
     </div>
     <!-- Page Header End -->
 
-
     <!-- Service Start -->
     <div class="container">
         <div class="row">
             <!-- Sidebar -->
             <div class="col-md-4 sidebar rounded" style="background-color: #eeee;">
-            <nav class="nav flex-column text-light w-100">
-            <a class="nav-link link-dark py-3" href="rpd.php">
-               
-                    <i class="fas fa-user-md"></i> Rééducation Post-Opératoire
-                </a>
-                <a class="nav-link link-dark py-3" href="tbs.php">
-                    <i class="fas fa-running"></i> Traitement Des Blessures Sportives
-                </a>
-                <a class="nav-link link-light active bg-primary py-3 rounded" href="tm.php">
-                    <i class="fas fa-hands"></i> Thérapie Manuelle
-                </a>
-                <a class="nav-link link-dark py-3" href="rn.php">
-                    <i class="fas fa-brain"></i> Rééducation Neurologique
-                </a>
-                <a class="nav-link link-dark py-3" href="rr.php">
-                    <i class="fas fa-lungs"></i> Rééducation Respiratoire
-                </a>
-                <a class="nav-link link-dark py-3" href="rp.php">
-                    <i class="fas fa-female"></i> Rééducation Périnéale
-                </a>
-                <a class="nav-link link-dark py-3" href="tdc.php">
-                    <i class="fas fa-hand-holding-medical"></i> Traitement Des Douleurs Chroniques
-                </a>
-                <a class="nav-link link-dark py-3" href="pb.php">
-                    <i class="fas fa-shield-alt"></i> Prévention Des Blessures
-                </a>
-            </nav>
-        </div>
+                <nav class="nav flex-column text-light w-100">
+                    <a class="nav-link link-dark py-3" href="rpd.php">
+                        <i class="fas fa-user-md"></i> Rééducation Post-Opératoire
+                    </a>
+                    <a class="nav-link link-dark py-3" href="tbs.php">
+                        <i class="fas fa-running"></i> Traitement Des Blessures Sportives
+                    </a>
+                    <a class="nav-link link-light active bg-primary py-3 rounded" href="tm.php">
+                        <i class="fas fa-hands"></i> Thérapie Manuelle
+                    </a>
+                    <a class="nav-link link-dark py-3" href="rn.php">
+                        <i class="fas fa-brain"></i> Rééducation Neurologique
+                    </a>
+                    <a class="nav-link link-dark py-3" href="rr.php">
+                        <i class="fas fa-lungs"></i> Rééducation Respiratoire
+                    </a>
+                    <a class="nav-link link-dark py-3" href="rp.php">
+                        <i class="fas fa-female"></i> Rééducation Périnéale
+                    </a>
+                    <a class="nav-link link-dark py-3" href="tdc.php">
+                        <i class="fas fa-hand-holding-medical"></i> Traitement Des Douleurs Chroniques
+                    </a>
+                    <a class="nav-link link-dark py-3" href="pb.php">
+                        <i class="fas fa-shield-alt"></i> Prévention Des Blessures
+                    </a>
+                </nav>
+            </div>
             <!-- Main Content -->
-        <div class="col-md-8">
+            <div class="col-md-8">
                 <div class="content-header d-flex flex-column gap-3 py-4 px-3">
-                    <img src="../assets/img/widget/rdp_img.jpg" class="img-fluid service-image rounded " alt="Service Image">
-                    <h1 >La thérapie manuelle orthopédique (TMO), c’est quoi ?</h1>
-                    <p>La thérapie manuelle orthopédique ou TMO, est un terme peu connu du grand public. Pourtant, cette discipline est pratiquée par des professionnels de santé depuis plusieurs décennies. La TMO est un sous-domaine de la kinésithérapie, qui traite tous les troubles neuro-musculo-squelettiques : par exemple les blessures de type entorse ou tendinite, ou les douleurs du cou et du dos, qui sont des maux extrêmement fréquents.
-                        </p>
-
-                    <p>La TMO a été définie officiellement en 2004 par l’IFOMPT, l’organisation internationale de référence des kinésithérapeutes. D’après cette définition officielle, elle associe plusieurs approches complémentaires, avec pour objectif principal la prise en charge personnalisée du patient. Le processus diagnostic, et l’éducation thérapeutique, sont très importants dans le cadre de la TMO ; l’idée étant de rendre le patient acteur de son parcours de soins.
-                        A noter que les kinésithérapeutes qui pratiquent la thérapie manuelle orthopédique ont suivi une formation spécifique.</p>
-          
-                
+                    <img src="../assets/img/widget/tm_img.jpg" class="img-fluid service-image rounded" alt="Service Image">
+                    <h1>La thérapie manuelle orthopédique (TMO), c’est quoi ?</h1>
+                    <p>La thérapie manuelle orthopédique ou TMO, est un terme peu connu du grand public. Pourtant, cette discipline est pratiquée par des professionnels de santé depuis plusieurs décennies. La TMO est un sous-domaine de la kinésithérapie, qui traite tous les troubles neuro-musculo-squelettiques : par exemple les blessures de type entorse ou tendinite, ou les douleurs du cou et du dos, qui sont des maux extrêmement fréquents.</p>
+                    <p>La TMO a été définie officiellement en 2004 par l’IFOMPT, l’organisation internationale de référence des kinésithérapeutes. D’après cette définition officielle, elle associe plusieurs approches complémentaires, avec pour objectif principal la prise en charge personnalisée du patient. Le processus diagnostic, et l’éducation thérapeutique, sont très importants dans le cadre de la TMO ; l’idée étant de rendre le patient acteur de son parcours de soins. A noter que les kinésithérapeutes qui pratiquent la thérapie manuelle orthopédique ont suivi une formation spécifique.</p>
                     <div class="row">
-                        <div class="col-md-12 py-3 px-0">      
+                        <div class="col-md-12  px-3">      
                             <h2>Quelles sont les indications de la thérapie manuelle orthopédique ?</h2>
                         </div>
-                        <div class="col-md-6">
-                           <p>La TMO permet de traiter toutes les pathologies :</p>
+                        <div class="col-md-11 m-auto py-3 px-3 ">
+                           <h3>La TMO permet de traiter toutes les pathologies :</h3>
                            <li>Musculaires</li>
                            <li>Articulaires</li>
                            <li>Ou liées à un trouble affectant les nerfs</li>
                            <br>
-                           <p>La TMO permet de traiter toutes les pathologies :</p>
+                           <h3>La TMO permet de traiter toutes les pathologies :</h3>
                            <li>Les douleurs du dos (lombalgie aiguë ou chronique, douleurs de la colonne vertébrale)</li>
                            <li>Les douleurs du cou (cervicalgie, torticolis)</li>
                            <li>Les tendinites et tendinopathies</li>
                            <li>Les entorses et autres blessures/douleurs des articulations</li>
                            <br>
                            <p>Le champ d’application de la TMO ne se limite pas à ces affections courantes : elle peut aussi soigner les céphalées d’origine cervicale, ou d’autres douleurs chroniques comme celles du syndrome douloureux régional complexe (aussi connu sous le nom d’algoneurodystrophie).</p>
-                           
                         </div>
-                      
-         
-                
+                    </div>
                 </div>
-               
- 
-                  
-               
                 <div class="content-header d-flex flex-column gap-2 py-4 px-3">
                     <div class="content-section">
                         <h2 class="w-100">
@@ -210,7 +189,7 @@
                         </h2>
                         <div class="collapse" id="collapseContent">
                             <div class="card card-body py-3"  style="background-color: #eeee; border: none;">
-                            La thérapie manuelle orthopédique présente de nombreux avantages : Les méthodes diagnostiques et de traitement reposent toutes sur des preuves précises, avec une approche scientifique rigoureuse, où chaque hypothèse doit être confirmée ou infirmée par des tests cliniques Le patient est placé au cœur de sa propre prise en charge. Concrètement, cela signifie qu’une place importante est accordée à l’interrogatoire initial, qui permet au kinésithérapeute de recueillir des informations précieuses sur les symptômes et leurs circonstances d’apparition. L’éducation thérapeutique est un autre aspect majeur de la TMO, qui permet au patient de comprendre sa problématique, les objectifs du traitement dans son ensemble, et de chaque soin ou exercice effectué. A terme, le patient devient autonome dans la gestion de sa pathologie L’approche est très spécifique et personnalisée : un des objectifs phares de la TMO est de cerner au mieux la problématique du patient, et de proposer les techniques qui donneront les meilleurs résultats
+                                La thérapie manuelle orthopédique présente de nombreux avantages : Les méthodes diagnostiques et de traitement reposent toutes sur des preuves précises, avec une approche scientifique rigoureuse, où chaque hypothèse doit être confirmée ou infirmée par des tests cliniques. Le patient est placé au cœur de sa propre prise en charge. Concrètement, cela signifie qu’une place importante est accordée à l’interrogatoire initial, qui permet au kinésithérapeute de recueillir des informations précieuses sur les symptômes et leurs circonstances d’apparition. L’éducation thérapeutique est un autre aspect majeur de la TMO, qui permet au patient de comprendre sa problématique, les objectifs du traitement dans son ensemble, et de chaque soin ou exercice effectué. A terme, le patient devient autonome dans la gestion de sa pathologie. L’approche est très spécifique et personnalisée : un des objectifs phares de la TMO est de cerner au mieux la problématique du patient, et de proposer les techniques qui donneront les meilleurs résultats.
                             </div>
                         </div>
                     </div>
@@ -222,7 +201,7 @@
                         </h2>
                         <div class="collapse" id="collapseContent2">
                             <div class="card card-body py-3" style="background-color: #eeee; border: none;">
-                            Le diagnostic est la première grande étape de votre prise en charge en thérapie manuelle orthopédique. Il repose sur le recueil des éléments suivants : Historique des symptômes Récit subjectif du patient Observation du patient Examen de la zone douloureuse En général, le diagnostic se fait en deux grandes étapes : Un premier temps consacré à l’examen subjectif, c’est-à-dire un interrogatoire dont les réponses vont permettre au thérapeute de poser les premières hypothèses sur la cause de votre mal. Lors de cet examen, l’objectif est aussi d’identifier les éventuels signaux de pathologies graves ; auquel cas votre kiné pourra vous rediriger vers un médecin spécialiste Une deuxième étape qui consiste en un examen clinique objectif du patient ; l’idée étant de confirmer les hypothèses grâce à des tests précis Bien sûr, la durée et le déroulement exact des séances dépendent directement de ce diagnostic. Une fois recueillis tous les éléments nécessaires, votre kiné établit un plan de traitement personnalisé, décomposé en plusieurs objectifs de guérison.</p>
+                                Le diagnostic est la première grande étape de votre prise en charge en thérapie manuelle orthopédique. Il repose sur le recueil des éléments suivants : Historique des symptômes, Récit subjectif du patient, Observation du patient, Examen de la zone douloureuse. En général, le diagnostic se fait en deux grandes étapes : Un premier temps consacré à l’examen subjectif, c’est-à-dire un interrogatoire dont les réponses vont permettre au thérapeute de poser les premières hypothèses sur la cause de votre mal. Lors de cet examen, l’objectif est aussi d’identifier les éventuels signaux de pathologies graves ; auquel cas votre kiné pourra vous rediriger vers un médecin spécialiste. Une deuxième étape qui consiste en un examen clinique objectif du patient ; l’idée étant de confirmer les hypothèses grâce à des tests précis. Bien sûr, la durée et le déroulement exact des séances dépendent directement de ce diagnostic. Une fois recueillis tous les éléments nécessaires, votre kiné établit un plan de traitement personnalisé, décomposé en plusieurs objectifs de guérison.
                             </div>
                         </div>
                     </div>
@@ -233,29 +212,16 @@
                             </button>
                         </h2>
                         <div class="collapse" id="collapseContent3">
-                                <div class="card card-body py-3" style="background-color: #eeee; border: none;">
-                                Pour le traitement des pathologies de l’appareil locomoteur, la TMO associe différentes techniques, les plus fréquentes étant : Les manipulations, des mouvements passifs vifs et d’amplitude faible qui permettent de soulager les problèmes articulaires Les mobilisations, des mouvements passifs doux dont l’objectif est de réduire les douleurs et d’améliorer la mobilité du membre concerné Les exercices de renforcement musculaire et les étirements Cette liste n’est bien sûr pas exhaustive ; vous en saurez plus sur le contenu exact de votre programme de soins à l’issue du bilan réalisé .</p>
+                            <div class="card card-body py-3" style="background-color: #eeee; border: none;">
+                                Pour le traitement des pathologies de l’appareil locomoteur, la TMO associe différentes techniques, les plus fréquentes étant : Les manipulations, des mouvements passifs vifs et d’amplitude faible qui permettent de soulager les problèmes articulaires. Les mobilisations, des mouvements passifs doux dont l’objectif est de réduire les douleurs et d’améliorer la mobilité du membre concerné. Les exercices de renforcement musculaire et les étirements. Cette liste n’est bien sûr pas exhaustive ; vous en saurez plus sur le contenu exact de votre programme de soins à l’issue du bilan réalisé.
+                            </div>
                         </div>
                     </div>
-
                 </div>
-                
-            </div>
-
-
-   
-               
             </div>
         </div>
     </div>
-
     <!-- Service End -->
-
-    
-
-
- 
-        
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
@@ -263,7 +229,7 @@
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Adresse</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Derrière l'hôpital Dalia et devant Café Paris TIFLET 15400</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Derrière Restaurant Soto Marina et Station Shell,Tiflet 15400</p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+212 6 66 74 16 66</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>chaibikine@gmail.com</p>
                     <div class="d-flex pt-2">
@@ -289,14 +255,14 @@
                     <a class="btn btn-link" href="">Termes & Conditions</a>
                     <a class="btn btn-link" href="">Support</a>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <!-- <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Newsletter</h5>
                     <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
                     <div class="position-relative mx-auto" style="max-width: 400px;">
                         <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Votre email">
                         <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">S'inscrire</button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="container">
@@ -312,14 +278,11 @@
             </div>
         </div>
     </div>
-
     <!-- Footer End -->
-
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
-    <a href="https://wa.me/0666741666" class="btn  rounded-circle " id="btnwpts" ><i class="fa-brands fa-whatsapp"></i></a>
-
+    <a href="https://wa.me/0666741666" class="btn rounded-circle" id="btnwpts"><i class="fa-brands fa-whatsapp"></i></a>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

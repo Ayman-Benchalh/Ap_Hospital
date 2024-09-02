@@ -25,7 +25,7 @@ while ($trow = $tlist->fetch_assoc()) {
 	} else {
 		?>
 		<tr>
-			<td><?=  $trow['patient_firstname'] ?></td>
+			<td><?=  $trow['patient_firstname'] ?>																		</td>
 			<td><?= $trow['app_time'] ?></td>
 			<td><?= $trow['treatment_type'] ?></td>
 			<?php

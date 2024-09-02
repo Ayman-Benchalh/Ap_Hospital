@@ -3,81 +3,110 @@ include('../config/autoload.php');
 include('./includes/path.inc.php');
 include('./includes/session.inc.php');
 
+// Fetch and decrypt appointment ID
 $app_id = decrypt_url($_GET["id"]);
+
+
+// Fetch patient and appointment details
 $result = $conn->query("SELECT * FROM appointment LEFT JOIN patients ON appointment.patient_id = patients.patient_id WHERE appointment.app_id = $app_id");
 $row = $result->fetch_assoc();
 
 $patient_id = $row["patient_id"];
+$patient_age = $row['patient_age'];
 
-$patient_age = date('Y') - date('Y', strtotime($row['patient_dob']));
-
+// Fetch medical records
 $medresult = $conn->query(
-	"SELECT * FROM medical_record M 
-	INNER JOIN clinics C ON M.clinic_id = C.clinic_id
-	INNER JOIN patients P ON M.patient_id = P.patient_id
-	WHERE M.patient_id = '".$patient_id."' ORDER BY M.med_id DESC"
+    "SELECT * FROM medical_record M 
+    INNER JOIN clinics C ON M.clinic_id = C.clinic_id
+    INNER JOIN patients P ON M.patient_id = P.patient_id
+    WHERE M.patient_id = '".$patient_id."' ORDER BY M.med_id DESC"
 );
 $medrow = $medresult->fetch_assoc();
 
 $errors = array();
 
+
 if (isset($_POST['prescriptionbtn'])) {
-	$sympton = escape_input($_POST['sympton']);
-	$diagnosis = escape_input($_POST['diagnosis']);
-	$advice = escape_input($_POST['advice']);
+    $sympton = escape_input($_POST['sympton']);
+    $diagnosis = escape_input($_POST['diagnosis']);
+    $advice = escape_input($_POST['advice']);
 
-	if (empty($sympton)) {
-		array_push($errors, "Symptons is required");
-	}
+    if (empty($sympton)) {
+        array_push($errors, "Symptoms are required");
+    }
 
-	if (empty($diagnosis)) {
-		array_push($errors, "Dianogsis is required");
-	}
+    if (empty($diagnosis)) {
+        array_push($errors, "Diagnosis is required");
+    }
 
-	if (empty($advice)) {
-		array_push($errors, "Advise is required");
-	}
+    if (empty($advice)) {
+        array_push($errors, "Advice is required");
+    }
 
-	if (count($errors) == 0) {
-		$stmt = $conn->prepare("INSERT INTO medical_record (med_sympton, med_diagnosis, med_advice, med_date, patient_id, clinic_id, doctor_id) VALUE (?,?,?,?,?,?,?) ");
-		$stmt->bind_param("sssssss", $sympton, $diagnosis, $advice, $date_created, $patient_id, $doctor_row['clinic_id'], $doctor_row['doctor_id']);
-		$stmt->execute();
-		$stmt->close();
-		header('Location: '.$_SERVER['REQUEST_URI']);
-	}
+    if (count($errors) == 0) {
+        $stmt = $conn->prepare("INSERT INTO medical_record (med_sympton, med_diagnosis, med_advice, med_date, patient_id, clinic_id, doctor_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssss", $sympton, $diagnosis, $advice, $date_created, $patient_id, $doctor_row['clinic_id'], $doctor_row['doctor_id']);
+        $stmt->execute();
+        $stmt->close();
+        header('Location: '.$_SERVER['REQUEST_URI']);
+    }
 }
 
 $apperrors = array();
 
+// Handle appointment form submission
 if (isset($_POST['appointmentbtn'])) {
-	$date = escape_input($_POST['inputAppointmentDate']);
-	$time = escape_input($_POST['inputAppointmentTime']);
-	$treatment = $conn->real_escape_string($_POST['inputTreatment']);
-	$status=1;
-	$consult_status=0;
-	$arrive_status=0;
-	if (empty($date)) {
-		array_push($apperrors, "Dates is required");
-	}
+    $date = escape_input($_POST['date']);
+    $time = escape_input($_POST['time']);
+    $treatment = $conn->real_escape_string($_POST['inputTreatment']);
+    $status = 1;
+    $consult_status = 0;
+    $arrive_status = 0;
 
-	if (empty($time)) {
+    // Input validation
+	if (!isset($date) || trim($date) === '') {
+		array_push($apperrors, "Date is required");
+	}
+	
+	if (!isset($time) || trim($time) === '') {
 		array_push($apperrors, "Time is required");
 	}
-
-	if (empty($treatment)) {
+	
+	if (!isset($treatment) || trim($treatment) === '') {
 		array_push($apperrors, "Treatment is required");
 	}
+	
+    // Check if there's already an appointment at the same time
+    $check_appointment = $conn->prepare("SELECT * FROM appointment WHERE app_date = ? AND app_time = ? AND doctor_id = ?");
+    $check_appointment->bind_param("ssi", $date, $time, $doctor_row['doctor_id']);
+    $check_appointment->execute();
+    $check_appointment->store_result();
 
-	if (count($apperrors) == 0) {
-		// $appstmt = $conn->prepare("INSERT INTO appointment (app_date, app_time, treatment_type, patient_id, clinic_id, doctor_id) VALUE (?,?,?,?,?,?) ");
-		// $appstmt->bind_param("ssssss", $date, $time, $treatment, $patient_id, $doctor_row['clinic_id'], $doctor_row['doctor_id']);
-		$appstmt = $conn->prepare("INSERT INTO appointment (app_date, app_time, treatment_type, patient_id, doctor_id, clinic_id, status, consult_status, arrive_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-		$appstmt->bind_param("ssssiiiii", $date, $time, $treatment, $patient_id, $doctor_row['doctor_id'], $doctor_row['clinic_id'], $status, $consult_status, $arrive_status);
-			  
-		$appstmt->execute();
-		$appstmt->close();
-		header('Location: '.$_SERVER['REQUEST_URI']);
-	}
+    if ($check_appointment->num_rows > 0) {
+        array_push($apperrors, "There is already an appointment at this time. Please choose another time.");
+    }
+    $check_appointment->close();
+
+    // If no errors, insert the new appointment
+    if (count($apperrors) == 0) {
+        $appstmt = $conn->prepare("INSERT INTO appointment (app_date, app_time, treatment_type, patient_id, doctor_id, clinic_id, status, consult_status, arrive_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $appstmt->bind_param("ssssiiiii", $date, $time, $treatment,$patient_id , $doctor_row['doctor_id'], $doctor_row['clinic_id'], $status, $consult_status, $arrive_status);
+        if ($appstmt->execute()) {
+            echo '<script>
+                Swal.fire({
+                    title: "Success!",
+                    text: "Appointment has been successfully added.",
+                    icon: "success",
+                    confirmButtonText: "OK"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "appointment.php";
+                    }
+                });
+                </script>';
+        }
+        $appstmt->close();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -85,39 +114,52 @@ if (isset($_POST['appointmentbtn'])) {
 
 <head>
 	<?php include CSS_PATH; ?>
-	<script type="text/javascript">
-		$(function() {
-			$('#datepicker').datetimepicker({
-				inline: true,
-				minDate: '<?= $current_date ?>',
-				format: 'YYY-MM-DD',
-			});
-		}).on('dp.change', function(event) {
-			var formatted = event.date.format('YYYY-MM-DD');
-			loadData(formatted);
-			$("#inputAppointmentDate").val(formatted);
-		});
+	
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  
+   
 
-		function loadData(formatted) {
-			$.ajax({
-				type: "POST",
-				data: {
-					date: formatted
-				},
-				url: 'loadSchedule.php',
-				dateType: "html",
-				success: function(response) {
-					$("#responsecontainer").html(response);
-				}
-			});
-		}
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-		function getTime(time) {
-			$("#inputAppointmentTime").val(time);
-			$("#labelAppointmentTime").html(time);
-		}
-		// $('#followup').modal('show');
-	</script>
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css">
+    <!-- <link rel="shortcut icon" href="./img/logoCAbi.ico" type="image/x-icon"> -->
+     <link rel="shortcut icon" href="./assets/img/icon/logoCAbi.ico" type="image/x-icon">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .my-calendar {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        #time2{
+            height: 55px;
+            width: 100%;
+            background-color: #EFF5FF;
+            outline: none;
+        
+        }
+        #time2 option{
+          
+            height: 55px;
+            color: #EFF5FF;
+            font-size: 20px;
+            padding: 15px;
+            font-weight: 600;
+            transition: all .5s ease;
+        
+        }
+      
+     
+    </style>
+
 </head>
 
 <style>
@@ -132,12 +174,7 @@ if (isset($_POST['appointmentbtn'])) {
 	}
 
 
-	/* tbody tr td:first-child {
-		width: 8em;
-		min-width: 10em;
-		max-width: 10em;
-		word-break: break-all;
-	} */
+	
 </style>
 
 <body>
@@ -168,12 +205,12 @@ if (isset($_POST["completebtn"])) {
 					<div class="modal-dialog modal-lg" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h6 class="modal-title">Add <strong><?= $row["patient_firstname"] . ' ' . $row["patient_lastname"] ?></strong> Follow Up Visit</h6>
+								<h6 class="modal-title">Add <strong><?= $row["patient_firstname"]  ?></strong> Follow Up Visit</h6>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							<form action="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>" method="POST">
+							<form action="<?= htmlspecialchars($_SERVER['REQUEST_URI']) ?>"  class="h-100" method="POST">
 								<?php
 									if (count($apperrors) > 0) {
 										echo '<div class="alert alert-warning" role="alert">';
@@ -195,26 +232,32 @@ if (isset($_POST["completebtn"])) {
 											?>
 										</select>
 									</div>
-									<div class="form-group">
-										<input type="hidden" class="form-control form-control-sm" name="inputAppointmentDate" id="inputAppointmentDate">
-										<input type="hidden" class="form-control form-control-sm" name="inputAppointmentTime" id="inputAppointmentTime">
-									</div>
+									
 									<div class="form-row">
 										<div class="form-group col-md-6">
 											<label>Select Date</label>
-											<div id="datepicker" onclick="getDate()"></div>
+											<div class="date" id="date" data-target-input="nearest">
+												<input type="time" onchange="getdataD(this.value)" id="datepicker" class="my-calendar form-control"
+												placeholder="Choisissez la Date" name="date"   style="height: 55px;background-color: #ffff;">
+											
+											</div>
 										</div>
 										<div class="form-group">
 											<label>Select Time : <small id="labelAppointmentTime"></small></label>
-											<div id="responsecontainer">
+											<div class="time" id="time" data-target-input="nearest">
+											<select name="time" id="time2" class="my-calendar form-control" style="height: 55px;background-color: #ffff;">
+											<option>Sélectionnez la Date d'abord</option>
+											</select>
+									
+										</div>
 											</div>
 										</div>
-									</div>
-								</div>
-								<div class="modal-footer">
+									</div><div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 									<button type="submit" name="appointmentbtn" class="btn btn-primary">Save</button>
 								</div>
+								</div>
+								
 							</form>
 						</div>
 					</div>
@@ -266,7 +309,7 @@ if (isset($_POST["completebtn"])) {
 						<form action="<?= htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="POST">
 							<div class="modal-body">
 								<input type="hidden" name="inputID" value="<?= $app_id ?>">
-								Case Complete for <b><?= $row["patient_lastname"].' '.$row["patient_firstname"] ?></b>
+								Case Complete for <b><?= $row["patient_firstname"] ?></b>
 							</div>
 							<div class="modal-footer" style="border:none;">
 								<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
@@ -284,8 +327,8 @@ if (isset($_POST["completebtn"])) {
 						<div class="d-flex bd-highlight">
 							<div class="flex-fill bd-highlight">
 								<p class="text-muted">Patient Info</p>
-								<h5 class="font-weight-bold"><?php echo $row["patient_lastname"] . ' ' . $row["patient_firstname"] ?></h5>
-								<p><?= $patient_age ?>,&nbsp; <?= strtoupper($row["patient_gender"]) ?> </p>
+								<h5 class="font-weight-bold"><?php echo   $row["patient_firstname"] ?></h5>
+								<p><?= $patient_age ?>,&nbsp; </p>
 							</div>
 							<div class="flex-fill bd-highlight">
 								<p class="text-muted">Last Visit</p>
@@ -436,6 +479,93 @@ if (isset($_POST["completebtn"])) {
 	</div>
 
 	<?php include JS_PATH; ?>
+	<script src="js/main.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#datepicker", {
+            dateFormat: "Y-m-d",
+            minDate: "today",
+            disable: [
+                function(date) {
+                 
+                    return (date.getDay() === 0 || date.getDay() === 6);
+                 }
+            ]
+        });
+      
+     
+  
+    const printdata = (data)=>{
+        const timevalid=['09:00 AM','09:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 AM','12:30 AM','1:00 PM','1:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM','6:00 PM'];
+        const select =document.getElementById('time2');
+
+
+
+     if(data){
+         datatime=data.map(v=>v.app_time)
+ 
+
+        const filteredArray2 = timevalid.filter(element => !datatime.includes(element));
+
+      
+        
+        // timevalid.filter(timava=>timava);
+
+        select.innerHTML=timevalid.map(timava=>{
+
+            if(filteredArray2.includes(timava)){
+                   return `<option value='${timava}' style=' background-color: #8B93FF;'>${timava}</option>`
+            }else{
+                   return `<option disabled  style=' background-color: rgba(250, 52, 91, 0.764);'>${timava} invalid</option>`
+            }
+         })
+     }else{
+        select.innerHTML=timevalid.map(timava=>{
+
+              return `<option value='${timava}'  style=' background-color: #8B93FF;'>${timava}</option>`
+       
+         })
+      
+        
+     }
+      }
+</script>
+<script>
+    const getdataD=(date)=>{
+       
+
+  
+        var xhr = new XMLHttpRequest();
+            xhr.open('POST', '../fetchdate.php', true); // Sending request to the same page
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    var feedback = document.getElementById('date-feedback');
+
+                    if (response.status === 202) {
+                            // console.log("data is here", JSON.stringify(response.data));
+                            printdata(response.data);
+                        } else if (response.status === 'no_data') {
+                         
+                            printdata(null);
+                            // console.log("data is not here", JSON.stringify(response));
+                        } else {
+                            console.error('Unexpected response status:', response.status);
+                        }
+                } else {
+                        console.error('Request failed. Returned status:', xhr.status);
+                }
+            };
+
+            xhr.send('ajax_check_date=true&date=' + encodeURIComponent(date));
+      
+}
+
+       
+
+</script>
 </body>
 
 </html>

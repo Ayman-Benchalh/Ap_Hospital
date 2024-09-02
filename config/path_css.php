@@ -3,7 +3,7 @@ echo '<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>'. $PAGE_TITLE .'</title>
-<link rel="shortcut icon" type="image/png" href="../assets/img/icon/favicon.ico">' . PHP_EOL;
+<link rel="shortcut icon" type="image/png" href="../assets/img/icon/logoCAbi.ico">' . PHP_EOL;
 
 $cssItem = array(
     'bootstrap.min.css',

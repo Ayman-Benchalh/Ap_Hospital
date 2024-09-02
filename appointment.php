@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <head>
     <meta charset="utf-8">
-    <title>Klinik - Clinic Website Template</title>
+    <title>Cabinet Chaibi</title>
     <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
@@ -175,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="col-lg-7 px-5 text-start">
                 <div class="h-100 d-inline-flex align-items-center py-3 me-4">
                     <small class="fa fa-map-marker-alt text-primary me-2"></small>
-                    <small>Derrière l'hôpital Dalia et devant Café Paris TIFLET 15400</small>
+                    <small>Derrière Restaurant Soto Marina et Station Shell,Tiflet 15400</small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center py-3">
                     <small class="far fa-clock text-primary me-2"></small>
@@ -217,16 +217,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <a href="about.php" class="nav-item nav-link">À propos</a>
                 <!-- <a href="service.php" class="nav-item nav-link">Service</a> -->
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Service</a>
+                    <a  class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Service</a>
                     <div class="dropdown-menu rounded-0 rounded-bottom m-0">
-                        <a href="feature.php" class="dropdown-item">Rééducation post-opératoire</a>
-                        <a href="team.php" class="dropdown-item"> Traitement des blessures sportives</a>
-                        <a href="appointment.php" class="dropdown-item">Thérapie manuelle</a>
-                        <a href="./admin/login.php" class="dropdown-item">Rééducation neurologique</a>
-                        <a href="./clinic/login.php" class="dropdown-item">Rééducation respiratoire</a>
-                        <a href="./doctor/login.php" class="dropdown-item">Rééducation périnéale</a>
-                        <a href="testimonial.php" class="dropdown-item">Traitement des douleurs chroniques</a>
-                        <a href="404.php" class="dropdown-item">Prévention des blessures</a>
+                        <a href="./groupe-services/rpd.php" class="dropdown-item">Rééducation post-opératoire</a>
+                        <a href="./groupe-services/tbs.php" class="dropdown-item"> Traitement des blessures sportives</a>
+                        <a href="./groupe-services/tm.php" class="dropdown-item">Thérapie manuelle</a>
+                        <a href="./groupe-services/rn.php" class="dropdown-item">Rééducation neurologique</a>
+                        <a href="./groupe-services/rr.php" class="dropdown-item">Rééducation respiratoire</a>
+                        <a href="./groupe-services/rp.php" class="dropdown-item">Rééducation périnéale</a>
+                        <a href="./groupe-services/rpd.php" class="dropdown-item">Traitement des douleurs chroniques</a>
+                        <a href="./groupe-services/rpd.php" class="dropdown-item">Prévention des blessures</a>
                     </div>
                 </div>
                 <!-- <a href="contact.php" class="nav-item nav-link">Contact</a> -->
@@ -341,7 +341,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Adresse</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Derrière l'hôpital Dalia et devant Café Paris TIFLET 15400</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Derrière Restaurant Soto Marina et Station Shell,Tiflet 15400</p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+212 6 66 74 16 66</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>chaibikine@gmail.com</p>
                     <div class="d-flex pt-2">
@@ -367,14 +367,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <a class="btn btn-link" href="">Termes & Conditions</a>
                     <a class="btn btn-link" href="">Support</a>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <!-- <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Newsletter</h5>
                     <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
                     <div class="position-relative mx-auto" style="max-width: 400px;">
                         <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Votre email">
                         <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">S'inscrire</button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="container">
@@ -580,14 +580,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                    title: 'Appointment success!',
                    text: 'Appointment has been successfully booked!',
                    icon: 'success'
-                   }) </script>;";
+                   }) </script>";
                 
                }else{
                    echo  " <script>Swal.fire({
                        title: 'Appointment Error  !',
                        text: 'Appointment has not been successfully booked.!',
                        icon: 'error'
-                       }) </script>;";
+                       }) </script>";
                    
                }
            }else{
@@ -604,14 +604,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                        title: 'Appointment success !',
                        text: 'Appointment has been successfully booked !',
                        icon: 'success'
-                       }) </script>;";
+                       }) </script>";
                        
                   }else{
                    echo " <script>Swal.fire({
                        title: 'Appointment Error  !',
                        text: 'Appointment has not been successfully booked.!',
                        icon: 'error'
-                       }) </script>;";
+                       }) </script>";
                       
                   }
                  
@@ -620,7 +620,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                        title: ''Appointment Error  !',
                        text: 'Appointment has not been successfully booked.!',
                        icon: 'error'
-                       }) </script>;";
+                       }) </script>";
                  
                }
                

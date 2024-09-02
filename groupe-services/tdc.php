@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Klinik - Clinic Website Template</title>
+    <title>Cabinet Chaibi</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -49,7 +49,7 @@
             <div class="col-lg-7 px-5 text-start">
                 <div class="h-100 d-inline-flex align-items-center py-3 me-4">
                     <small class="fa fa-map-marker-alt text-primary me-2"></small>
-                    <small>Derrière l'hôpital Dalia et devant Café Paris TIFLET 15400</small>
+                    <small>Derrière Restaurant Soto Marina et Station Shell,Tiflet 15400</small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center py-3">
                     <small class="far fa-clock text-primary me-2"></small>
@@ -105,7 +105,7 @@
                 </div>
                 <!-- <a href="contact.php" class="nav-item nav-link">Contact</a> -->
             </div>
-            <a href="appointment.php" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Rendez-vous<i class="fa fa-arrow-right ms-3"></i></a>
+            <a href="../appointment.php" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Rendez-vous<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
 </nav>
 
@@ -141,7 +141,7 @@
                 <a class="nav-link link-dark py-3" href="tbs.php">
                     <i class="fas fa-running"></i> Traitement Des Blessures Sportives
                 </a>
-                <a class="nav-link link-light active bg-primary py-3 rounded" href="tm.php">
+                <a class="nav-link link-dark   py-3 " href="tm.php">
                     <i class="fas fa-hands"></i> Thérapie Manuelle
                 </a>
                 <a class="nav-link link-dark py-3" href="rn.php">
@@ -153,7 +153,7 @@
                 <a class="nav-link link-dark py-3" href="rp.php">
                     <i class="fas fa-female"></i> Rééducation Périnéale
                 </a>
-                <a class="nav-link link-dark py-3" href="tdc.php">
+                <a class="nav-link link-light py-3 active bg-primary rounded" href="tdc.php">
                     <i class="fas fa-hand-holding-medical"></i> Traitement Des Douleurs Chroniques
                 </a>
                 <a class="nav-link link-dark py-3" href="pb.php">
@@ -164,7 +164,7 @@
             <!-- Main Content -->
         <div class="col-md-8">
                 <div class="content-header d-flex flex-column gap-3 py-4 px-3">
-                    <img src="../assets/img/widget/rdp_img.jpg" class="img-fluid service-image rounded " alt="Service Image">
+                    <img src="../assets/img/widget/tdc_img.jpg" class="img-fluid service-image rounded " alt="Service Image">
                     <h1 >Douleur chronique</h1>
                     <p>On définit une douleur chronique comme étant une douleur persistante au delà de ce qui est habituel pour la pathologie en cause. Ce tableau clinique impose des explorations profondes en vue de poser un diagnostic et la prise en charge peut être multidisciplinaire.
                         </p>
@@ -287,7 +287,7 @@ En réalité, la douleur est un mécanisme complexe, qui se trouve à la jonctio
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Adresse</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Derrière l'hôpital Dalia et devant Café Paris TIFLET 15400</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Derrière Restaurant Soto Marina et Station Shell,Tiflet 15400</p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+212 6 66 74 16 66</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>chaibikine@gmail.com</p>
                     <div class="d-flex pt-2">
@@ -313,14 +313,14 @@ En réalité, la douleur est un mécanisme complexe, qui se trouve à la jonctio
                     <a class="btn btn-link" href="">Termes & Conditions</a>
                     <a class="btn btn-link" href="">Support</a>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <!-- <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Newsletter</h5>
                     <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
                     <div class="position-relative mx-auto" style="max-width: 400px;">
                         <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Votre email">
                         <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">S'inscrire</button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="container">

@@ -187,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="col-lg-7 px-5 text-start">
                 <div class="h-100 d-inline-flex align-items-center py-3 me-4">
                     <small class="fa fa-map-marker-alt text-primary me-2"></small>
-                    <small>Derrière l'hôpital Dalia et devant Café Paris TIFLET 15400</small>
+                    <small>Derrière Restaurant Soto Marina et Station Shell,Tiflet 15400</small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center py-3">
                     <small class="far fa-clock text-primary me-2"></small>
@@ -481,7 +481,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="col-lg-6 pe-lg-0 wow fadeIn" data-wow-delay="0.5s" style="min-height: 400px;">
                 <div class="position-relative h-100">
-                    <img class="position-absolute img-fluid w-100 h-100" src="img/feature.jpg" style="object-fit: cover;" alt="">
+                    <img class="position-absolute img-fluid w-100 h-100" src="./assets/img/widget/keni3.jpg" style="object-fit: cover;" alt="">
                 </div>
             </div>
         </div>
@@ -491,85 +491,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Feature End -->
 
 
-    <!-- Team Start -->
-    <!-- <div class="container-xxl py-5">
-    <div class="container">
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <p class="d-inline-block border rounded-pill py-1 px-4">Médecins</p>
-            <h1>Nos Médecins Expérimentés</h1>
-        </div>
-        <div class="row g-4">
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="team-item position-relative rounded overflow-hidden">
-                    <div class="overflow-hidden">
-                        <img class="img-fluid" src="img/team-1.jpg" alt="">
-                    </div>
-                    <div class="team-text bg-light text-center p-4">
-                        <h5>Nom du Médecin</h5>
-                        <p class="text-primary">Département</p>
-                        <div class="team-social text-center">
-                            <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="team-item position-relative rounded overflow-hidden">
-                    <div class="overflow-hidden">
-                        <img class="img-fluid" src="img/team-2.jpg" alt="">
-                    </div>
-                    <div class="team-text bg-light text-center p-4">
-                        <h5>Nom du Médecin</h5>
-                        <p class="text-primary">Département</p>
-                        <div class="team-social text-center">
-                            <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="team-item position-relative rounded overflow-hidden">
-                    <div class="overflow-hidden">
-                        <img class="img-fluid" src="img/team-3.jpg" alt="">
-                    </div>
-                    <div class="team-text bg-light text-center p-4">
-                        <h5>Nom du Médecin</h5>
-                        <p class="text-primary">Département</p>
-                        <div class="team-social text-center">
-                            <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                <div class="team-item position-relative rounded overflow-hidden">
-                    <div class="overflow-hidden">
-                        <img class="img-fluid" src="img/team-4.jpg" alt="">
-                    </div>
-                    <div class="team-text bg-light text-center p-4">
-                        <h5>Nom du Médecin</h5>
-                        <p class="text-primary">Département</p>
-                        <div class="team-social text-center">
-                            <a class="btn btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-    <!-- Team End -->
-
-
+  
     <!-- Appointment Start -->
     <div class="container-xxl py-5">
     <div class="container">
@@ -607,7 +529,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <?php echo $errNomComplet; ?>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <input type="text" name="Doctorext"<?php echo $classDoctor_ext?> class="form-control border-0" placeholder="Entrez Docter Nom" style="height: 55px;">
+                                <input type="text" name="Doctorext"<?php echo $classDoctor_ext?> class="form-control border-0" placeholder="Entrez le Nom de docteur" style="height: 55px;">
                                 <?php echo $errDoctor_ext; ?>
                             </div>
                             <div class="col-12 col-sm-6">
@@ -695,7 +617,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-light mb-4">Adresse</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Derrière l'hôpital Dalia et devant Café Paris TIFLET 15400</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Derrière Restaurant Soto Marina et Station Shell,Tiflet 15400</p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+212 6 66 74 16 66</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>chaibikine@gmail.com</p>
                     <div class="d-flex pt-2">

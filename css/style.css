@@ -255,10 +255,12 @@
 }
 
 .page-header {
-    background: url(../assets/img/widget/2.png) top center no-repeat;
+    background:  linear-gradient(rgba(0, 0, 0, 0.353), rgba(0, 0, 0, 0.5)), /* Overlay color */
+    url(../assets/img/widget/bbg1.jpg) top/cover no-repeat; 
     background-size: cover;
     object-fit: cover;
     text-shadow: 0 0 30px rgba(0, 0, 0, .1);
+ 
 }
 
 .breadcrumb-item + .breadcrumb-item::before {

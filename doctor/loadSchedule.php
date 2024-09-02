@@ -3,11 +3,10 @@ include('../config/autoload.php');
 
 $date = $_POST["date"];
 
-// Prepare and execute the query using prepared statements
-$query = "SELECT * FROM schedule s
-          LEFT JOIN schedule_detail sd ON s.schedule_id = sd.schedule_id 
-          WHERE s.date_from <= ? AND s.date_to >= ? 
-          ORDER BY sd.time_slot";
+
+$query = "SELECT * FROM schedule_list 
+          WHERE start_datetime <= ? AND end_datetime >= ? 
+          ORDER BY start_datetime";
 
 $stmt = $conn->prepare($query);
 $stmt->bind_param("ss", $date, $date);
@@ -18,11 +17,16 @@ if ($result->num_rows == 0) {
     echo '<span>No Time Added</span>';
 } else {
     while ($row = $result->fetch_assoc()) {
-        $day = $row['schedule_week'];
+        echo print_r($row);
+        $start_datetime = $row["start_datetime"];
+        $end_datetime = $row["end_datetime"];
+        
+        // Format the date to get the day of the week
         $dayofweek = date("l", strtotime($date));
+        $day = date("l", strtotime($start_datetime)); // Assuming you need to check the day
 
         if ($dayofweek == $day) {
-            $timeslot = $row["time_slot"];
+            $timeslot = date("H:i", strtotime($start_datetime)) . ' - ' . date("H:i", strtotime($end_datetime));
             ?>
             <button type="button" class="btn btn-sm btn-outline-primary" 
                     data-toggle="button" aria-pressed="false" autocomplete="off" 
