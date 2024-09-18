@@ -4,7 +4,6 @@ require_once('./includes/path.inc.php');
 
 $errors = array();
 
-// ! New 
 if (ctype_xdigit($_GET["selector"]) !== false && ctype_xdigit($_GET["validator"]) !== false) {
 	$selector = $_GET["selector"];
 	$validator = $_GET["validator"];

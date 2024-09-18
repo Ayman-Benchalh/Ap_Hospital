@@ -1,0 +1,58 @@
+<?php
+require_once('../config/autoload.php');
+require_once('./includes/path.inc.php');
+require_once('./includes/session.inc.php');
+// Get the passed data
+if (isset($_GET['data'])) {
+    $serviceData = unserialize(base64_decode($_GET['data']));
+    $services = $serviceData['services'];
+    $quantities = $serviceData['quantities'];
+    $rates = $serviceData['rates'];
+    $amounts = $serviceData['amounts'];
+    $total = $serviceData['total'];
+    $gst = $serviceData['gst'];
+    $netAmount = $serviceData['netAmount'];
+} else {
+    echo "No data received!";
+    exit();
+}
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>Print Invoice</title>
+</head>
+
+<body>
+    <h2>Invoice Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Quantity</th>
+                <th>Rate</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php for ($i = 0; $i < count($services); $i++): ?>
+                <tr>
+                    <td><?php echo $services[$i]; ?></td>
+                    <td><?php echo $quantities[$i]; ?></td>
+                    <td><?php echo $rates[$i]; ?></td>
+                    <td><?php echo $amounts[$i]; ?></td>
+                </tr>
+            <?php endfor; ?>
+        </tbody>
+    </table>
+
+    <h3>Total: <?php echo $total; ?></h3>
+    <h3>TVA: <?php echo $gst; ?>%</h3>
+    <h3>Net Amount: <?php echo $netAmount; ?></h3>
+
+    <button onclick="window.print()">Print</button>
+</body>
+
+</html>

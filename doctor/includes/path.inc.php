@@ -79,7 +79,6 @@ switch ($_SERVER["SCRIPT_NAME"]) {
             $PAGE_TITLE = "All Appointment | $BRAND_NAME";
         break;
     
-
     // Schedule
     case '/'.$PATH.'/schedule.php':
         $CURRENT_PAGE = "Schedule";
@@ -135,6 +134,20 @@ switch ($_SERVER["SCRIPT_NAME"]) {
         $PAGE_TITLE = "Activate Doctor Account | $BRAND_NAME";
         break;
     
+    // Facture
+    case '/'.$PATH.'/facture.php':
+        $CURRENT_PAGE = "Facture";
+        $CURRENT_PATH = "Facture";
+        $PAGE_TITLE = "Facture | $BRAND_NAME";
+        break;
+
+    // Devis
+    case '/'.$PATH.'/devis.php':
+        $CURRENT_PAGE = "Devis";
+        $CURRENT_PATH = "Devis";
+        $PAGE_TITLE = "Devis | $BRAND_NAME";
+        break;
+
     // Index Page
     default:
         $CURRENT_PAGE = "Dashboard";
@@ -145,3 +158,4 @@ switch ($_SERVER["SCRIPT_NAME"]) {
 define('NAVIGATION', 'layouts/navigate.php');
 define('HEADER', 'layouts/nav_header.php');
 define('WIDGET', 'layouts/widget.php');
+?>

@@ -32,11 +32,21 @@
                     <a href="#" class="nav-link has-arrow" aria-expanded="false"><i class="fa fa-user-clock mr-3 fa-fw"></i>Schedule</a>
                     <ul class="side-collapse">
                         <a href="sch-list.php" class="nav-link"><i class="far fa-calendar mr-3 fa-fw"></i>Manage Schedule</a>
-                        <!-- <a href="schedule-setup.php" class="nav-link"><i class="far fa-calendar-plus mr-3 fa-fw"></i>Schedule Setup</a> -->
-                        <!-- <a href="schedule.php" class="nav-link"><i class="far fa-calendar-alt mr-3 fa-fw"></i>View Schedule</a> -->
                     </ul>
                 </li>
+
+                <!-- Facture -->
+                <li class="nav-item <?php if (stripos($_SERVER['REQUEST_URI'],'facture.php') !== FALSE) {echo 'mm-active';} ?>">
+                    <a href="facture.php" class="nav-link"><i class="fas fa-file-invoice-dollar mr-3 fa-fw"></i>Facture</a>
+                </li>
+
+                <!-- Devis (New Section) -->
+                <li class="nav-item <?php if (stripos($_SERVER['REQUEST_URI'],'devis.php') !== FALSE) {echo 'mm-active';} ?>">
+                    <a href="devis.php" class="nav-link"><i class="fas fa-file-alt mr-3 fa-fw"></i>Devis</a>
+                </li>
+
                 <!-- End Upper -->
+                
                 <p class="sidebar-heading px-3 pb-1 mb-0">Others</p>
                 <li class="nav-item <?php if (stripos($_SERVER['REQUEST_URI'],'treatment.php') !== FALSE) {echo 'mm-active';} ?>">
                     <a href="treatment.php" class="nav-link"><i class="fas fa-stream mr-3 fa-fw"></i>Treatment Type</a>
