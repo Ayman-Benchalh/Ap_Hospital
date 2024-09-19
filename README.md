@@ -31,7 +31,7 @@ In this project, contains 4 user-roles. Each users key features and functionalit
 - view appointment status & list
 - make annoucement for patient
 
-#### Patient (Android-Based)
+#### Patient
 - register as an patient account
 - edit profile & password reset
 - book & cancel an appointment
