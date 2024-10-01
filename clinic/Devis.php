@@ -9,7 +9,7 @@ $success_message = "";
 
 
 // Fetch clinic services
-$clinic_id = $doctor_row['clinic_id'];
+$clinic_id = $clinic_row['clinic_id'];
 $query = "SELECT id, Nom_Servic, Price FROM clinic_service WHERE clinic_id = $clinic_id";
 $result = mysqli_query($conn, $query);
 

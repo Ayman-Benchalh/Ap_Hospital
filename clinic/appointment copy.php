@@ -1,17 +1,16 @@
 <?php
 
 require_once('../config/autoload.php');
-include('../config/database.php');
-include('./includes/path.inc.php');
-include('./includes/session.inc.php');
+require_once('./includes/path.inc.php');
+require_once('./includes/session.inc.php');
 
-$doctor_id = $doctor_row['doctor_id'];
+$doctor_id = $clinic_row['clinic_id'];
 
 $stmt = $conn->prepare("
    SELECT appointment.*, patients.patient_firstname, patients.patient_Seance, doctors.doctor_firstname, doctors.doctor_lastname 
    FROM appointment 
    JOIN patients ON appointment.patient_id = patients.patient_id JOIN doctors ON appointment.doctor_id = doctors.doctor_id 
-   WHERE appointment.doctor_id = ?
+   WHERE appointment.clinic_id = ?
 ");
 $stmt->bind_param("i", $doctor_id);
 
@@ -31,16 +30,12 @@ if ($stmt->execute()) {
         $color = '#906BD4';
 
         // Personnaliser la couleur en fonction du jour de la semaine et de l'heure
-        // if ($dayOfWeek == 1 && $hour >= 9 && $hour <= 12) {
-        //     $color = '#FF0000'; // Exemple : rouge pour les matins du lundi
-        // } elseif ($dayOfWeek == 5 && $hour >= 14 && $hour <= 18) {
-        //     $color = '#00FF00'; // Exemple : vert pour les après-midis du vendredi
-        // }
-        if($row['arrive_status']){
-            $color = '#00e600'; 
-        }else{
-            $color = '#906BD4';
+        if ($dayOfWeek == 1 && $hour >= 9 && $hour <= 12) {
+            $color = '#FF0000'; // Exemple : rouge pour les matins du lundi
+        } elseif ($dayOfWeek == 5 && $hour >= 14 && $hour <= 18) {
+            $color = '#00FF00'; // Exemple : vert pour les après-midis du vendredi
         }
+
         $sched_res[] = [
             'id' => $row['app_id'],
             'title' => $row['patient_firstname'], // Nom du patient comme titre

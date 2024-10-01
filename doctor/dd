@@ -1,58 +1,40 @@
+
 <?php
 require_once('../config/autoload.php');
 require_once('./includes/path.inc.php');
 require_once('./includes/session.inc.php');
-// Get the passed data
-if (isset($_GET['data'])) {
-    $serviceData = unserialize(base64_decode($_GET['data']));
-    $services = $serviceData['services'];
-    $quantities = $serviceData['quantities'];
-    $rates = $serviceData['rates'];
-    $amounts = $serviceData['amounts'];
-    $total = $serviceData['total'];
-    $gst = $serviceData['gst'];
-    $netAmount = $serviceData['netAmount'];
-} else {
-    echo "No data received!";
-    exit();
-}
-?>
 
+// Ensure $clinic_row and $conn are properly initialized in session.inc.php
+if (!isset($doctor_row['clinic_id']) || !isset($conn)) {
+    die('Required data not set.');
+}
+
+$clinic_id = $doctor_row['clinic_id'];
+ // Number of rows to display per page
+
+$qery = "SELECT * FROM clinic_service Where clinic_id = $clinic_id";
+$result = $conn->query($qery);
+echo print_r($result);
+
+?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
-    <title>Print Invoice</title>
+    <?php include CSS_PATH; ?>
+    <title>Service</title>
 </head>
 
 <body>
-    <h2>Invoice Details</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Service</th>
-                <th>Quantity</th>
-                <th>Rate</th>
-                <th>Amount</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php for ($i = 0; $i < count($services); $i++): ?>
-                <tr>
-                    <td><?php echo $services[$i]; ?></td>
-                    <td><?php echo $quantities[$i]; ?></td>
-                    <td><?php echo $rates[$i]; ?></td>
-                    <td><?php echo $amounts[$i]; ?></td>
-                </tr>
-            <?php endfor; ?>
-        </tbody>
-    </table>
+    <?php include NAVIGATION; ?>
+    <div class="page-content" id="content">
+        <?php include HEADER; ?>
+        <!-- Page content -->
 
-    <h3>Total: <?php echo $total; ?></h3>
-    <h3>TVA: <?php echo $gst; ?>%</h3>
-    <h3>Net Amount: <?php echo $netAmount; ?></h3>
-
-    <button onclick="window.print()">Print</button>
+        
+       
+    </div>
+    <?php include JS_PATH; ?>
 </body>
 
 </html>

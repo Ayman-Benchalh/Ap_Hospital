@@ -1,17 +1,16 @@
 <?php
 
 require_once('../config/autoload.php');
-include('../config/database.php');
-include('./includes/path.inc.php');
-include('./includes/session.inc.php');
+require_once('./includes/path.inc.php');
+require_once('./includes/session.inc.php');
 
-$doctor_id = $doctor_row['doctor_id'];
+$doctor_id = $clinic_row['clinic_id'];
 
 $stmt = $conn->prepare("
    SELECT appointment.*, patients.patient_firstname, patients.patient_Seance, doctors.doctor_firstname, doctors.doctor_lastname 
    FROM appointment 
    JOIN patients ON appointment.patient_id = patients.patient_id JOIN doctors ON appointment.doctor_id = doctors.doctor_id 
-   WHERE appointment.doctor_id = ?
+   WHERE appointment.clinic_id = ?
 ");
 $stmt->bind_param("i", $doctor_id);
 
@@ -31,18 +30,15 @@ if ($stmt->execute()) {
         $color = '#906BD4';
 
         // Personnaliser la couleur en fonction du jour de la semaine et de l'heure
-        // if ($dayOfWeek == 1 && $hour >= 9 && $hour <= 12) {
-        //     $color = '#FF0000'; // Exemple : rouge pour les matins du lundi
-        // } elseif ($dayOfWeek == 5 && $hour >= 14 && $hour <= 18) {
-        //     $color = '#00FF00'; // Exemple : vert pour les après-midis du vendredi
-        // }
-        if($row['arrive_status']){
-            $color = '#00e600'; 
-        }else{
-            $color = '#906BD4';
+        if ($dayOfWeek == 1 && $hour >= 9 && $hour <= 12) {
+            $color = '#FF0000'; // Exemple : rouge pour les matins du lundi
+        } elseif ($dayOfWeek == 5 && $hour >= 14 && $hour <= 18) {
+            $color = '#00FF00'; // Exemple : vert pour les après-midis du vendredi
         }
+
         $sched_res[] = [
             'id' => $row['app_id'],
+            'patient_id' => $row['patient_id'],
             'title' => $row['patient_firstname'], // Nom du patient comme titre
             'Nom_Complet' => $row['doctor_firstname'].' '.$row['doctor_lastname'], // Nom complet du docteur
             'start' => $row['sdate'],
@@ -53,7 +49,7 @@ if ($stmt->execute()) {
             'status' => $row['status'], // Statut
             'consult_status' => $row['consult_status'], // Statut de la consultation
             'arrive_status' => $row['arrive_status'], // Statut d'arrivée
-            'urlshow' => encrypt_url($row['app_id']), // URL cryptée
+            'urlshow' => encrypt_url($row['patient_id']), // URL cryptée
         ];
     }
 } else {
@@ -117,12 +113,14 @@ $conn->close();
                     </div>
                 </div>
                 <div class="modal-footer rounded-0">
-                    <div class="text-end">
-                        <a class="btn btn-success btn-sm rounded-0" id="show" href="appointment-view?id=" data-id="">Voir</a>
-                        <button type="button" class="btn btn-danger btn-sm rounded-0" id="delete" data-id="">Supprimer</button>
-                        <button type="button" class="btn btn-secondary btn-sm rounded-0" data-bs-dismiss="modal" id="modal-close2">Fermer</button>
-                    </div>
-                </div>
+    <div class="col-12 d-flex justify-content-end">
+        <div id="arrive_status" class="me-auto"></div>
+        <!-- <button type="button" class="btn btn-danger btn-sm rounded-0" data-id="">Arrive</button> -->
+        <a class="btn btn-sm btn-success mx-2  me-2" id="show" href="patient-view?cid=" data-id="">Voir</a>
+        <button type="button" class="btn btn-sm mx-2 btn-danger  me-2" id="delete" data-id="">Supprimer</button>
+        <button type="button" class="btn btn-sm  mx-2 btn-secondary " data-bs-dismiss="modal" id="modal-close2">Fermer</button>
+    </div>
+</div>
             </div>
         </div>
     </div>
@@ -139,6 +137,7 @@ $conn->close();
             scheds.forEach(row => {
                 events2.push({
                     id: row.id,
+                    patient:row.patient_id,
                     title: row.title,
                     start: row.start,
                     end: row.end,
@@ -154,7 +153,7 @@ $conn->close();
                 });
             });
         }
-        console.log(events2);
+        // console.log(events2);
 
         calendar = new Calendar(document.getElementById('calendar'), {
             headerToolbar: {
@@ -173,16 +172,22 @@ $conn->close();
                 var eventData = scheds.find(event => event.id == id);
 
                 if (eventData) {
+                    console.log(eventData)
                     document.getElementById('event-title').textContent = eventData.title;
                     document.getElementById('event-description').textContent = eventData.description;
                     document.getElementById('event-seance').textContent = eventData.Seance;
                     document.getElementById('event-start').textContent = new Date(eventData.start).toLocaleString();
-                    document.getElementById('show').setAttribute('href', `appointment-view.php?id=${eventData.urlshow}`);
+                    document.getElementById('show').setAttribute('href', `patient-view.php?cid=${eventData.urlshow}`);
                     document.getElementById('delete').setAttribute('data-id', id);
+                    // document.getElementById('arrive_status').setAttribute('data-id', id);
 
                     document.getElementById('event-Case').innerHTML = eventData.consult_status 
                         ? `<span class="badge badge-success px-3 py-1">Terminé</span>`
                         : `<span class="badge badge-warning px-3 py-1">Non terminé</span>`;
+
+                    document.getElementById('arrive_status').innerHTML = eventData.arrive_status 
+                    ? `<button type="button" name="checkbtn" class="btn btn-sm btn-secondary mx-2 " >Seated</button>`
+                    : `<button type="button" name="checkbtn" onlick="updateId(${id},'${eventData.patient_id}')" class="btn btn-sm btn-primary mx-2 ">Arrivé</button>`;
 
                     document.getElementById('event-Arrive').innerHTML = eventData.arrive_status 
                         ? `<span class="badge badge-success px-3 py-1">Arrivé</span>`
@@ -248,6 +253,27 @@ $conn->close();
             alert("Événement indéfini");
         }
     });
+
+    function updateId(id,Pid)
+        {
+            console.log('Appointment ID:', id);
+            console.log('Patient ID:', Pid);
+            $.ajax({
+                type: "POST",
+                data: {
+                    id: id,
+                    patient_Seance : Pid
+                },
+                url: 'updateArrive.php',
+                success: function(data) {
+                    console.log(data);
+                    location.reload();
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
+        }
 </script>
 </body>
 </html>

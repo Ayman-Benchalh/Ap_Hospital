@@ -10,7 +10,7 @@ switch ($_SERVER["SCRIPT_NAME"]) {
         $CURRENT_PATH = "Login";
         $PAGE_TITLE = "Login | $BRAND_NAME";
         break;
-    
+
     // Patient
     case '/'.$PATH.'/patient-list.php':
         $CURRENT_PAGE = "Patient List";
@@ -23,19 +23,20 @@ switch ($_SERVER["SCRIPT_NAME"]) {
         $CURRENT_PATH = "Add Patient";
         $PAGE_TITLE = "Patient | $BRAND_NAME";
         break;
-    
+
     case '/'.$PATH.'/patient-view.php':
         $CURRENT_PAGE = "Patient Profile";
         $CURRENT_PATH = "View Patient";
         $PAGE_TITLE = "Patient | $BRAND_NAME";
         break;
-    
+
     // Doctor
     case '/'.$PATH.'/doctor.php':
         $CURRENT_PAGE = "Doctor Profile";
         $CURRENT_PATH = "Doctor";
         $PAGE_TITLE = "Doctor | $BRAND_NAME";
         break;
+
     case '/'.$PATH.'/doctor-edit.php':
         $CURRENT_PAGE = "Edit Profile";
         $CURRENT_PATH = "Doctor";
@@ -48,50 +49,51 @@ switch ($_SERVER["SCRIPT_NAME"]) {
         $CURRENT_PATH = "";
         $PAGE_TITLE = "Clinic | $BRAND_NAME";
         break;
-    
+
     case '/'.$PATH.'/clinic-add.php':
         $CURRENT_PAGE = "Add Clinic";
         $CURRENT_PATH = "";
         $PAGE_TITLE = "Clinic | $BRAND_NAME";
         break;
-    
+
     case '/'.$PATH.'/clinic-view.php':
         $CURRENT_PAGE = "View Clinic";
         $CURRENT_PATH = "";
         $PAGE_TITLE = "Clinic | $BRAND_NAME";
         break;
-    
+
     case '/'.$PATH.'/clinic.php':
         $CURRENT_PAGE = "Clinic";
         $CURRENT_PATH = "";
         $PAGE_TITLE = "Clinic | $BRAND_NAME";
         break;
-    
+
     // Appointment
     case '/'.$PATH.'/appointment.php':
         $CURRENT_PAGE = "Appointment";
         $CURRENT_PATH = "";
         $PAGE_TITLE = "Appointment | $BRAND_NAME";
         break;
+
     case '/'.$PATH.'/all-appointment.php':
-            $CURRENT_PAGE = "All Appointment";
-            $CURRENT_PATH = "";
-            $PAGE_TITLE = "All Appointment | $BRAND_NAME";
+        $CURRENT_PAGE = "All Appointment";
+        $CURRENT_PATH = "";
+        $PAGE_TITLE = "All Appointment | $BRAND_NAME";
         break;
-    
+
     // Schedule
     case '/'.$PATH.'/schedule.php':
         $CURRENT_PAGE = "Schedule";
         $CURRENT_PATH = "Schedule";
         $PAGE_TITLE = "Schedule | $BRAND_NAME";
         break;
-    
+
     case '/'.$PATH.'/speciality.php':
         $CURRENT_PAGE = "Speciality";
         $CURRENT_PATH = "";
         $PAGE_TITLE = "Speciality | $BRAND_NAME";
         break;
-    
+
     case '/'.$PATH.'/language.php':
         $CURRENT_PAGE = "Language";
         $CURRENT_PATH = "Language";
@@ -103,37 +105,37 @@ switch ($_SERVER["SCRIPT_NAME"]) {
         $CURRENT_PATH = "Treatment";
         $PAGE_TITLE = "Treatment | $BRAND_NAME";
         break;
-    
+
     case '/'.$PATH.'/report.php':
         $CURRENT_PAGE = "Report";
         $CURRENT_PATH = "Report";
         $PAGE_TITLE = "Report | $BRAND_NAME";
         break;
-    
+
     case '/'.$PATH.'/review.php':
         $CURRENT_PAGE = "Review";
         $CURRENT_PATH = "Review";
         $PAGE_TITLE = "Review | $BRAND_NAME";
         break;
-    
+
     case '/'.$PATH.'/password.php':
         $CURRENT_PAGE = "Reset Password";
         $CURRENT_PATH = "Reset Password";
         $PAGE_TITLE = "Reset Password | $BRAND_NAME";
         break;
-    
+
     case '/'.$PATH.'/reset.php':
         $CURRENT_PAGE = "Reset Password";
         $CURRENT_PATH = "Reset Password";
         $PAGE_TITLE = "Reset Password | $BRAND_NAME";
         break;
-    
+
     case '/'.$PATH.'/activate.php':
         $CURRENT_PAGE = "Activate Doctor Account";
         $CURRENT_PATH = "Activate Doctor Account";
         $PAGE_TITLE = "Activate Doctor Account | $BRAND_NAME";
         break;
-    
+
     // Facture
     case '/'.$PATH.'/facture.php':
         $CURRENT_PAGE = "Facture";
@@ -146,6 +148,13 @@ switch ($_SERVER["SCRIPT_NAME"]) {
         $CURRENT_PAGE = "Devis";
         $CURRENT_PATH = "Devis";
         $PAGE_TITLE = "Devis | $BRAND_NAME";
+        break;
+
+    // New Service Page
+    case '/'.$PATH.'/service.php':
+        $CURRENT_PAGE = "Service";
+        $CURRENT_PATH = "Service";
+        $PAGE_TITLE = "Service | $BRAND_NAME";
         break;
 
     // Index Page

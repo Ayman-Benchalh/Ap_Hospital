@@ -5,7 +5,7 @@ include('./includes/path.inc.php');
 include('./includes/session.inc.php');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 	<?php include CSS_PATH; ?>
@@ -15,7 +15,7 @@ include('./includes/session.inc.php');
 	<?php include NAVIGATION; ?>
 	<div class="page-content" id="content">
 		<?php include HEADER; ?>
-		<!-- Page content -->
+		<!-- Contenu de la page -->
 		<div class="row">
 			<?php
 			$tlist = $conn->prepare("SELECT * FROM doctors WHERE clinic_id = ?");
@@ -23,7 +23,7 @@ include('./includes/session.inc.php');
 			$tlist->execute();
 			$tresult = $tlist->get_result();
 			if ($tresult->num_rows === 0) {
-				echo '<div>No Doctor Record</div>';
+				echo '<div>Aucun enregistrement de médecin</div>';
 			} else {
 				while ($trow = $tresult->fetch_assoc()) { ?>
 					<div class="col-sm-6">
@@ -46,9 +46,8 @@ include('./includes/session.inc.php');
 										<p class="card-text"><?= $trow["doctor_email"]; ?></p>
 										<p class="card-text"><?= $trow["doctor_contact"]; ?></p>
 										<div class="mt-3">
-											<a href="doctor-view.php?did=<?= encrypt_url($trow["doctor_id"]) ?>" class="btn btn-sm btn-primary"><i class="fa fa-eye mr-1"></i> View</a>
-											<!-- <a href="doctor-edit.php?cid=<?= encrypt_url($trow["doctor_id"]) ?>" class="btn btn-sm btn-secondary"><i class="fa fa-pen mr-1"></i> Edit</a> -->
-											<a href= "#deleteid<?= $trow['doctor_id'] ?>" data-toggle="modal" class="btn btn-sm btn-danger" id="delete_product" data-id="<?php echo $trow["doctor_id"]; ?>"><i class="fa fa-trash mr-1"></i> Delete</a>
+											<a href="doctor-view.php?did=<?= encrypt_url($trow["doctor_id"]) ?>" class="btn btn-sm btn-primary"><i class="fa fa-eye mr-1"></i> Voir</a>
+											<a href= "#deleteid<?= $trow['doctor_id'] ?>" data-toggle="modal" class="btn btn-sm btn-danger" id="delete_product" data-id="<?php echo $trow["doctor_id"]; ?>"><i class="fa fa-trash mr-1"></i> Supprimer</a>
 										</div>
 									</div>
 								</div>
@@ -56,7 +55,7 @@ include('./includes/session.inc.php');
 						</div>
 					</div>
 
-					<!-- End Modal -->
+					<!-- Fin Modal -->
 					<div class="modal fade" id="deleteid<?= $trow['doctor_id'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
@@ -68,11 +67,11 @@ include('./includes/session.inc.php');
 								<form action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
 									<div class="modal-body">
 										<input type="hidden" name="doctor_id" value="<?= $trow['doctor_id'] ?>">
-										Are you sure want to delete <strong><?= $trow['doctor_lastname'].' '.$trow['doctor_firstname'] ?></strong> ?
+										Êtes-vous sûr de vouloir supprimer <strong><?= $trow['doctor_lastname'].' '.$trow['doctor_firstname'] ?></strong> ?
 									</div>
 									<div class="modal-footer" style="border:none;">
-										<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-										<button type="submit" name="deletebtn" class="btn btn-sm btn-danger">Delete</button>
+										<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Fermer</button>
+										<button type="submit" name="deletebtn" class="btn btn-sm btn-danger">Supprimer</button>
 									</div>
 								</form>
 							</div>
@@ -83,7 +82,7 @@ include('./includes/session.inc.php');
 			}
 			?>
 		</div>
-		<!-- End Page Content -->
+		<!-- Fin du contenu de la page -->
 	</div>
 	<?php include JS_PATH; ?>
 </body>
@@ -96,8 +95,8 @@ if (isset($_POST["deletebtn"])) {
 	if (mysqli_query($conn, "DELETE FROM doctors WHERE doctor_id = $id")) {
 		echo '<script>
 		Swal.fire({
-			title: "Great!",
-			text: "Doctor deleted successfully!",
+			title: "Super!",
+			text: "Médecin supprimé avec succès!",
 			icon: "success"
 		}).then((result) => {
 			if (result.isConfirmed) {
@@ -106,7 +105,7 @@ if (isset($_POST["deletebtn"])) {
 		});
 		</script>';
 	} else {
-		echo "Error deleting record: " . mysqli_error($conn);
+		echo "Erreur lors de la suppression de l\'enregistrement: " . mysqli_error($conn);
 	}
 	mysqli_close($conn);
 }

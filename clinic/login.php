@@ -44,9 +44,9 @@ require_once('../config/database.php');
                     <button type="submit" name="login_btn" class="btn btn-primary btn-block button">Log In</button>
                 </form>
             </div>
-            <div class="login-footer">
+            <!-- <div class="login-footer">
                 <p class="text-muted">Don't have an account? <a href="register.php">Sign up</a></p>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>

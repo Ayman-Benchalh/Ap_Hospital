@@ -8,18 +8,6 @@ $errFName = $errLName = $errSpec = $errYears = $errFee = $errSpoke = $errGender 
 $classFName = $classLName = $classSpec = $classYears = $classFee = $classSpoke = $classGender = $classEmail = $errContact = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	// $avatar = $conn->real_escape_string($_POST['inputAvatar']);
-	/* $fname       = $conn->real_escape_string($_POST['inputFirstName']);
-	$lname       = $conn->real_escape_string($_POST['inputLastName']);
-	$speciality = $conn->real_escape_string($_POST['inputSpeciality']);
-	$years      = $conn->real_escape_string($_POST['inputYrsExp']);
-	$desc       = $conn->real_escape_string($_POST['inputDesc']);
-	$lang       = $_POST['inputLanguages'];
-	$spoke      = implode(",", $lang);
-	$dob        = $conn->real_escape_string($_POST['inputDOB']);
-	$gender     = $conn->real_escape_string($_POST['inputGender']);
-	$email      = $conn->real_escape_string($_POST['inputEmailAddress']);
-	$contact    = $conn->real_escape_string($_POST['inputContactNumber']); */
 
 	$fname = escape_input($_POST['inputFirstName']);
 	$lname = escape_input($_POST['inputLastName']);
@@ -40,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$email = escape_input($_POST['inputEmailAddress']);
 	$contact = escape_input($_POST['inputContactNumber']);
 
-	// Validate
+	// Validation
 	if (empty($fname)) {
 		$errFName = $error_html['errFirstName'];
 		$classFName = $error_html['errClass'];
@@ -117,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 	<?php include CSS_PATH; ?>
@@ -140,10 +128,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			top: 0;
 		}
 
-		/* .imageupload .file-tab button {
-			display: none;
-		} */
-
 		.imageupload .thumbnail {
 			margin-bottom: 10px;
 		}
@@ -154,37 +138,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	<?php include NAVIGATION; ?>
 	<div class="page-content" id="content">
 		<?php include HEADER; ?>
-		<!-- Page content -->
+		<!-- Contenu de la page -->
 		<div class="row">
 			<div class="col-12">
 				<form name="regform" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
 					<div class="d-flex">
 						<div class="card col-md-9">
 							<div class="card-body">
-								<!-- Add Doctor -->
+								<!-- Ajouter un Docteur -->
 								<div class="form-row">
 									<div class="form-group col-md-6">
-										<label for="inputPatientID">Doctor ID #</label>
+										<label for="inputPatientID">ID du Docteur #</label>
 										<input type="text" name="inputPatientID" class="form-control" id="inputPatientID" disabled value="<?php echo $doctor_row["doctor_id"]; ?>">
 									</div>
 								</div>
 								<div class="form-row">
 									<div class="form-group col-md-6">
-										<label for="inputFirstName">First Name</label>
-										<input type="text" name="inputFirstName" class="form-control <?= $classFName ?>" id="inputFirstName" placeholder="Enter First Name" value="<?php echo $doctor_row["doctor_firstname"]; ?>">
+										<label for="inputFirstName">Prénom</label>
+										<input type="text" name="inputFirstName" class="form-control <?= $classFName ?>" id="inputFirstName" placeholder="Entrez le prénom" value="<?php echo $doctor_row["doctor_firstname"]; ?>">
 										<?php echo $errFName; ?>
 									</div>
 									<div class="form-group col-md-6">
-										<label for="inputLastName">Last Name/Surname</label>
-										<input type="text" name="inputLastName" class="form-control <?= $classLName ?>" id="inputLastName" placeholder="Enter Last Name" value="<?php echo $doctor_row["doctor_lastname"]; ?>">
+										<label for="inputLastName">Nom de famille</label>
+										<input type="text" name="inputLastName" class="form-control <?= $classLName ?>" id="inputLastName" placeholder="Entrez le nom de famille" value="<?php echo $doctor_row["doctor_lastname"]; ?>">
 										<?php echo $errLName; ?>
 									</div>
 								</div>
 								<div class="form-row">
 									<div class="form-group col-md-6">
-										<label for="inputSpeciality">Speciality</label>
+										<label for="inputSpeciality">Spécialité</label>
 										<select name="inputSpeciality" id="inputSpeciality" class="form-control selectpicker <?= $classSpec ?>" data-live-search="true">
-											<option value="" selected disabled>Choose</option>
+											<option value="" selected disabled>Choisissez</option>
 											<?php
 											$table_result = mysqli_query($conn, "SELECT * FROM speciality");
 											while ($table_row = mysqli_fetch_assoc($table_result)) {
@@ -200,17 +184,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 										<?= $errSpec ?>
 									</div>
 									<div class="form-group col-md-6">
-										<label for="inputYrsExp">Year Experience</label>
-										<input type="number" name="inputYrsExp" class="form-control <?= $classYears ?>" id="inputYrsExp" placeholder="Enter Years Experience" value="<?php echo $doctor_row["doctor_experience"]; ?>">
+										<label for="inputYrsExp">Années d'expérience</label>
+										<input type="number" name="inputYrsExp" class="form-control <?= $classYears ?>" id="inputYrsExp" placeholder="Entrez les années d'expérience" value="<?php echo $doctor_row["doctor_experience"]; ?>">
 										<?= $errYears ?>
 									</div>
 									<div class="form-group col-md-6">
-                                        <label for="inputFee">Consultant Fees</label>
-                                        <input type="text" name="inputFee" class="form-control <?= $classFee ?>" id="inputFee" placeholder="Enter Consultant Fees" value="<?= $doctor_row["consult_fee"]; ?>">
+                                        <label for="inputFee">Frais de consultation</label>
+                                        <input type="text" name="inputFee" class="form-control <?= $classFee ?>" id="inputFee" placeholder="Entrez les frais de consultation" value="<?= $doctor_row["consult_fee"]; ?>">
                                         <?= $errFee ?>
                                     </div>
 								</div>
-								<!-- End Add Doctor -->
+								<!-- Fin Ajouter Docteur -->
 							</div>
 						</div>
 
@@ -219,16 +203,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 								<div class="imageupload">
 									<?php
 									if (!empty($doctor_row["doctor_avatar"])) {
-										echo '<img src="../uploads/' . $doctor_row["clinic_id"] . '/doctor' . '/' . $doctor_row["doctor_avatar"] . '" id="output" class="img-fluid thumbnail" alt="Doctor-Avatar" title="Doctor-Avatar">';
+										echo '<img src="../uploads/' . $doctor_row["clinic_id"] . '/doctor' . '/' . $doctor_row["doctor_avatar"] . '" id="output" class="img-fluid thumbnail" alt="Avatar Docteur" title="Avatar Docteur">';
 									} else {
-										echo '<img src="../assets/img/empty/empty-avatar.jpg" id="output" class="img-fluid thumbnail" alt="Doctor-Avatar" title="Doctor-Avatar">';
+										echo '<img src="../assets/img/empty/empty-avatar.jpg" id="output" class="img-fluid thumbnail" alt="Avatar Docteur" title="Avatar Docteur">';
 									}
 									?>
 									<div class="file-tab">
 										<label class="btn btn-sm btn-primary btn-block btn-file">
-											<span>Browse</span>
+											<span>Parcourir</span>
 											<input type="file" name="inputAvatar" id="inputAvatar" accept="image/*" onchange="openFile(event)" value="<?= $doctor_row["doctor_avatar"]; ?>">
-										</label><!-- <button type="button" class="btn btn-sm btn-primary">Remove</button> -->
+										</label>
 									</div>
 								</div>
 								<script>
@@ -251,7 +235,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					<div class="card">
 						<div class="card-body">
 							<div class="form-group">
-								<label for="inputLanguages">Languages Spoke</label><small class="text-muted m-2">We'll never share your email with anyone else.</small>
+								<label for="inputLanguages">Langues parlées</label><small class="text-muted m-2">Nous ne partagerons jamais votre email avec quelqu'un d'autre.</small>
 								<div class="row">
 									<?php $i = 1;
 									foreach ($select_lang as $lang_value) {
@@ -271,7 +255,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="inputDesc">Describe</label>
+								<label for="inputDesc">Description</label>
 								<textarea class="form-control" id="inputDesc" name="inputDesc" rows="3"><?php echo $doctor_row["doctor_desc"]; ?></textarea>
 							</div>
 						</div>
@@ -281,24 +265,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 						<div class="card-body">
 							<div class="form-row">
 								<div class="form-group col-md-6">
-									<label for="inputDOB">Date of Birth</label>
-									<input type="text" name="inputDOB" class="form-control" id="datepicker" placeholder="Enter DOB" value="<?php echo $doctor_row["doctor_dob"]; ?>">
+									<label for="inputDOB">Date de naissance</label>
+									<input type="text" name="inputDOB" class="form-control" id="datepicker" placeholder="Entrez la date de naissance" value="<?php echo $doctor_row["doctor_dob"]; ?>">
 								</div>
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md-6">
-									<label for="inputGender">Gender</label>
+									<label for="inputGender">Sexe</label>
 									<div class="row">
 										<div class="col">
 											<div class="custom-control custom-radio custom-control-inline">
 												<input type="radio" id="inputGenderMale" name="inputGender" class="custom-control-input" value="male" <?= $doctor_row["doctor_gender"] == "male" ? "checked" : "" ?>>
-												<label class="custom-control-label" for="inputGenderMale">Male</label>
+												<label class="custom-control-label" for="inputGenderMale">Homme</label>
 											</div>
 										</div>
 										<div class="col">
 											<div class="custom-control custom-radio custom-control-inline">
 												<input type="radio" id="inputGenderFemale" name="inputGender" class="custom-control-input" value="female" <?= $doctor_row["doctor_gender"] == "female" ? "checked" : "" ?>>
-												<label class="custom-control-label" for="inputGenderFemale">Female</label>
+												<label class="custom-control-label" for="inputGenderFemale">Femme</label>
 											</div>
 										</div>
 									</div>
@@ -306,13 +290,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 							</div>
 							<div class="form-row">
 								<div class="form-group col-md-6">
-									<label for="inputContactNumber">Contact Number</label>
-									<input type="text" name="inputContactNumber" class="form-control <?= $classContact ?>" id="inputContactNumber" placeholder="Enter Phone Number" value="<?php echo $doctor_row["doctor_contact"]; ?>">
+									<label for="inputContactNumber">Numéro de téléphone</label>
+									<input type="text" name="inputContactNumber" class="form-control <?= $classContact ?>" id="inputContactNumber" placeholder="Entrez le numéro de téléphone" value="<?php echo $doctor_row["doctor_contact"]; ?>">
 									<?= $errContact ?>
 								</div>
 								<div class="form-group col-md-6">
-									<label for="inputEmailAddress">Email Address</label>
-									<input type="text" name="inputEmailAddress" class="form-control <?= $classEmail ?>" id="inputEmailAddress" placeholder="Enter Email Address" value="<?php echo $doctor_row["doctor_email"]; ?>">
+									<label for="inputEmailAddress">Adresse e-mail</label>
+									<input type="text" name="inputEmailAddress" class="form-control <?= $classEmail ?>" id="inputEmailAddress" placeholder="Entrez l'adresse e-mail" value="<?php echo $doctor_row["doctor_email"]; ?>">
 									<?= $errEmail ?>
 								</div>
 							</div>
@@ -320,13 +304,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					</div>
 
 					<div class="row">
-						<div class="col-6"><button type="reset" class="btn btn-outline-secondary btn-block">Clear</button></div>
-						<div class="col-6"><button type="submit" class="btn btn-primary btn-block" name="savebtn">Save</button></div>
+						<div class="col-6"><button type="reset" class="btn btn-outline-secondary btn-block">Effacer</button></div>
+						<div class="col-6"><button type="submit" class="btn btn-primary btn-block" name="savebtn">Enregistrer</button></div>
 					</div>
 				</form>
 			</div>
 		</div>
-		<!-- End Page Content -->
+		<!-- Fin du contenu de la page -->
 	</div>
 	<?php include JS_PATH; ?>
 	<script>
@@ -362,7 +346,7 @@ if (isset($_POST["savebtn"])) {
 				$ext = pathinfo($filename, PATHINFO_EXTENSION);
 	
 				if (!in_array($ext, $allowed)) {
-					echo "<script>Swal.fire('Oops...','Only can be image!','error')</script>";
+					echo "<script>Swal.fire('Oups...','Seules les images sont autorisées!','error')</script>";
 					exit();
 				} else {
 					if (!empty($_FILES['inputAvatar']['name'])) {
@@ -375,7 +359,7 @@ if (isset($_POST["savebtn"])) {
 						}
 						move_uploaded_file($_FILES['inputAvatar']['tmp_name'], $path);
 					} else {
-						echo "<script>Swal.fire('Oops...','You should select a file to upload!','error')</script>";
+						echo "<script>Swal.fire('Oups...','Vous devez sélectionner un fichier à télécharger!','error')</script>";
 						exit();
 					}
 				}
@@ -389,12 +373,12 @@ if (isset($_POST["savebtn"])) {
 
 		if ($updatestmt->execute()) {
 			echo '<script>
-				Swal.fire({ title: "Great!", text: "Successful Updated!", type: "success" }).then((result) => {
+				Swal.fire({ title: "Super!", text: "Mise à jour réussie!", type: "success" }).then((result) => {
 					if (result.value) { window.location.href = "doctor-edit.php"; }
 				});
 			</script>';
 		} else {
-			echo "Error: " . $query . "<br>" . mysqli_error($conn);
+			echo "Erreur: " . $query . "<br>" . mysqli_error($conn);
 		}
 		$updatestmt->close();
 	}

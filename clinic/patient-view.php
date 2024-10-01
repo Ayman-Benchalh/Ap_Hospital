@@ -4,15 +4,11 @@ include('./includes/path.inc.php');
 include('./includes/session.inc.php');
 
 $patient_id = decrypt_url($_GET["cid"]);
+
 $result = mysqli_query($conn,"SELECT * FROM patients WHERE patient_id = '".$patient_id."' ");
 $row = mysqli_fetch_assoc($result);
 
-$age =$row["patient_age"];
-// $dobDate = explode("-", $dobDate);
-// $age = (date("md", date("U", mktime(0, 0, 0, $dobDate[0], $dobDate[1], $dobDate[2]))) > date("md")
-//     ? ((date("Y") - $dobDate[2]) - 1)
-//     : (date("Y") - $dobDate[2]));
-
+$age = $row["patient_age"];
 
 $medresult = $conn->query(
     "SELECT * FROM medical_record M 
@@ -22,7 +18,7 @@ $medresult = $conn->query(
 $barrow = $medresult->fetch_assoc();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <?php include CSS_PATH; ?>
 </head>
@@ -37,7 +33,6 @@ $barrow = $medresult->fetch_assoc();
     border-right: 0;
 }
 
-
 tbody tr td:first-child {
   width: 8em;
   min-width: 10em;
@@ -48,26 +43,26 @@ tbody tr td:first-child {
 
 <body>
     <?php include NAVIGATION; ?>
-    <!-- Page content holder -->
+    <!-- Contenu de la page -->
     <div class="page-content" id="content">
         <?php include HEADER; ?>
-        <!-- Page content -->
+        <!-- Contenu de la page -->
         <div class="row">
             <div class="col-md-12">
-                <!-- Card Content -->
+                <!-- Contenu de la carte -->
                 <div class="card patient-status-bar">
                     <div class="card-body">
                         <div class="d-flex bd-highlight">
                             <div class="flex-fill bd-highlight">
-                                <p class="text-muted">Patient Info</p>
+                                <p class="text-muted">Informations sur le Patient</p>
                                 <h5 class="font-weight-bold"><?php echo $row["patient_firstname"]; ?></h5>
-                                <p><?php echo $age; ?></p>
+                                <p>Age : <?php echo $age; ?></p>
                             </div>
                             <div class="flex-fill bd-highlight">
-                                <p class="text-muted">Last Visit</p>
+                                <p class="text-muted">Dernière Visite</p>
                                 <h5 class="font-weight-bold">
 									<?php if ($medresult->num_rows == 0) {
-										echo 'New Patient';
+										echo 'Nouveau Patient';
 									} else {
 										echo date_format(new DateTime($barrow['med_date']), 'Y-m-d');
 									}
@@ -75,10 +70,10 @@ tbody tr td:first-child {
 								</h5>
                             </div>
                             <div class="flex-fill bd-highlight">
-                                <p class="text-muted">Diagnosis</p>
+                                <p class="text-muted">Diagnostic</p>
                                 <h5 class="font-weight-bold">
 									<?php if ($medresult->num_rows == 0) {
-										echo 'New Patient';
+										echo 'Nouveau Patient';
 									} else {
 										echo $barrow['med_diagnosis'];
 									}
@@ -91,7 +86,7 @@ tbody tr td:first-child {
             </div>
 
             <div class="col-md-6">
-                <h6>Latest Status</h6>
+                <h6>Dernier Statut</h6>
                 <div class="card">
                     <div class="card-body">
                         <ul class="list-unstyled">
@@ -102,7 +97,7 @@ tbody tr td:first-child {
                             WHERE M.patient_id = '".$patient_id."' AND M.clinic_id = '".$clinic_row["clinic_id"]."' ORDER BY M.med_id DESC "
                         );
                         if ($medresult2->num_rows == 0) {
-                            echo '<td colspan="4">No Record Found</td>';
+                            echo '<td colspan="4">Aucun Enregistrement Trouvé</td>';
                         } else {
                             while ($medrow = $medresult2->fetch_assoc()) {
                             ?>
@@ -123,19 +118,19 @@ tbody tr td:first-child {
             </div>
 
             <div class="col-md-6">
-                <h6>Appointment List</h6>
+                <h6>Liste des Rendez-vous</h6>
                 <div class="card">
                     <div class="card-body">
                         <table class="table nowrap">
                             <thead>
                                 <th>Date</th>
-                                <th>Treatment</th>
+                                <th>Traitement</th>
                             </thead>
                             <tbody>
                                 <?php
                                 $tresult = $conn->query("SELECT * FROM appointment WHERE patient_id = '".$patient_id."'");
                                 if ($tresult->num_rows == 0) {
-                                    echo '<td colspan="2">No Record Found</td>';
+                                    echo '<td colspan="2">Aucun Enregistrement Trouvé</td>';
                                 } else {
                                     while ($trow = $tresult->fetch_assoc()) {
                                         ?>
@@ -154,10 +149,10 @@ tbody tr td:first-child {
             </div>
 
         </div>
-        <!-- End Page Content -->
+        <!-- Fin du contenu de la page -->
     </div>
 
-    <?php include JS_PATH;?>
+    <?php include JS_PATH; ?>
 </body>
 
 </html>

@@ -89,6 +89,13 @@ switch ($_SERVER["SCRIPT_NAME"]) {
         $PAGE_TITLE = "All Appointment | $BRAND_NAME";
         break;
 
+    // New Add Appointment case
+    case '/'.$PATH.'/add_appointment.php':
+        $CURRENT_PAGE = "Add Appointment";
+        $CURRENT_PATH = "";
+        $PAGE_TITLE = "Add Appointment | $BRAND_NAME";
+        break;
+
     // Schedule
     case '/'.$PATH.'/schedule.php':
         $CURRENT_PAGE = "Schedule";

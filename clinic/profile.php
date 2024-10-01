@@ -5,7 +5,7 @@ include('../clinic/includes/session.inc.php');
 include('../helper/select_helper.php');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <?php include CSS_PATH; ?>
@@ -15,11 +15,11 @@ include('../helper/select_helper.php');
     <?php include NAVIGATION; ?>
     <div class="page-content" id="content">
         <?php include HEADER; ?>
-        <!-- Page content -->
+        <!-- Contenu de la page -->
         <div class="row">
-            <div class="col-12 mt-3 mb-3">
-                <a href="./profile-edit.php" class="btn btn-primary btn-sm pull-right px-5">Edit Clinic Profile</a>
-            </div>
+            <!-- <div class="col-12 mt-3 mb-3">
+                <a href="./profile-edit.php" class="btn btn-primary btn-sm pull-right px-5">Modifier le profil de la clinique</a>
+            </div> -->
 
             <div class="col-12">
                 <div class="owl-carousel" style="height: 300px;">
@@ -43,33 +43,33 @@ include('../helper/select_helper.php');
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <h6><i class="far fa-clock fa-fw mr-1 mb-2"></i>Opening Hours</h6>
+                        <h6><i class="far fa-clock fa-fw mr-1 mb-2"></i>Heures d'ouverture</h6>
                         <?php
                         $hour_result = mysqli_query($conn,"SELECT * FROM business_hour WHERE clinic_id = ".$clinic_row["clinic_id"]." ");
                         while ($hour_row = mysqli_fetch_assoc($hour_result)) {
                             ?>
-                            <p class="col-xs-2"><span class="badge badge-info px-3 py-1">Monday - Friday</span></p>
+                            <p class="col-xs-2"><span class="badge badge-info px-3 py-1">Lundi - Vendredi</span></p>
                             <p class="col-xs-8">
                                 <?php if($hour_row["open_week"] == "" && $hour_row["close_week"] == "") {
-                                    echo "Closed";
+                                    echo "Fermé";
                                 } else {
                                     echo $hour_row['open_week'].' -- '.$hour_row['close_week'];
                                 }
                                 ?>
                             </p>
-                            <p class="col-xs-2"><span class="badge badge-info px-3 py-1">Saturday</span></p>
+                            <p class="col-xs-2"><span class="badge badge-info px-3 py-1">Samedi</span></p>
                             <p class="col-xs-8">
                                 <?php if($hour_row["open_sat"] == "" && $hour_row["close_sat"] == "") {
-                                    echo "Closed";
+                                    echo "Fermé";
                                 } else {
                                     echo $hour_row['open_sat'].' -- '.$hour_row['close_sat'];
                                 }
                                 ?>
                             </p>
-                            <p class="col-xs-2"><span class="badge badge-info px-3 py-1">Sunday</span></p>
+                            <p class="col-xs-2"><span class="badge badge-info px-3 py-1">Dimanche</span></p>
                             <p class="col-xs-8">
                                 <?php if($hour_row["open_sun"] == "" && $hour_row["close_sun"] == "") {
-                                    echo "Closed";
+                                    echo "Fermé";
                                 } else {
                                     echo $hour_row['open_sun'].' -- '.$hour_row['close_sun'];
                                 }
@@ -92,7 +92,7 @@ include('../helper/select_helper.php');
             </div>
 
         </div>
-        <!-- End Page Content -->
+        <!-- Fin du contenu de la page -->
     </div>
     <?php include JS_PATH; ?>
     <script>
@@ -127,51 +127,12 @@ include('../helper/select_helper.php');
         var hash = window.location.hash;
         $('#pillTab a[href="' + hash + '"]').tab('show');
     </script>
-    <script>
-        // $('#add').on('click', add);
-        // $('#remove').on('click', remove);
-
-        // function add() {
-        //     var new_chq_no = parseInt($('#total_chq').val()) + 1;
-        //     var new_input = '<div class="form-group row" id=new_"' + new_chq_no + '">\
-        //                 <label for="inputBusinessHour" class="col-sm-2 col-form-label">Tuesday</label>\
-        //                 <div class="col-sm-2">\
-        //                     <input type="text" class="form-control" id="inputBusinessHour">\
-        //                 </div>\
-        //                 <div class="col-sm-2">\
-        //                     <select name="" class="form-control" id="">\
-        //                         <option value="am">AM</option>\
-        //                         <option value="pm">PM</option>\
-        //                     </select>\
-        //                 </div>\
-        //                 <div class="col-sm-2">\
-        //                     <input type="text" class="form-control" id="inputBusinessHour">\
-        //                 </div>\
-        //                 <div class="col-sm-2">\
-        //                     <select name="" class="form-control" id="">\
-        //                         <option value="am">AM</option>\
-        //                         <option value="pm">PM</option>\
-        //                     </select>\
-        //                 </div>\
-        //             </div>';
-        //     $('#new_chq').append(new_input);
-        //     $('#total_chq').val(new_chq_no);
-        // }
-
-        // function remove() {
-        //     var last_chq_no = $('#total_chq').val();
-        //     if (last_chq_no > 1) {
-        //         $('#new_' + last_chq_no).remove();
-        //         $('#total_chq').val(last_chq_no - 1);
-        //     }
-        // }
-    </script>
 </body>
 
 </html>
 <?php
 /**
- * Info Tab
+ * Onglet Informations
  */
 if (isset($_POST["savebtn"])) {
     $clinic_name = mysqli_real_escape_string($conn, $_POST["inputClinicName"]);
@@ -194,18 +155,18 @@ if (isset($_POST["savebtn"])) {
 
     if (mysqli_query($conn, $query)) {
         echo '<script>
-            Swal.fire({ "Great!", "New Record Added!", "success" }).then((result) => {
+            Swal.fire({ "Super!", "Nouvel enregistrement ajouté!", "success" }).then((result) => {
                 if (result.value) { window.location.href = "doctor-add.php"; }
             })
             </script>';
     } else {
-        echo "Error: " . $query . "<br>" . mysqli_error($conn);
+        echo "Erreur : " . $query . "<br>" . mysqli_error($conn);
     }
     mysqli_close($conn);
 }
 
 /**
- * Image Tab
+ * Onglet Image
  */
 if (isset($_POST["uploadbtn"])) {
     $filename = $conn->real_escape_string($_POST["inputImageUpload"]);
@@ -213,12 +174,12 @@ if (isset($_POST["uploadbtn"])) {
     $query = "INSERT INTO clinic_images (clinicimg_filename, clinic_id) VALUES ('" . $filename . "', " . $clinic_row['clinic_id'] . ")";
     if (mysqli_query($conn, $query)) {
         echo '<script>
-            Swal.fire({ "Great!", "New Image Added!", "success" }).then((result) => {
+            Swal.fire({ "Super!", "Nouvelle image ajoutée!", "success" }).then((result) => {
                 if (result.value) { window.location.href = "clinic.php#tab-images"; }
             })
             </script>';
     } else {
-        echo "Error: " . $query . "<br>" . mysqli_error($conn);
+        echo "Erreur : " . $query . "<br>" . mysqli_error($conn);
     }
     mysqli_close($conn);
 }

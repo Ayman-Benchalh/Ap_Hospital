@@ -4,7 +4,7 @@
             <div class="card-body d-flex">
                 <div class="widget-left">
                     <div class="widget-titles">
-                        <h6>Total Patients</h6>
+                        <h6>Total des Patients</h6>
                     </div>
                     <span class="widget-numbers"><?=$pt_row?></span>
                 </div>
@@ -31,7 +31,7 @@
             <div class="card-body d-flex">
                 <div class="widget-left">
                     <div class="widget-titles">
-                        <h6>Total Appointment</h6>
+                        <h6>Total des Rendez-vous</h6>
                     </div>
                     <span class="widget-numbers"><?=$app_row?></span>
                 </div>
@@ -55,7 +55,7 @@
             <div class="card-body d-flex">
                 <div class="widget-left">
                     <div class="widget-titles">
-                        <h6>Total Doctors</h6>
+                        <h6>Total des Médecins</h6>
                     </div>
                     <span class="widget-numbers"><?=$tr_row?></span>
                 </div>
