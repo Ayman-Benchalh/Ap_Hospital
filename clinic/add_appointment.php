@@ -205,6 +205,28 @@ $conn->close();
             border-right: 0;
         }
     </style>
+     <style>
+        .my-calendar {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        #time2{
+         
+            width: 100%;
+            background-color: #EFF5FF;
+            outline: none;
+        }
+        #time2 option{
+            height: 55px;
+            color: #EFF5FF;
+            font-size: 20px;
+            padding: 15px;
+            font-weight: 600;
+            transition: all .5s ease;
+        }
+    </style>
      <script>
         function confirmSubmission(event) {
             const btnsubmt = document.getElementById('btnsubmt');
@@ -353,49 +375,63 @@ $conn->close();
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         flatpickr("#datepicker", {
+            locale: "fr",
             dateFormat: "Y-m-d",
             minDate: "today",
             disable: [
                 function(date) {
-                    return (date.getDay() === 0 || date.getDay() === 6); // Désactiver les week-ends
-                }
+                 
+                    return (date.getDay() === 0 || date.getDay() === 7);
+                 }
             ]
         });
+      
+     
+  
+ 
+        const printdata = (data, isSaturday) => {
+            let timevalid = ['09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '01:00 PM'];
+            
+            if (!isSaturday) {
+                timevalid = ['09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '01:00 PM', '01:30 PM', '03:00 PM', '03:30 PM', '04:00 PM', '04:30 PM', '05:00 PM', '05:30 PM', '06:00 PM'];
+            }
 
-        const printdata = (data) => {
-            const timevalid = ['09:00 AM','09:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM','6:00 PM'];
             const select = document.getElementById('time2');
 
             if (data) {
                 const datatime = data.map(v => v.app_time);
-                const filteredArray2 = timevalid.filter(element => !datatime.includes(element));
+                const filteredArray = timevalid.filter(element => !datatime.includes(element));
 
-                select.innerHTML = timevalid.map(timava => {
-                    if (filteredArray2.includes(timava)) {
-                        return `<option value='${timava}' style=' background-color: #8B93FF;'>${timava}</option>`;
+                select.innerHTML = timevalid.map(timeSlot => {
+                    if (filteredArray.includes(timeSlot)) {
+                        return `<option value='${timeSlot}' style='background-color: #8B93FF;'>${timeSlot}</option>`;
                     } else {
-                        return `<option disabled style=' background-color: rgba(250, 52, 91, 0.764);'>${timava} invalide</option>`;
+                        return `<option disabled style='background-color: rgba(250, 52, 91, 0.764);'>${timeSlot} invalid</option>`;
                     }
-                });
+                }).join('');
             } else {
-                select.innerHTML = timevalid.map(timava => {
-                    return `<option value='${timava}' style=' background-color: #8B93FF;'>${timava}</option>`;
-                });
+                select.innerHTML = timevalid.map(timeSlot => {
+                    return `<option value='${timeSlot}' style='background-color: #8B93FF;'>${timeSlot}</option>`;
+                }).join('');
             }
         };
 
         const getdataD = (date) => {
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '../fetchdate.php', true);
+            const selectedDate = new Date(date);
+            const isSaturday = selectedDate.getDay() === 6;
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '../fetchdate.php', true); 
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
+
                     if (response.status === 202) {
-                        printdata(response.data);
+                        printdata(response.data, isSaturday);
                     } else if (response.status === 'no_data') {
-                        printdata(null);
+                        printdata(null, isSaturday);
                     } else {
                         console.error('Unexpected response status:', response.status);
                     }

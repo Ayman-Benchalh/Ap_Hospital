@@ -76,8 +76,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <thead class="table-success">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Nom Servic</th>
-                                <th scope="col" class="text-end">Seance</th>
+                                <th scope="col">Pathologie</th>
+                                <th scope="col" class="text-end">Nomber de séances</th>
                                 <th scope="col" class="text-end">Prix</th>
                                 <th scope="col" class="text-end">Total</th>
                                 <th scope="col" class="NoPrint">
@@ -129,6 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <option value="20">20%</option>
                                     <option value="10">10%</option>
                                     <option value="5">5%</option>
+                                    <option value="0" selected>0%</option>
                                 </select>
                             </div>
                             <div class="input-group mb-3">
@@ -196,7 +197,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 calcultotal = (sum / 110) * 10;
             } else if (gst == 5) {
                 calcultotal = (sum / 105.5) * 5.5;
+            }else{
+                calcultotal = (sum / 105.5) * 0;
             }
+            
 
             document.getElementById("FNet").value = calcultotal.toFixed(2);
             document.getElementById("FNetHidden").value = calcultotal.toFixed(2);

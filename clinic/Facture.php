@@ -218,8 +218,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <tr>
                             <th>#</th>
                             <th>Nom Client</th>
-                            <th>Service</th>
-                            <th>Seance</th>
+                            <th>Pathologie</th>
+                            <th>Nomber de séances</th>
                             <th>Montant</th>
                         </tr>
                     </thead>
@@ -258,6 +258,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <option value="20">20%</option>
                                         <option value="10">10%</option>
                                         <option value="5">5%</option>
+                                        <option value="0" selected>0%</option>
                                     </select>
                                 </td>
                             </tr>
@@ -308,8 +309,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 handlTv('20');
             } else if (selectTv.value == '10') {
                 handlTv('10');
-            } else {
+            }else if (selectTv.value == '5') {
                 handlTv('5');
+            } else {
+                handlTv('0');
             }
         }
 

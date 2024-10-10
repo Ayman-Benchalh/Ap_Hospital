@@ -191,7 +191,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="h-100 d-inline-flex align-items-center py-3">
                     <small class="far fa-clock text-primary me-2"></small>
-                    <small>Lun - Ven : 09.00  - 18.00 </small>
+                    <small>Lun - Ven : 09.00 - 18.00</small>
+                    <small class="ms-3">Sam : 09.00 - 13.00</small>
                 </div>
             </div>
             <div class="col-lg-5 px-5 text-end">
@@ -541,7 +542,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <?php echo $errTele; ?>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <input type="text" class="form-control border-0" name="Age" <?php echo $classAge?> placeholder="Entrez Âge" style="height: 55px;">
+                                <input type="number" class="form-control border-0" name="Age" <?php echo $classAge?> placeholder="Entrez Âge" style="height: 55px;">
                                 <?php echo $errAge; ?>
                             </div>
                             <div class="col-12 col-sm-6">
@@ -692,89 +693,74 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         flatpickr("#datepicker", {
+            locale: "fr",
             dateFormat: "Y-m-d",
             minDate: "today",
             disable: [
                 function(date) {
                  
-                    return (date.getDay() === 0 || date.getDay() === 6);
+                    return (date.getDay() === 0 || date.getDay() === 7);
                  }
             ]
         });
       
      
   
-    const printdata = (data)=>{
-        const timevalid=['09:00 AM','09:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 AM','12:30 AM','1:00 PM','1:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM','6:00 PM'];
-        const select =document.getElementById('time2');
-
-
-
-     if(data){
-         datatime=data.map(v=>v.app_time)
  
-
-        const filteredArray2 = timevalid.filter(element => !datatime.includes(element));
-
-      
-        
-        // timevalid.filter(timava=>timava);
-
-        select.innerHTML=timevalid.map(timava=>{
-
-            if(filteredArray2.includes(timava)){
-                   return `<option value='${timava}' style=' background-color: #8B93FF;'>${timava}</option>`
-            }else{
-                   return `<option disabled  style=' background-color: rgba(250, 52, 91, 0.764);'>${timava} invalid</option>`
+        const printdata = (data, isSaturday) => {
+            let timevalid = ['09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '01:00 PM'];
+            
+            if (!isSaturday) {
+                timevalid = ['09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '01:00 PM', '01:30 PM', '03:00 PM', '03:30 PM', '04:00 PM', '04:30 PM', '05:00 PM', '05:30 PM', '06:00 PM'];
             }
-         })
-     }else{
-        select.innerHTML=timevalid.map(timava=>{
 
-              return `<option value='${timava}'  style=' background-color: #8B93FF;'>${timava}</option>`
-       
-         })
-      
-        
-     }
-      }
-</script>
-<script>
-    const getdataD=(date)=>{
-       
+            const select = document.getElementById('time2');
 
-  
-        var xhr = new XMLHttpRequest();
-            xhr.open('POST', './fetchdate.php', true); // Sending request to the same page
+            if (data) {
+                const datatime = data.map(v => v.app_time);
+                const filteredArray = timevalid.filter(element => !datatime.includes(element));
+
+                select.innerHTML = timevalid.map(timeSlot => {
+                    if (filteredArray.includes(timeSlot)) {
+                        return `<option value='${timeSlot}' style='background-color: #8B93FF;'>${timeSlot}</option>`;
+                    } else {
+                        return `<option disabled style='background-color: rgba(250, 52, 91, 0.764);'>${timeSlot} invalid</option>`;
+                    }
+                }).join('');
+            } else {
+                select.innerHTML = timevalid.map(timeSlot => {
+                    return `<option value='${timeSlot}' style='background-color: #8B93FF;'>${timeSlot}</option>`;
+                }).join('');
+            }
+        };
+
+        const getdataD = (date) => {
+            const selectedDate = new Date(date);
+            const isSaturday = selectedDate.getDay() === 6;
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', './fetchdate.php', true); 
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
-                    var feedback = document.getElementById('date-feedback');
 
                     if (response.status === 202) {
-                            // console.log("data is here", JSON.stringify(response.data));
-                            printdata(response.data);
-                        } else if (response.status === 'no_data') {
-                         
-                            printdata(null);
-                            // console.log("data is not here", JSON.stringify(response));
-                        } else {
-                            console.error('Unexpected response status:', response.status);
-                        }
+                        printdata(response.data, isSaturday);
+                    } else if (response.status === 'no_data') {
+                        printdata(null, isSaturday);
+                    } else {
+                        console.error('Unexpected response status:', response.status);
+                    }
                 } else {
-                        console.error('Request failed. Returned status:', xhr.status);
+                    console.error('Request failed. Returned status:', xhr.status);
                 }
             };
 
             xhr.send('ajax_check_date=true&date=' + encodeURIComponent(date));
-      
-}
-
-       
-
-</script>
+        };
+    </script>
 
 </body>
 
@@ -825,7 +811,7 @@ if (isset($_POST['btnform'])) {
                 type: 'error' })
                 </script>
             ";
-            exit();
+            
            
         } else {
             $date_created = $date . " " . $time;
@@ -855,14 +841,14 @@ if (isset($_POST['btnform'])) {
                     title: 'Appointment success!',
                     text: 'Appointment has been successfully booked!',
                     icon: 'success'
-                    }) </script>;";
+                    }) </script>";
                  
                 }else{
                     echo  " <script>Swal.fire({
                         title: 'Appointment Error  !',
                         text: 'Appointment has not been successfully booked.!',
                         icon: 'error'
-                        }) </script>;";
+                        }) </script>";
                    
                 }
             }else{
@@ -886,7 +872,7 @@ if (isset($_POST['btnform'])) {
                         title: 'Appointment Error  !',
                         text: 'Appointment has not been successfully booked.!',
                         icon: 'error'
-                        }) </script>;";
+                        }) </script>";
                        
                    }
                   
@@ -895,7 +881,7 @@ if (isset($_POST['btnform'])) {
                         title: ''Appointment Error  !',
                         text: 'Appointment has not been successfully booked.!',
                         icon: 'error'
-                        }) </script>;";
+                        }) </script>";
                   
                 }
                 

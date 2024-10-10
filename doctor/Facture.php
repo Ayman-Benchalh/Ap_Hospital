@@ -199,17 +199,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>#</th>
+                        <th>#</th>
                             <th>Nom Client</th>
-                            <th>Service</th>
-                            <th>Seance</th>
+                            <th>Pathologie</th>
+                            <th>Nomber de séances</th>
                             <th>Montant</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td><input type="text" class="form-control" id="item_name" name="item_name[]" value="Client Name"></td>
+                            <td><input type="text" class="form-control" id="item_name" name="item_name[]" value="Client Nom"></td>
                             <td>
                                 <select class="form-control service-select" id="service_id" name="service_id[]">
                                     <option>Select Service</option>
@@ -241,6 +241,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <option value="20">20%</option>
                                         <option value="10">10%</option>
                                         <option value="5">5%</option>
+                                        <option value="0" selected>0%</option>
                                     </select>
                                 </td>
                             </tr>
@@ -291,8 +292,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 handlTv('20');
             } else if (selectTv.value == '10') {
                 handlTv('10');
-            } else {
+            }else if (selectTv.value == '5') {
                 handlTv('5');
+            } else {
+                handlTv('0');
             }
         }
 

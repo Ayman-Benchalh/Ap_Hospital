@@ -52,11 +52,11 @@
 
                 <!-- Fin Haut -->
                 
-                <!-- <p class="sidebar-heading px-3 pb-1 mb-0">Autres</p>
+                <p class="sidebar-heading px-3 pb-1 mb-0">Autres</p>
                 <li class="nav-item <?php if (stripos($_SERVER['REQUEST_URI'],'treatment.php') !== FALSE) {echo 'mm-active';} ?>">
                     <a href="treatment.php" class="nav-link"><i class="fas fa-stream mr-3 fa-fw"></i>Type de traitement</a>
                 </li>
-                <li class="nav-item <?php if (stripos($_SERVER['REQUEST_URI'],'review.php') !== FALSE) {echo 'mm-active';} ?>">
+               <!--  <li class="nav-item <?php if (stripos($_SERVER['REQUEST_URI'],'review.php') !== FALSE) {echo 'mm-active';} ?>">
                     <a href="review.php" class="nav-link"><i class="fas fa-star mr-3 fa-fw"></i>Avis</a>
                 </li>
                 <li class="nav-item <?php if (stripos($_SERVER['REQUEST_URI'],'report.php') !== FALSE) {echo 'mm-active';} ?>">
