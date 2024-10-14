@@ -3,7 +3,7 @@ require_once('../config/autoload.php');
 require_once('./includes/path.inc.php');
 require_once('./includes/session.inc.php');
 
-// Get the passed data from the previous form
+// Check if the necessary data is provided
 if (isset($_GET['data'])) {
     $serviceData = unserialize(base64_decode($_GET['data']));
     $services = $serviceData['services'];
@@ -31,14 +31,17 @@ for ($i = 0; $i < count($services); $i++) {
     }
 }
 
-// Fetch clinic data from the session or database (replace as needed)
-$clinic_id = $doctor_row['clinic_id'];
-$dataClinic = "SELECT * FROM clinics WHERE clinic_id = ?";
-$stmtClinic = $conn->prepare($dataClinic);
-$stmtClinic->bind_param("s", $clinic_id);
-$stmtClinic->execute();
-$clinicResult = $stmtClinic->get_result();
-$ClinicData = $clinicResult->fetch_assoc();
+// Fetch clinic data from the session or database (adjust as needed)
+$clinic_id = isset($doctor_row['clinic_id']) ? $doctor_row['clinic_id'] : null;
+$ClinicData = [];
+if ($clinic_id) {
+    $dataClinic = "SELECT * FROM clinics WHERE clinic_id = ?";
+    $stmtClinic = $conn->prepare($dataClinic);
+    $stmtClinic->bind_param("s", $clinic_id);
+    $stmtClinic->execute();
+    $clinicResult = $stmtClinic->get_result();
+    $ClinicData = $clinicResult->fetch_assoc();
+}
 
 // Get today's date
 $currentDate = date("d/m/Y");
@@ -51,18 +54,19 @@ $currentDate = date("d/m/Y");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Devis</title>
-    <!-- Include Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Include html2pdf.js for PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
-
     <style>
         .text-right {
             text-align: right;
         }
         .text-uppercase {
             text-transform: uppercase;
+        }
+        .footer-info {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 0;
         }
     </style>
 </head>
@@ -84,18 +88,14 @@ $currentDate = date("d/m/Y");
                 <div class="col-md-6">
                     <h4>Info</h4>
                     <address>
-                        <strong><?= $ClinicData['clinic_name'] ?></strong><br>
-                        <?= $ClinicData['clinic_url'] ?><br>
-                        <?= $ClinicData['clinic_city'] ?><br>
-                        Téléphone : <?= $ClinicData['clinic_contact'] ?><br>
-                        Email : <?= $ClinicData['clinic_email'] ?><br>
-                        Adresse : <?= $ClinicData['clinic_address'] ?>
+                        <strong><?= isset($ClinicData['clinic_name']) ? htmlspecialchars($ClinicData['clinic_name']) : 'Clinic Name' ?></strong><br>
+                        Téléphone : <?= isset($ClinicData['clinic_contact']) ? htmlspecialchars($ClinicData['clinic_contact']) : 'N/A' ?><br>
+                        Email : <?= isset($ClinicData['clinic_email']) ? htmlspecialchars($ClinicData['clinic_email']) : 'N/A' ?><br>
                     </address>
                 </div>
-                
             </div>
 
-            <div class="row mb-4">
+            <div class="row mb-4"  style="height: 55vh;">
                 <div class="col-md-12">
                     <table class="table table-bordered">
                         <thead class="thead-light">
@@ -106,9 +106,8 @@ $currentDate = date("d/m/Y");
                             <th class="text-right">Montant</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody >
                         <?php
-                        // Display the filtered service data
                         $totalAmount = 0;
                         foreach ($filteredServices as $entry) {
                             $service = htmlspecialchars($entry['service']);
@@ -130,7 +129,7 @@ $currentDate = date("d/m/Y");
                             <th class="text-right"><?= number_format($totalAmount, 2) ?></th>
                         </tr>
                         <tr>
-                            <td colspan="3" class="text-right">TVA (<?= $tva ?>%)</td>
+                            <td colspan="3" class="text-right">TVA (<?= htmlspecialchars($tva) ?>%)</td>
                             <td class="text-right"><?= number_format(($totalAmount * $tva) / 100, 2) ?></td>
                         </tr>
                         <tr>
@@ -142,29 +141,34 @@ $currentDate = date("d/m/Y");
                 </div>
             </div>
 
+           
+        <div class="text-center  col-12 pt-5 mt-5 d-none" id="footer">
+    <div class="col-12 m-auto fw-bolder ">Derrière Station Shell, Rue de Sebta Hay EL Farah 02، Tiflet 15400, Tél: 0666741666,</div>
+    <div class="col-12  m-auto fw-bolder">ICE: 003251390000089 - IF: 53667670 - Patente: 29506551 - RC: 1537<br> www.cabinetchaibi.ma </div>
+</div>
         </div>
     </div>
 </div>
 
-<div class="text-center mb-5">
-    <button id="download-pdf" class="btn btn-primary">Télécharger la Dives en PDF</button>
+<div class="text-center mt-5">
+    <button id="download-pdf" class="btn btn-primary">Télécharger la Devis en PDF</button>
 </div>
 
-<!-- JavaScript to handle PDF generation -->
 <script>
     document.getElementById('download-pdf').addEventListener('click', function () {
+        const footer = document.getElementById('footer');
+        footer.classList.remove('d-none')
         const invoice = document.getElementById('invoice');
-        const invoiceId = '<?= uniqid() ?>'; // Generate a unique invoice ID
+        const invoiceId = '<?= uniqid() ?>';
         html2pdf().from(invoice).set({
             margin: 1,
-            filename: 'Devis_' + invoiceId + '.pdf', // Use invoice ID in the filename
+            filename: 'Devis_' + invoiceId + '.pdf',
             html2canvas: { scale: 2 },
             jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
         }).save();
     });
 </script>
 
-<!-- Include Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 

@@ -47,7 +47,12 @@
 
                 <!-- Service -->
                 <li class="nav-item <?php if (stripos($_SERVER['REQUEST_URI'],'service.php') !== FALSE) {echo 'mm-active';} ?>">
-                    <a href="service.php" class="nav-link"><i class="fas fa-cogs mr-3 fa-fw"></i>Service</a>
+                    <a href="service.php" class="nav-link"><i class="fas fa-cogs mr-3 fa-fw"></i>Pathologie</a>
+                </li>
+
+                <!-- Seances -->
+                <li class="nav-item <?php if (stripos($_SERVER['REQUEST_URI'],'Seances.php') !== FALSE) {echo 'mm-active';} ?>">
+                    <a href="Seances.php" class="nav-link"><i class="fas fa-calendar-day mr-3 fa-fw"></i>Seances</a>
                 </li>
 
                 <!-- Fin Haut -->

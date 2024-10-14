@@ -147,7 +147,7 @@ if (isset($_POST['deletebtn'])) {
                     <div class="card-body">
                         <form class="inline-form" id="formadd" action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                             <div class="form-group row">
-                                <label for="inputTreatment" class="col-sm-3 col-form-label text-right">Nom du service</label>
+                                <label for="inputTreatment" class="col-sm-3 col-form-label text-right">Nouveaux Pathologie</label>
                                 <div class="col-sm-6">
                                     <input type="text" name="inputTreatment" id="inputTreatment" class="form-control form-control-sm <?= $className ?>">
                                     <?= $errName ?>
@@ -176,7 +176,7 @@ if (isset($_POST['deletebtn'])) {
                     <div class="card-body">
                         <table class="table">
                             <thead>
-                                <th>Service</th>
+                                <th>Pathologie</th>
                                 <th>Prix</th>
                                 <th>Action</th>
                             </thead>

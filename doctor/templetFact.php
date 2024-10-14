@@ -72,10 +72,16 @@ $ClinicData = $clinicResult->fetch_assoc();
             border: 2px solid black;
         }
 
+      
         .custom-bordered-table td {
             border: 2px solid black;
             height: 40px;
-            width: 33%;
+            width: 25%;
+        }
+        .custom-bordered-table th {
+            border: 2px solid black;
+            height: 40px;
+            width: 25%;
         }
     </style>
 </head>
@@ -91,15 +97,16 @@ $ClinicData = $clinicResult->fetch_assoc();
             </div>
 
             <div class="row mb-4">
-                <div class="col-md-6">
+            <div class="col-md-6">
                     <h4>De</h4>
                     <address>
                         <strong> <?= $ClinicData['clinic_name'] ?></strong><br>
-                        <?= $ClinicData['clinic_url'] ?><br>
-                        <?= $ClinicData['clinic_city'] ?><br>
+                        
+                       
                         Téléphone : <?= $ClinicData['clinic_contact'] ?><br>
                         Email : <?= $ClinicData['clinic_email'] ?><br>
-                        Adresse : <?= $ClinicData['clinic_address'] ?>
+                        Address  : <?= $ClinicData['clinic_address'] ?><br>
+                        
                     </address>
                 </div>
                 <div class="col-md-6 text-right">
@@ -114,7 +121,7 @@ $ClinicData = $clinicResult->fetch_assoc();
                 </div>
             </div>
 
-            <div class="row mb-4">
+            <div class="row mb-4" style="height: 45vh;">
                 <div class="col-md-12">
                     <table class="table table-bordered">
                         <thead class="thead-light">
@@ -130,6 +137,7 @@ $ClinicData = $clinicResult->fetch_assoc();
                         <?php
                         $total = 0;
                         while ($detail = $detailsResult->fetch_assoc()) {
+                            
                             echo "<tr>
                                 <td>{$detail['seance']}</td>
                                 <td>{$detail['service_nom']}</td> 
@@ -140,7 +148,7 @@ $ClinicData = $clinicResult->fetch_assoc();
                         }
                         ?>
                         <tr>
-                            <th colspan="4" class="text-right">Prix Total</th>
+                            <th colspan="4" class="text-right"> Prix Total</th>
                             <th class="text-right"><?= number_format($invoiceData['total']) ?></th>
                         </tr>
                         <tr>
@@ -148,79 +156,66 @@ $ClinicData = $clinicResult->fetch_assoc();
                             <td class="text-right"><?= $invoiceData['tva'] ?></td>
                         </tr>
                         <tr>
-                            <td colspan="4" class="text-right">Montant TVA</td>
+                            <td colspan="4" class="text-right">Montent TVA</td>
                             <td class="text-right"><?= number_format($invoiceData['net_amount'], 2) ?></td>
                         </tr>
+          
+
                         </tbody>
                     </table>
                 </div>
             </div>
-
             <div class="page-break"></div> <!-- Page break here -->
 
-            <div class="row mb-4  mx-5 my-5" style="opacity: 0;">
-                <div class="col-6 m-auto py-3">
-                    <h4 class="text-center fw-bold text-rese">Calendrier des séances</h4>
-                </div>
-                <div class="col-md-12">
-                    <table id="table" class="table custom-bordered-table">
-                        <tr>
-                            <td  class="text-center fw-bold">1</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center fw-bold">2</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center fw-bold">3</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center fw-bold">4</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
 
-            <div class="row mx-5 d-none" id="divtable">
-            <div class="col-6 m-auto py-3 mx-5">
-                    <h4 class="text-center fw-bold text-rese">Calendrier des séances</h4>
+            <!-- <div class="row mx-5 d-none" id="divtable">
+                <div class="col-6 m-auto py-3 mx-5">
+                        <h4 class="text-center fw-bold text-rese">Calendrier des séances</h4>
                 </div>
                 <div class="col-md-12">
-                    <table id="table2" class="table custom-bordered-table "></table>
+                        <table id="table2" class="table custom-bordered-table ">
+                        <tr  class="text-center fw-bold">
+                                        <th>Nº</th>
+                                        <th>Date</th>
+                                        <th>Nº</th>
+                                        <th>Date</th>
+                        </tr>
+                        </table>
                 </div>
-            </div>
+            </div> -->
+        </div>
+        <div class="text-center  col-12 pt-5 mt-5 d-none" id="footer">
+            <div class="col-12 m-auto fw-bolder ">Derrière Station Shell, Rue de Sebta Hay EL Farah 02، Tiflet 15400, Tél: 0666741666,</div>
+            <div class="col-12  m-auto fw-bolder">ICE: 003251390000089 - IF: 53667670 - Patente: 29506551 - RC: 1537<br> www.cabinetchaibi.ma </div>
         </div>
     </div>
 </div>
-
 <div class="text-center mb-5">
-    <button id="download-pdf" class="btn btn-primary" >Télécharger la Facture en PDF</button>
+    <button id="download-pdf" class="btn btn-primary">Télécharger la Facture en PDF</button>
 </div>
 
+
+<!-- JavaScript to handle PDF generation -->
 <script>
       function printtable(){
         const table2 = document.getElementById('table2');
-        for (let i = 1; i <= 20; i++) {
-            table2.innerHTML += `<tr>
-                <td class="text-center " style="width: 33%;">${i}</td>
-                <td style="width: 33%;"></td>
-                <td style="width: 33%;"></td>
+        for (let i = 1; i <= 15; i++) {
+            table2.innerHTML += `   <tr>
+                <td class="text-center " style="width: 25%;">${i}</td>
+                <td style="width: 25%;"></td>
+                <td class="text-center " style="width: 25%;">${15+i}</td>
+                <td style="width: 25%;"></td>
             </tr>`;
         }
     }
 
     // Call the function to append rows to table2
-    printtable();
+    // printtable();
     document.getElementById('download-pdf').addEventListener('click', function () {
-        const table2 = document.getElementById('divtable');
-        table2.classList.remove('d-none')
+        // const table2 = document.getElementById('divtable');
+        // table2.classList.remove('d-none')
+        const footer = document.getElementById('footer');
+        footer.classList.remove('d-none')
         const invoice = document.getElementById('invoice');
         const invoiceId = '<?= $invoiceData['id'] ?>'; // Get the invoice ID from PHP
         html2pdf().from(invoice).set({
@@ -237,4 +232,5 @@ $ClinicData = $clinicResult->fetch_assoc();
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

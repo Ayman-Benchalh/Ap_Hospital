@@ -80,22 +80,19 @@ $currentDate = date("d/m/Y");
                 <img src="../assets/img/widget/logo.png" alt="Logo" class="img-fluid" style="max-width: 200px;">
             </div>
 
-            <div class="row mb-4">
+            <div class="row mb-4" >
                 <div class="col-md-6">
                     <h4>Info</h4>
                     <address>
-                        <strong><?= $ClinicData['clinic_name'] ?></strong><br>
-                        <?= $ClinicData['clinic_url'] ?><br>
-                        <?= $ClinicData['clinic_city'] ?><br>
-                        Téléphone : <?= $ClinicData['clinic_contact'] ?><br>
-                        Email : <?= $ClinicData['clinic_email'] ?><br>
-                        Adresse : <?= $ClinicData['clinic_address'] ?>
+                        <strong><?= isset($ClinicData['clinic_name']) ? htmlspecialchars($ClinicData['clinic_name']) : 'Clinic Name' ?></strong><br>
+                        Téléphone : <?= isset($ClinicData['clinic_contact']) ? htmlspecialchars($ClinicData['clinic_contact']) : 'N/A' ?><br>
+                        Email : <?= isset($ClinicData['clinic_email']) ? htmlspecialchars($ClinicData['clinic_email']) : 'N/A' ?><br>
                     </address>
                 </div>
                 
             </div>
 
-            <div class="row mb-4">
+            <div class="row mb-4" style="height: 55vh;">
                 <div class="col-md-12">
                     <table class="table table-bordered">
                         <thead class="thead-light">
@@ -141,7 +138,10 @@ $currentDate = date("d/m/Y");
                     </table>
                 </div>
             </div>
-
+            <div class="text-center  col-12 pt-5 mt-5 d-none" id="footer">
+            <div class="col-12 m-auto fw-bolder ">Derrière Station Shell, Rue de Sebta Hay EL Farah 02، Tiflet 15400, Tél: 0666741666,</div>
+            <div class="col-12  m-auto fw-bolder">ICE: 003251390000089 - IF: 53667670 - Patente: 29506551 - RC: 1537<br> www.cabinetchaibi.ma </div>
+        </div>
         </div>
     </div>
 </div>
@@ -153,6 +153,8 @@ $currentDate = date("d/m/Y");
 <!-- JavaScript to handle PDF generation -->
 <script>
     document.getElementById('download-pdf').addEventListener('click', function () {
+        const footer = document.getElementById('footer');
+        footer.classList.remove('d-none')
         const invoice = document.getElementById('invoice');
         const invoiceId = '<?= uniqid() ?>'; // Generate a unique invoice ID
         html2pdf().from(invoice).set({

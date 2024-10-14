@@ -229,7 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <td><input type="text" class="form-control" id="item_name" name="item_name[]" value="Client Name"></td>
                             <td>
                                 <select class="form-control service-select" id="service_id" name="service_id[]">
-                                    <option>Select Service</option>
+                                    <option>Select Pathologie</option>
                                     <?php
                                     // Populate the dropdown with service data from the database
                                     while ($row = mysqli_fetch_assoc($result)) {

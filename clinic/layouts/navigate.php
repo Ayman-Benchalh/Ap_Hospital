@@ -52,6 +52,9 @@
                 <li class="nav-item <?php echo (basename($_SERVER['REQUEST_URI']) == 'Devis.php') ? 'mm-active' : ''; ?>">
                     <a href="Devis.php" class="nav-link"><i class="fas fa-file-contract mr-3 fa-fw"></i>Devis</a>
                 </li>
+                <li class="nav-item <?php if (stripos($_SERVER['REQUEST_URI'],'Seances.php') !== FALSE) {echo 'mm-active';} ?>">
+                    <a href="Seances.php" class="nav-link"><i class="fas fa-calendar-day mr-3 fa-fw"></i>Seances</a>
+                </li>
                 <!-- Fin de la partie supérieure -->
             </ul>
         </div>
